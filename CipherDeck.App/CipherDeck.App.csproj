@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>CipherDeck</AssemblyName>
+    <RootNamespace>CipherDeck</RootNamespace>
+    <Product>CipherDeck</Product>
+    <Description>Classic ciphers with a modern desktop interface.</Description>
+    <Version>0.4.0</Version>
+    <ApplicationIcon>Assets\CipherDeck.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CipherDeck.Core\CipherDeck.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\CipherDeck.ico" LogicalName="CipherDeck.AppIcon.ico" />
+  </ItemGroup>
+</Project>
