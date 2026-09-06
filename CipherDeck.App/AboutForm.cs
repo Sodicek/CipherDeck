@@ -70,9 +70,34 @@ internal sealed class AboutForm : Form
         };
         closeButton.Click += (_, _) => Close();
 
+        var githubButton = new Button
+        {
+            BackColor = panel,
+            FlatStyle = FlatStyle.Flat,
+            ForeColor = text,
+            Height = 36,
+            Text = "Otevřít GitHub",
+            UseVisualStyleBackColor = false,
+            Width = 140
+        };
+        githubButton.Click += (_, _) => System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://github.com/Sodicek/CipherDeck",
+            UseShellExecute = true
+        });
+
+        var buttons = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            FlowDirection = FlowDirection.RightToLeft,
+            Padding = new Padding(0, 7, 0, 0)
+        };
+        buttons.Controls.Add(closeButton);
+        buttons.Controls.Add(githubButton);
+
         layout.Controls.Add(header, 0, 0);
         layout.Controls.Add(help, 0, 1);
-        layout.Controls.Add(closeButton, 0, 2);
+        layout.Controls.Add(buttons, 0, 2);
         Controls.Add(layout);
     }
 

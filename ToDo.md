@@ -61,7 +61,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [ ] Zajistit ovládání klávesnicí a logické pořadí tabulátoru.
 - [ ] Doplnit tooltipy a dobře čitelné kontrasty.
 - [x] Přidat obrazovku **O aplikaci** s verzí a nápovědou.
-- [ ] Doplnit do obrazovky **O aplikaci** odkaz na GitHub.
+- [x] Doplnit do obrazovky **O aplikaci** odkaz na GitHub.
 
 ## 4. Funkce pro „top appku“
 
@@ -97,7 +97,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [ ] Zvolit licenci, například MIT.
 - [ ] Přidat šablony pro bug report a návrh nové funkce.
 - [ ] Používat issues, milestones a označené verze.
-- [ ] Vytvořit první GitHub Release s přenosnou sestavou aplikace.
+- [x] Vytvořit první GitHub Release s přenosnou sestavou aplikace.
 - [x] Připravit lokální samostatný `win-x64` Release balíček pro budoucí GitHub Release.
 
 ## Doporučené milníky

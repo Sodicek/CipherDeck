@@ -2,6 +2,9 @@
 
 > Classic ciphers. Modern interface.
 
+[![Build and test](https://github.com/Sodicek/CipherDeck/actions/workflows/ci.yml/badge.svg)](https://github.com/Sodicek/CipherDeck/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/Sodicek/CipherDeck)](https://github.com/Sodicek/CipherDeck/releases/latest)
+
 <p align="center">
   <img src="CipherDeck.App/Assets/cipherdeck-logo.png" alt="CipherDeck logo" width="180">
 </p>
@@ -34,6 +37,8 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 ## Spuštění
 
 Projekt vyžaduje Windows a [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+
+Hotovou verzi bez nutnosti instalovat .NET najdeš v [nejnovějším GitHub Release](https://github.com/Sodicek/CipherDeck/releases/latest).
 
 ```powershell
 dotnet run --project CipherDeck.App/CipherDeck.App.csproj
