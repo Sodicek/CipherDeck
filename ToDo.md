@@ -70,7 +70,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Import a export textových souborů v UTF-8.
 - [ ] Režim krok za krokem, který vizuálně vysvětlí průběh šifry.
 - [ ] Náhodný generátor vhodných klíčů.
-- [ ] Analýza četnosti písmen a jednoduchý sloupcový graf.
+- [x] Analýza četnosti písmen a jednoduchý sloupcový graf.
 - [ ] Detekce pravděpodobného typu jednoduché šifry.
 - [ ] Výzvy k rozluštění s několika úrovněmi obtížnosti.
 - [ ] Export výsledku jako sdílitelná kartička nebo obrázek.

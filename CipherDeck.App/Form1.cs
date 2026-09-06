@@ -1,4 +1,5 @@
 using CipherDeck.Core;
+using CipherDeck.Core.Analysis;
 using System.Text;
 
 namespace CipherDeck;
@@ -273,6 +274,19 @@ public partial class Form1 : Form
         aboutForm.ShowDialog(this);
     }
 
+    private void AnalysisButton_Click(object? sender, EventArgs e)
+    {
+        var textToAnalyze = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
+        if (FrequencyAnalyzer.AnalyzeLetters(textToAnalyze).Count == 0)
+        {
+            SetError("Pro analýzu je potřeba text obsahující alespoň jedno písmeno.");
+            return;
+        }
+
+        using var analysisForm = new AnalysisForm(textToAnalyze, _darkTheme);
+        analysisForm.ShowDialog(this);
+    }
+
     private void ThemeButton_Click(object? sender, EventArgs e)
     {
         _darkTheme = !_darkTheme;
@@ -392,7 +406,7 @@ public partial class Form1 : Form
         characterCount.ForeColor = secondary;
         livePreview.ForeColor = text;
 
-        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, historyButton, helpButton, themeButton })
+        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, historyButton, analysisButton, helpButton, themeButton })
         {
             button.BackColor = panel;
             button.ForeColor = text;

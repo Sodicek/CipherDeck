@@ -33,7 +33,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.4"
+            Text = "CipherDeck  v0.5"
         };
         var tagline = new Label
         {
@@ -98,6 +98,12 @@ internal sealed class AboutForm : Form
         Ctrl+Enter provede operaci a přidá ji do historie.
         Ctrl+O importuje textový soubor.
         Ctrl+S exportuje výsledek nebo vstupní text.
+
+        ANALÝZA ČETNOSTI
+
+        Tlačítko Analýza zobrazí graf a tabulku četnosti písmen. Pokud existuje
+        výstup, analyzuje se výstupní text; jinak se použije vstup. To se hodí
+        jako první vodítko při luštění jednoduchých substitučních šifer.
 
         SOUBORY A HISTORIE
 

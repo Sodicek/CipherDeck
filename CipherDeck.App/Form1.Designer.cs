@@ -27,6 +27,7 @@ partial class Form1
         titleLabel = new Label();
         subtitleLabel = new Label();
         historyButton = new Button();
+        analysisButton = new Button();
         helpButton = new Button();
         themeButton = new Button();
         optionsPanel = new TableLayoutPanel();
@@ -83,6 +84,7 @@ partial class Form1
         headerPanel.Controls.Add(titleLabel);
         headerPanel.Controls.Add(subtitleLabel);
         headerPanel.Controls.Add(historyButton);
+        headerPanel.Controls.Add(analysisButton);
         headerPanel.Controls.Add(helpButton);
         headerPanel.Controls.Add(themeButton);
 
@@ -100,8 +102,13 @@ partial class Form1
 
         ConfigureButton(historyButton, "Historie (0)", panelBackground, textPrimary, 120);
         historyButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        historyButton.Location = new Point(690, 18);
+        historyButton.Location = new Point(560, 18);
         historyButton.Click += HistoryButton_Click;
+
+        ConfigureButton(analysisButton, "Analýza", panelBackground, textPrimary, 120);
+        analysisButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        analysisButton.Location = new Point(690, 18);
+        analysisButton.Click += AnalysisButton_Click;
 
         ConfigureButton(helpButton, "Nápověda", panelBackground, textPrimary, 105);
         helpButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -322,7 +329,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.4";
+        Text = "CipherDeck · v0.5";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -349,6 +356,7 @@ partial class Form1
     private Label titleLabel = null!;
     private Label subtitleLabel = null!;
     private Button historyButton = null!;
+    private Button analysisButton = null!;
     private Button helpButton = null!;
     private Button themeButton = null!;
     private TableLayoutPanel optionsPanel = null!;

@@ -1,4 +1,5 @@
 using CipherDeck.Core;
+using CipherDeck.Core.Analysis;
 using CipherDeck.Core.Ciphers;
 using Xunit;
 
@@ -6,6 +7,23 @@ namespace CipherDeck.Tests;
 
 public sealed class CipherTests
 {
+    [Fact]
+    public void FrequencyAnalyzerGroupsCaseAndKeepsDiacritics()
+    {
+        var result = FrequencyAnalyzer.AnalyzeLetters("Aa bb! Čč 123");
+
+        Assert.Equal(3, result.Count);
+        Assert.All(result, item => Assert.Equal(2, item.Count));
+        Assert.All(result, item => Assert.Equal(100d / 3d, item.Percentage, precision: 8));
+        Assert.Equal(["A", "B", "Č"], result.Select(item => item.Symbol));
+    }
+
+    [Fact]
+    public void FrequencyAnalyzerReturnsEmptyResultWhenTextHasNoLetters()
+    {
+        Assert.Empty(FrequencyAnalyzer.AnalyzeLetters("123 !? 🔐"));
+    }
+
     [Fact]
     public void CatalogContainsFirstThreeCiphers()
     {

@@ -8,7 +8,7 @@
 
 CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasických šifer. Nabízí jednoduché rozhraní, okamžitý převod textu a oddělené, automaticky testované šifrovací algoritmy.
 
-## Co umí v0.4
+## Co umí v0.5
 
 - text pozpátku s korektní podporou Unicode znaků,
 - Caesarovu šifru s volitelným posunem,
@@ -25,6 +25,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - nápovědu a popisy všech podporovaných šifer přímo v aplikaci,
 - import a export textových souborů v UTF-8,
 - vlastní ikonu aplikace,
+- analýzu četnosti písmen s grafem a podrobnou tabulkou,
 - klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
 
 > [!WARNING]
