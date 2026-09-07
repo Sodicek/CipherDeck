@@ -15,11 +15,11 @@ internal sealed class ChallengeForm : Form
     public ChallengeForm(bool darkTheme)
     {
         _darkTheme = darkTheme;
-        var background = darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var input = darkTheme ? Color.FromArgb(17, 24, 39) : Color.FromArgb(248, 250, 252);
-        var text = darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        var palette = UiTheme.GetPalette(darkTheme);
+        var background = palette.Background;
+        var input = palette.Content;
+        var text = palette.Text;
+        var secondary = palette.Muted;
 
         Text = "CipherDeck · Výzvy";
         StartPosition = FormStartPosition.CenterParent;
@@ -81,7 +81,7 @@ internal sealed class ChallengeForm : Form
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
             Font = new Font("Cascadia Mono", 13F),
-            ForeColor = darkTheme ? Color.FromArgb(196, 181, 253) : Color.FromArgb(91, 33, 182),
+            ForeColor = palette.OutputText,
             ReadOnly = true
         };
         _hint = new Label
@@ -104,10 +104,10 @@ internal sealed class ChallengeForm : Form
         _status = new Label { AutoSize = true, ForeColor = secondary, Text = "Zkus najít původní zprávu." };
 
         var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(0, 12, 0, 0) };
-        var checkButton = CreateButton("Zkontrolovat · Ctrl+Enter", Color.FromArgb(124, 58, 237), Color.White, 205);
-        var hintButton = CreateButton("Nápověda", panel, text, 115);
-        var revealButton = CreateButton("Odhalit", panel, text, 105);
-        var newButton = CreateButton("Nová výzva", panel, text, 120);
+        var checkButton = UiStyles.CreateButton("Zkontrolovat · Ctrl+Enter", 205, palette, primary: true);
+        var hintButton = UiStyles.CreateButton("Nápověda", 115, palette);
+        var revealButton = UiStyles.CreateButton("Odhalit", 105, palette);
+        var newButton = UiStyles.CreateButton("Nová výzva", 120, palette);
         checkButton.Click += (_, _) => CheckAnswer();
         hintButton.Click += (_, _) => ShowHint();
         revealButton.Click += (_, _) => RevealAnswer();
@@ -140,7 +140,7 @@ internal sealed class ChallengeForm : Form
         _cipherText.Text = _challenge.EncryptedText;
         _answer.Clear();
         _hint.Text = "Nápověda je zatím skrytá.";
-        _status.ForeColor = _darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        _status.ForeColor = UiTheme.GetPalette(_darkTheme).Muted;
         _status.Text = "Zkus najít původní zprávu.";
         _answer.Focus();
     }
@@ -151,9 +151,8 @@ internal sealed class ChallengeForm : Form
             return;
 
         var correct = _challenge.IsCorrect(_answer.Text);
-        _status.ForeColor = correct
-            ? (_darkTheme ? Color.FromArgb(134, 239, 172) : Color.FromArgb(22, 101, 52))
-            : (_darkTheme ? Color.FromArgb(253, 164, 175) : Color.FromArgb(190, 18, 60));
+        var palette = UiTheme.GetPalette(_darkTheme);
+        _status.ForeColor = correct ? palette.Success : palette.Error;
         _status.Text = correct ? "Správně! Výzva je vyřešená." : "Ještě ne. Zkontroluj pořadí a jednotlivá písmena.";
     }
 
@@ -170,7 +169,7 @@ internal sealed class ChallengeForm : Form
 
         var key = _challenge.Key?.Number?.ToString() ?? _challenge.Key?.Text ?? "bez klíče";
         _answer.Text = _challenge.PlainText;
-        _status.ForeColor = _darkTheme ? Color.FromArgb(196, 181, 253) : Color.FromArgb(91, 33, 182);
+        _status.ForeColor = UiTheme.GetPalette(_darkTheme).OutputText;
         _status.Text = $"Použitá šifra: {_challenge.CipherName} · klíč: {key}";
     }
 
@@ -181,18 +180,6 @@ internal sealed class ChallengeForm : Form
         Font = new Font("Segoe UI", 9F, bold ? FontStyle.Bold : FontStyle.Regular),
         ForeColor = color,
         Text = text
-    };
-
-    private static Button CreateButton(string text, Color background, Color foreground, int width) => new()
-    {
-        BackColor = background,
-        FlatStyle = FlatStyle.Flat,
-        ForeColor = foreground,
-        Height = 36,
-        Margin = new Padding(0, 0, 10, 0),
-        Text = text,
-        UseVisualStyleBackColor = false,
-        Width = width
     };
 
     private sealed record DifficultyOption(string Name, ChallengeDifficulty Value)

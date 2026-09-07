@@ -7,11 +7,12 @@ internal sealed class AnalysisForm : Form
     public AnalysisForm(string analyzedText, bool darkTheme)
     {
         var frequencies = FrequencyAnalyzer.AnalyzeLetters(analyzedText);
-        var background = darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var input = darkTheme ? Color.FromArgb(17, 24, 39) : Color.FromArgb(248, 250, 252);
-        var text = darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        var palette = UiTheme.GetPalette(darkTheme);
+        var background = palette.Background;
+        var panel = palette.Surface;
+        var input = palette.Content;
+        var text = palette.Text;
+        var secondary = palette.Muted;
 
         Text = "CipherDeck · Analýza četnosti";
         StartPosition = FormStartPosition.CenterParent;
@@ -65,7 +66,7 @@ internal sealed class AnalysisForm : Form
             ColumnHeadersHeight = 34,
             Dock = DockStyle.Fill,
             EnableHeadersVisualStyles = false,
-            GridColor = panel,
+            GridColor = palette.Border,
             ReadOnly = true,
             RowHeadersVisible = false,
             SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -74,24 +75,15 @@ internal sealed class AnalysisForm : Form
         grid.ColumnHeadersDefaultCellStyle.ForeColor = text;
         grid.DefaultCellStyle.BackColor = input;
         grid.DefaultCellStyle.ForeColor = text;
-        grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(109, 40, 217);
+        grid.DefaultCellStyle.SelectionBackColor = palette.AccentPressed;
         grid.DefaultCellStyle.SelectionForeColor = Color.White;
         grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Symbol), HeaderText = "Písmeno" });
         grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Count), HeaderText = "Počet" });
         grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Percentage), HeaderText = "Podíl", DefaultCellStyle = new DataGridViewCellStyle { Format = "0.00' %'" } });
         grid.DataSource = frequencies.ToList();
 
-        var closeButton = new Button
-        {
-            Anchor = AnchorStyles.Right,
-            BackColor = Color.FromArgb(124, 58, 237),
-            FlatStyle = FlatStyle.Flat,
-            ForeColor = Color.White,
-            Height = 36,
-            Text = "Zavřít",
-            UseVisualStyleBackColor = false,
-            Width = 110
-        };
+        var closeButton = UiStyles.CreateButton("Zavřít", 110, palette, primary: true);
+        closeButton.Anchor = AnchorStyles.Right;
         closeButton.Click += (_, _) => Close();
 
         layout.Controls.Add(heading, 0, 0);

@@ -16,11 +16,11 @@ internal sealed class ExplanationForm : Form
     public ExplanationForm(CipherExplanation explanation, bool darkTheme)
     {
         _explanation = explanation;
-        var background = darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var input = darkTheme ? Color.FromArgb(17, 24, 39) : Color.FromArgb(248, 250, 252);
-        var text = darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        var palette = UiTheme.GetPalette(darkTheme);
+        var background = palette.Background;
+        var input = palette.Content;
+        var text = palette.Text;
+        var secondary = palette.Muted;
 
         Text = $"CipherDeck · Jak funguje {explanation.CipherName}";
         StartPosition = FormStartPosition.CenterParent;
@@ -62,7 +62,7 @@ internal sealed class ExplanationForm : Form
             Anchor = AnchorStyles.Left,
             AutoSize = true,
             Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-            ForeColor = Color.FromArgb(139, 92, 246)
+            ForeColor = palette.AccentHover
         };
         _stepTitle = new Label
         {
@@ -94,7 +94,7 @@ internal sealed class ExplanationForm : Form
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
             Font = new Font("Cascadia Mono", 12F),
-            ForeColor = darkTheme ? Color.FromArgb(196, 181, 253) : Color.FromArgb(91, 33, 182),
+            ForeColor = palette.OutputText,
             ReadOnly = true,
             ScrollBars = RichTextBoxScrollBars.Both,
             WordWrap = true
@@ -106,9 +106,9 @@ internal sealed class ExplanationForm : Form
             FlowDirection = FlowDirection.RightToLeft,
             Padding = new Padding(0, 12, 0, 0)
         };
-        _nextButton = CreateButton("Další →", Color.FromArgb(124, 58, 237), Color.White, 120);
-        _previousButton = CreateButton("← Předchozí", panel, text, 120);
-        var closeButton = CreateButton("Zavřít", panel, text, 100);
+        _nextButton = UiStyles.CreateButton("Další →", 120, palette, primary: true);
+        _previousButton = UiStyles.CreateButton("← Předchozí", 120, palette);
+        var closeButton = UiStyles.CreateButton("Zavřít", 100, palette);
         _nextButton.Click += (_, _) => AdvanceOrClose();
         _previousButton.Click += (_, _) => MoveStep(-1);
         closeButton.Click += (_, _) => Close();
@@ -155,14 +155,4 @@ internal sealed class ExplanationForm : Form
         _nextButton.Text = _currentStep == _explanation.Steps.Count - 1 ? "Hotovo" : "Další →";
     }
 
-    private static Button CreateButton(string text, Color background, Color foreground, int width) => new()
-    {
-        BackColor = background,
-        FlatStyle = FlatStyle.Flat,
-        ForeColor = foreground,
-        Height = 36,
-        Text = text,
-        UseVisualStyleBackColor = false,
-        Width = width
-    };
 }

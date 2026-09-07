@@ -11,11 +11,12 @@ internal sealed class HistoryForm : Form
 
     public HistoryForm(IReadOnlyList<HistoryEntry> entries, bool darkTheme)
     {
-        var background = darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var input = darkTheme ? Color.FromArgb(17, 24, 39) : Color.FromArgb(248, 250, 252);
-        var text = darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        var palette = UiTheme.GetPalette(darkTheme);
+        var background = palette.Background;
+        var panel = palette.Surface;
+        var input = palette.Content;
+        var text = palette.Text;
+        var secondary = palette.Muted;
 
         Text = "CipherDeck · Historie";
         StartPosition = FormStartPosition.CenterParent;
@@ -76,9 +77,9 @@ internal sealed class HistoryForm : Form
             FlowDirection = FlowDirection.RightToLeft,
             Padding = new Padding(0, 12, 0, 0)
         };
-        var useButton = CreateButton("Načíst operaci", Color.FromArgb(124, 58, 237), Color.White, 150);
-        var closeButton = CreateButton("Zavřít", panel, text, 100);
-        var clearButton = CreateButton("Vymazat historii", panel, text, 150);
+        var useButton = UiStyles.CreateButton("Načíst operaci", 150, palette, primary: true);
+        var closeButton = UiStyles.CreateButton("Zavřít", 100, palette);
+        var clearButton = UiStyles.CreateButton("Vymazat historii", 150, palette);
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
         clearButton.Click += (_, _) => ClearHistory();
@@ -139,14 +140,4 @@ internal sealed class HistoryForm : Form
         Close();
     }
 
-    private static Button CreateButton(string text, Color background, Color foreground, int width) => new()
-    {
-        BackColor = background,
-        FlatStyle = FlatStyle.Flat,
-        ForeColor = foreground,
-        Height = 36,
-        Text = text,
-        UseVisualStyleBackColor = false,
-        Width = width
-    };
 }

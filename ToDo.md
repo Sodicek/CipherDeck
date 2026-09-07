@@ -53,7 +53,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 
 ## 3. Vzhled a použitelnost
 
-- [ ] Navrhnout jednoduché moderní rozhraní bez výchozího vzhledu WinForms.
+- [x] Navrhnout jednoduché moderní rozhraní bez výchozího vzhledu WinForms.
 - [x] Vytvořit světlý a tmavý motiv.
 - [x] Použít responzivní rozložení, které zvládne změnu velikosti okna.
 - [x] Zobrazovat nastavení dynamicky podle vybrané šifry.
@@ -130,6 +130,13 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Nápověda, odhalení řešení a okamžitá kontrola odpovědi.
 - Heuristický odhad šifer Pozpátku, Atbash a Caesar.
 - Seřazené návrhy s mírou jistoty a náhledem rozluštěného textu.
+
+### v0.8 — Smooth UI
+
+- Společný vizuální systém pro hlavní i vedlejší okna.
+- Zaoblená tlačítka s hover, pressed, disabled a focus stavy.
+- Jemnější karty editoru a nastavení s konzistentními okraji.
+- Vyváženější rozložení akcí ve světlém i tmavém motivu.
 
 ### v1.0 — GitHub Release
 

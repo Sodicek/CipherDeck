@@ -18,7 +18,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
   <img src="docs/screenshots/main-window-dark.png" alt="Hlavní okno CipherDecku v tmavém motivu" width="640">
 </p>
 
-## Co umí v0.7
+## Co umí v0.8
 
 - text pozpátku s korektní podporou Unicode znaků,
 - Caesarovu šifru s volitelným posunem,
@@ -40,6 +40,8 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - generátor vhodných číselných a textových klíčů,
 - šifrovací výzvy ve třech úrovních obtížnosti s nápovědou a kontrolou řešení,
 - heuristický odhad jednoduché šifry s náhledem nejpravděpodobnějšího výsledku,
+- sjednocené zaoblené ovládací prvky s jemnými hover, pressed a focus stavy,
+- uhlazené karty, rozestupy a barevné kontrasty ve světlém i tmavém motivu,
 - klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
 
 > [!WARNING]
