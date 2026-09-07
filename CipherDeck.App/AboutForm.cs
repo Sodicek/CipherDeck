@@ -33,7 +33,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.6"
+            Text = "CipherDeck  v0.7"
         };
         var tagline = new Label
         {
@@ -135,6 +135,12 @@ internal sealed class AboutForm : Form
         Tlačítko Vysvětlit rozloží aktuální operaci do názorných kroků. Šipkami
         můžeš projít princip algoritmu, mezivýsledky i finální text. Kruhové
         tlačítko vedle klíče vygeneruje vhodný náhodný klíč.
+
+        VÝZVY A ODHAD ŠIFRY
+
+        Ve Výzvách můžeš luštit náhodné zprávy ve třech obtížnostech. Odhad šifry
+        vyzkouší obrácení textu, Atbash a všech 25 Caesarových posunů. Výsledek je
+        pouze jazyková heuristika, proto zobrazené procento není zárukou správnosti.
 
         SOUBORY A HISTORIE
 
