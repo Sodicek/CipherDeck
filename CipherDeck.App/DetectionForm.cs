@@ -84,18 +84,21 @@ internal sealed class DetectionForm : Form
             ReadOnly = true
         };
 
-        var buttons = new FlowLayoutPanel
+        var buttons = new TableLayoutPanel
         {
+            ColumnCount = 2,
             Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.RightToLeft,
-            Padding = new Padding(0, 12, 0, 0)
+            Padding = new Padding(0, 8, 0, 2),
+            RowCount = 1
         };
-        var useButton = UiStyles.CreateButton("Použít návrh", 140, palette, primary: true);
-        var closeButton = UiStyles.CreateButton("Zavřít", 100, palette);
+        buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        var useButton = UiStyles.CreateGridButton("Použít návrh", palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
-        buttons.Controls.Add(useButton);
-        buttons.Controls.Add(closeButton);
+        buttons.Controls.Add(closeButton, 0, 0);
+        buttons.Controls.Add(useButton, 1, 0);
 
         layout.Controls.Add(heading, 0, 0);
         layout.Controls.Add(disclaimer, 0, 1);

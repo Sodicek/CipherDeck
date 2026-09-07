@@ -26,7 +26,7 @@ partial class Form1
         headerPanel = new Panel();
         titleLabel = new Label();
         subtitleLabel = new Label();
-        headerActionsPanel = new FlowLayoutPanel();
+        headerActionsPanel = new TableLayoutPanel();
         challengeButton = new SmoothButton();
         historyButton = new SmoothButton();
         analysisButton = new SmoothButton();
@@ -52,7 +52,7 @@ partial class Form1
         inputText = new RichTextBox();
         outputGroup = new SmoothGroupBox();
         outputText = new RichTextBox();
-        actionsPanel = new FlowLayoutPanel();
+        actionsPanel = new TableLayoutPanel();
         importButton = new SmoothButton();
         exportButton = new SmoothButton();
         transformButton = new SmoothButton();
@@ -103,29 +103,33 @@ partial class Form1
         subtitleLabel.Location = new Point(4, 51);
         subtitleLabel.Text = "Classic ciphers. Modern interface.";
 
-        headerActionsPanel.Controls.Add(themeButton);
-        headerActionsPanel.Controls.Add(helpButton);
-        headerActionsPanel.Controls.Add(analysisButton);
-        headerActionsPanel.Controls.Add(historyButton);
-        headerActionsPanel.Controls.Add(challengeButton);
+        headerActionsPanel.ColumnCount = 5;
+        for (var column = 0; column < 5; column++)
+            headerActionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        headerActionsPanel.Controls.Add(challengeButton, 0, 0);
+        headerActionsPanel.Controls.Add(historyButton, 1, 0);
+        headerActionsPanel.Controls.Add(analysisButton, 2, 0);
+        headerActionsPanel.Controls.Add(helpButton, 3, 0);
+        headerActionsPanel.Controls.Add(themeButton, 4, 0);
         headerActionsPanel.Dock = DockStyle.Right;
-        headerActionsPanel.FlowDirection = FlowDirection.RightToLeft;
-        headerActionsPanel.Padding = new Padding(0, 18, 0, 0);
-        headerActionsPanel.Width = 590;
+        headerActionsPanel.Padding = new Padding(0, 18, 0, 18);
+        headerActionsPanel.RowCount = 1;
+        headerActionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        headerActionsPanel.Width = 580;
 
-        ConfigureButton(challengeButton, "Výzvy", 105, palette);
+        ConfigureGridButton(challengeButton, "Výzvy", palette);
         challengeButton.Click += ChallengeButton_Click;
 
-        ConfigureButton(historyButton, "Historie (0)", 110, palette);
+        ConfigureGridButton(historyButton, "Historie (0)", palette);
         historyButton.Click += HistoryButton_Click;
 
-        ConfigureButton(analysisButton, "Analýza", 105, palette);
+        ConfigureGridButton(analysisButton, "Analýza", palette);
         analysisButton.Click += AnalysisButton_Click;
 
-        ConfigureButton(helpButton, "Nápověda", 95, palette);
+        ConfigureGridButton(helpButton, "Nápověda", palette);
         helpButton.Click += HelpButton_Click;
 
-        ConfigureButton(themeButton, "☀  Světlý", 105, palette);
+        ConfigureGridButton(themeButton, "☀  Světlý", palette);
         themeButton.Click += ThemeButton_Click;
 
         optionsPanel.BackColor = panelBackground;
@@ -296,34 +300,38 @@ partial class Form1
         outputText.ForeColor = Color.FromArgb(196, 181, 253);
         outputText.ReadOnly = true;
 
-        actionsPanel.Controls.Add(importButton);
-        actionsPanel.Controls.Add(exportButton);
-        actionsPanel.Controls.Add(transformButton);
-        actionsPanel.Controls.Add(swapButton);
-        actionsPanel.Controls.Add(copyButton);
-        actionsPanel.Controls.Add(clearButton);
-        actionsPanel.Controls.Add(explainButton);
-        actionsPanel.Controls.Add(detectButton);
-        actionsPanel.Controls.Add(livePreview);
+        actionsPanel.ColumnCount = 4;
+        for (var column = 0; column < 4; column++)
+            actionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        actionsPanel.Controls.Add(transformButton, 0, 0);
+        actionsPanel.Controls.Add(swapButton, 1, 0);
+        actionsPanel.Controls.Add(copyButton, 2, 0);
+        actionsPanel.Controls.Add(clearButton, 3, 0);
+        actionsPanel.Controls.Add(importButton, 0, 1);
+        actionsPanel.Controls.Add(exportButton, 1, 1);
+        actionsPanel.Controls.Add(explainButton, 2, 1);
+        actionsPanel.Controls.Add(detectButton, 3, 1);
         actionsPanel.Dock = DockStyle.Fill;
-        actionsPanel.Padding = new Padding(0, 13, 0, 0);
-        actionsPanel.SetFlowBreak(clearButton, true);
+        actionsPanel.Padding = new Padding(0, 6, 0, 6);
+        actionsPanel.RowCount = 2;
+        actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
 
-        ConfigureButton(importButton, "Načíst · Ctrl+O", 130, palette);
+        ConfigureGridButton(importButton, "Načíst · Ctrl+O", palette);
         importButton.Click += ImportButton_Click;
-        ConfigureButton(exportButton, "Uložit · Ctrl+S", 130, palette);
+        ConfigureGridButton(exportButton, "Uložit · Ctrl+S", palette);
         exportButton.Click += ExportButton_Click;
-        ConfigureButton(transformButton, "Provést  ·  Ctrl+Enter", 200, palette, primary: true);
+        ConfigureGridButton(transformButton, "Provést  ·  Ctrl+Enter", palette, primary: true);
         transformButton.Click += TransformButton_Click;
-        ConfigureButton(swapButton, "⇄  Prohodit", 115, palette);
+        ConfigureGridButton(swapButton, "⇄  Prohodit", palette);
         swapButton.Click += SwapButton_Click;
-        ConfigureButton(copyButton, "Kopírovat", 110, palette);
+        ConfigureGridButton(copyButton, "Kopírovat", palette);
         copyButton.Click += CopyButton_Click;
-        ConfigureButton(clearButton, "Vymazat", 100, palette);
+        ConfigureGridButton(clearButton, "Vymazat", palette);
         clearButton.Click += ClearButton_Click;
-        ConfigureButton(explainButton, "Jak to funguje", 135, palette);
+        ConfigureGridButton(explainButton, "Jak to funguje", palette);
         explainButton.Click += ExplainButton_Click;
-        ConfigureButton(detectButton, "Odhad šifry", 125, palette);
+        ConfigureGridButton(detectButton, "Odhad šifry", palette);
         detectButton.Click += DetectButton_Click;
 
         livePreview.AutoSize = true;
@@ -331,15 +339,18 @@ partial class Form1
         livePreview.CheckState = CheckState.Checked;
         livePreview.Font = new Font("Segoe UI", 10F);
         livePreview.ForeColor = textPrimary;
-        livePreview.Margin = new Padding(8, 10, 0, 0);
+        livePreview.Anchor = AnchorStyles.Right;
+        livePreview.Margin = new Padding(0, 0, 28, 0);
         livePreview.Text = "Živý náhled";
         livePreview.CheckedChanged += LivePreview_CheckedChanged;
 
-        footerPanel.ColumnCount = 2;
+        footerPanel.ColumnCount = 3;
         footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         footerPanel.Controls.Add(statusLabel, 0, 0);
-        footerPanel.Controls.Add(characterCount, 1, 0);
+        footerPanel.Controls.Add(livePreview, 1, 0);
+        footerPanel.Controls.Add(characterCount, 2, 0);
         footerPanel.Dock = DockStyle.Fill;
 
         statusLabel.Anchor = AnchorStyles.Left;
@@ -363,7 +374,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.8";
+        Text = "CipherDeck · v0.8.1";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -373,11 +384,18 @@ partial class Form1
     private static void ConfigureButton(Button button, string text, int width, UiPalette palette, bool primary = false) =>
         UiStyles.ConfigureButton(button, text, width, palette, primary);
 
+    private static void ConfigureGridButton(Button button, string text, UiPalette palette, bool primary = false)
+    {
+        UiStyles.ConfigureButton(button, text, 100, palette, primary);
+        button.Dock = DockStyle.Fill;
+        button.Margin = new Padding(5, 4, 5, 4);
+    }
+
     private TableLayoutPanel mainLayout = null!;
     private Panel headerPanel = null!;
     private Label titleLabel = null!;
     private Label subtitleLabel = null!;
-    private FlowLayoutPanel headerActionsPanel = null!;
+    private TableLayoutPanel headerActionsPanel = null!;
     private Button challengeButton = null!;
     private Button historyButton = null!;
     private Button analysisButton = null!;
@@ -403,7 +421,7 @@ partial class Form1
     private RichTextBox inputText = null!;
     private SmoothGroupBox outputGroup = null!;
     private RichTextBox outputText = null!;
-    private FlowLayoutPanel actionsPanel = null!;
+    private TableLayoutPanel actionsPanel = null!;
     private Button importButton = null!;
     private Button exportButton = null!;
     private Button transformButton = null!;

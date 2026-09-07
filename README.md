@@ -42,6 +42,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - heuristický odhad jednoduché šifry s náhledem nejpravděpodobnějšího výsledku,
 - sjednocené zaoblené ovládací prvky s jemnými hover, pressed a focus stavy,
 - uhlazené karty, rozestupy a barevné kontrasty ve světlém i tmavém motivu,
+- přesnou mřížku stejně velkých tlačítek bez nepravidelného zalamování,
 - klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
 
 > [!WARNING]

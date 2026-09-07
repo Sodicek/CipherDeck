@@ -100,21 +100,24 @@ internal sealed class ExplanationForm : Form
             WordWrap = true
         };
 
-        var buttons = new FlowLayoutPanel
+        var buttons = new TableLayoutPanel
         {
+            ColumnCount = 3,
             Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.RightToLeft,
-            Padding = new Padding(0, 12, 0, 0)
+            Padding = new Padding(0, 8, 0, 2),
+            RowCount = 1
         };
-        _nextButton = UiStyles.CreateButton("Další →", 120, palette, primary: true);
-        _previousButton = UiStyles.CreateButton("← Předchozí", 120, palette);
-        var closeButton = UiStyles.CreateButton("Zavřít", 100, palette);
+        for (var column = 0; column < 3; column++)
+            buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 3F));
+        _nextButton = UiStyles.CreateGridButton("Další →", palette, primary: true);
+        _previousButton = UiStyles.CreateGridButton("← Předchozí", palette);
+        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
         _nextButton.Click += (_, _) => AdvanceOrClose();
         _previousButton.Click += (_, _) => MoveStep(-1);
         closeButton.Click += (_, _) => Close();
-        buttons.Controls.Add(_nextButton);
-        buttons.Controls.Add(_previousButton);
-        buttons.Controls.Add(closeButton);
+        buttons.Controls.Add(closeButton, 0, 0);
+        buttons.Controls.Add(_previousButton, 1, 0);
+        buttons.Controls.Add(_nextButton, 2, 0);
 
         layout.Controls.Add(heading, 0, 0);
         layout.Controls.Add(summary, 0, 1);

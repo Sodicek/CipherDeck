@@ -58,6 +58,14 @@ internal static class UiStyles
     public static SmoothButton CreateButton(string text, int width, UiPalette palette, bool primary = false) =>
         ConfigureButton(new SmoothButton(), text, width, palette, primary);
 
+    public static SmoothButton CreateGridButton(string text, UiPalette palette, bool primary = false)
+    {
+        var button = CreateButton(text, 100, palette, primary);
+        button.Dock = DockStyle.Fill;
+        button.Margin = new Padding(4);
+        return button;
+    }
+
     public static T ConfigureButton<T>(T button, string text, int width, UiPalette palette, bool primary = false)
         where T : Button
     {

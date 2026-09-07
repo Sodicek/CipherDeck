@@ -71,21 +71,24 @@ internal sealed class HistoryForm : Form
             Margin = new Padding(0, 12, 0, 0)
         };
 
-        var buttonPanel = new FlowLayoutPanel
+        var buttonPanel = new TableLayoutPanel
         {
+            ColumnCount = 3,
             Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.RightToLeft,
-            Padding = new Padding(0, 12, 0, 0)
+            Padding = new Padding(0, 8, 0, 2),
+            RowCount = 1
         };
-        var useButton = UiStyles.CreateButton("Načíst operaci", 150, palette, primary: true);
-        var closeButton = UiStyles.CreateButton("Zavřít", 100, palette);
-        var clearButton = UiStyles.CreateButton("Vymazat historii", 150, palette);
+        for (var column = 0; column < 3; column++)
+            buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 3F));
+        var useButton = UiStyles.CreateGridButton("Načíst operaci", palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
+        var clearButton = UiStyles.CreateGridButton("Vymazat historii", palette);
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
         clearButton.Click += (_, _) => ClearHistory();
-        buttonPanel.Controls.Add(useButton);
-        buttonPanel.Controls.Add(closeButton);
-        buttonPanel.Controls.Add(clearButton);
+        buttonPanel.Controls.Add(clearButton, 0, 0);
+        buttonPanel.Controls.Add(closeButton, 1, 0);
+        buttonPanel.Controls.Add(useButton, 2, 0);
 
         layout.Controls.Add(heading, 0, 0);
         layout.Controls.Add(_historyList, 0, 1);

@@ -103,19 +103,21 @@ internal sealed class ChallengeForm : Form
         };
         _status = new Label { AutoSize = true, ForeColor = secondary, Text = "Zkus najít původní zprávu." };
 
-        var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, Padding = new Padding(0, 12, 0, 0) };
-        var checkButton = UiStyles.CreateButton("Zkontrolovat · Ctrl+Enter", 205, palette, primary: true);
-        var hintButton = UiStyles.CreateButton("Nápověda", 115, palette);
-        var revealButton = UiStyles.CreateButton("Odhalit", 105, palette);
-        var newButton = UiStyles.CreateButton("Nová výzva", 120, palette);
+        var buttons = new TableLayoutPanel { ColumnCount = 4, Dock = DockStyle.Fill, Padding = new Padding(0, 8, 0, 2), RowCount = 1 };
+        for (var column = 0; column < 4; column++)
+            buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        var checkButton = UiStyles.CreateGridButton("Zkontrolovat · Ctrl+Enter", palette, primary: true);
+        var hintButton = UiStyles.CreateGridButton("Nápověda", palette);
+        var revealButton = UiStyles.CreateGridButton("Odhalit", palette);
+        var newButton = UiStyles.CreateGridButton("Nová výzva", palette);
         checkButton.Click += (_, _) => CheckAnswer();
         hintButton.Click += (_, _) => ShowHint();
         revealButton.Click += (_, _) => RevealAnswer();
         newButton.Click += (_, _) => NewChallenge();
-        buttons.Controls.Add(checkButton);
-        buttons.Controls.Add(hintButton);
-        buttons.Controls.Add(revealButton);
-        buttons.Controls.Add(newButton);
+        buttons.Controls.Add(newButton, 0, 0);
+        buttons.Controls.Add(hintButton, 1, 0);
+        buttons.Controls.Add(revealButton, 2, 0);
+        buttons.Controls.Add(checkButton, 3, 0);
 
         layout.Controls.Add(heading, 0, 0);
         layout.Controls.Add(_difficulty, 0, 1);

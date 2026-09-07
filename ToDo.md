@@ -137,6 +137,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Zaoblená tlačítka s hover, pressed, disabled a focus stavy.
 - Jemnější karty editoru a nastavení s konzistentními okraji.
 - Vyváženější rozložení akcí ve světlém i tmavém motivu.
+- Stejně široká a vysoká tlačítka v pravidelných řádcích a sloupcích.
 
 ### v1.0 — GitHub Release
 
