@@ -18,7 +18,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
   <img src="docs/screenshots/main-window-dark.png" alt="Hlavní okno CipherDecku v tmavém motivu" width="640">
 </p>
 
-## Co umí v0.6
+## Co umí v0.7
 
 - text pozpátku s korektní podporou Unicode znaků,
 - Caesarovu šifru s volitelným posunem,
@@ -38,6 +38,8 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - analýzu četnosti písmen s grafem a podrobnou tabulkou,
 - Learn Mode s vysvětlením každé šifry krok za krokem,
 - generátor vhodných číselných a textových klíčů,
+- šifrovací výzvy ve třech úrovních obtížnosti s nápovědou a kontrolou řešení,
+- heuristický odhad jednoduché šifry s náhledem nejpravděpodobnějšího výsledku,
 - klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
 
 > [!WARNING]
@@ -74,7 +76,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmapa
 
-Další plánované funkce zahrnují šifrovací výzvy, automatický odhad jednoduché šifry a plnou lokalizaci rozhraní do angličtiny.
+Další plánované funkce zahrnují export výsledku jako sdílitelnou kartičku, plnou lokalizaci rozhraní do angličtiny a další vylepšení přístupnosti.
 
 Podrobný plán je v [ToDo.md](ToDo.md).
 
