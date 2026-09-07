@@ -15,24 +15,24 @@ partial class Form1
 
     private void InitializeComponent()
     {
-        var darkBackground = Color.FromArgb(15, 23, 42);
-        var panelBackground = Color.FromArgb(30, 41, 59);
-        var inputBackground = Color.FromArgb(17, 24, 39);
-        var primary = Color.FromArgb(124, 58, 237);
-        var textPrimary = Color.FromArgb(241, 245, 249);
-        var textSecondary = Color.FromArgb(148, 163, 184);
+        var palette = UiTheme.GetPalette(darkTheme: true);
+        var darkBackground = palette.Background;
+        var panelBackground = palette.Surface;
+        var inputBackground = palette.Content;
+        var textPrimary = palette.Text;
+        var textSecondary = palette.Muted;
 
         mainLayout = new TableLayoutPanel();
         headerPanel = new Panel();
         titleLabel = new Label();
         subtitleLabel = new Label();
         headerActionsPanel = new FlowLayoutPanel();
-        challengeButton = new Button();
-        historyButton = new Button();
-        analysisButton = new Button();
-        helpButton = new Button();
-        themeButton = new Button();
-        optionsPanel = new TableLayoutPanel();
+        challengeButton = new SmoothButton();
+        historyButton = new SmoothButton();
+        analysisButton = new SmoothButton();
+        helpButton = new SmoothButton();
+        themeButton = new SmoothButton();
+        optionsPanel = new RoundedTableLayoutPanel();
         cipherLabel = new Label();
         cipherSelector = new ComboBox();
         modePanel = new FlowLayoutPanel();
@@ -41,26 +41,26 @@ partial class Form1
         keyPanel = new FlowLayoutPanel();
         keyLabel = new Label();
         shiftValue = new NumericUpDown();
-        randomNumericKeyButton = new Button();
+        randomNumericKeyButton = new SmoothButton();
         textKeyPanel = new FlowLayoutPanel();
         textKeyLabel = new Label();
         textKeyInput = new TextBox();
-        randomTextKeyButton = new Button();
+        randomTextKeyButton = new SmoothButton();
         cipherDescription = new Label();
         editorLayout = new TableLayoutPanel();
-        inputGroup = new GroupBox();
+        inputGroup = new SmoothGroupBox();
         inputText = new RichTextBox();
-        outputGroup = new GroupBox();
+        outputGroup = new SmoothGroupBox();
         outputText = new RichTextBox();
         actionsPanel = new FlowLayoutPanel();
-        importButton = new Button();
-        exportButton = new Button();
-        transformButton = new Button();
-        swapButton = new Button();
-        copyButton = new Button();
-        clearButton = new Button();
-        explainButton = new Button();
-        detectButton = new Button();
+        importButton = new SmoothButton();
+        exportButton = new SmoothButton();
+        transformButton = new SmoothButton();
+        swapButton = new SmoothButton();
+        copyButton = new SmoothButton();
+        clearButton = new SmoothButton();
+        explainButton = new SmoothButton();
+        detectButton = new SmoothButton();
         livePreview = new CheckBox();
         footerPanel = new TableLayoutPanel();
         statusLabel = new Label();
@@ -113,22 +113,23 @@ partial class Form1
         headerActionsPanel.Padding = new Padding(0, 18, 0, 0);
         headerActionsPanel.Width = 590;
 
-        ConfigureButton(challengeButton, "Výzvy", panelBackground, textPrimary, 105);
+        ConfigureButton(challengeButton, "Výzvy", 105, palette);
         challengeButton.Click += ChallengeButton_Click;
 
-        ConfigureButton(historyButton, "Historie (0)", panelBackground, textPrimary, 110);
+        ConfigureButton(historyButton, "Historie (0)", 110, palette);
         historyButton.Click += HistoryButton_Click;
 
-        ConfigureButton(analysisButton, "Analýza", panelBackground, textPrimary, 105);
+        ConfigureButton(analysisButton, "Analýza", 105, palette);
         analysisButton.Click += AnalysisButton_Click;
 
-        ConfigureButton(helpButton, "Nápověda", panelBackground, textPrimary, 95);
+        ConfigureButton(helpButton, "Nápověda", 95, palette);
         helpButton.Click += HelpButton_Click;
 
-        ConfigureButton(themeButton, "☀  Světlý", panelBackground, textPrimary, 105);
+        ConfigureButton(themeButton, "☀  Světlý", 105, palette);
         themeButton.Click += ThemeButton_Click;
 
         optionsPanel.BackColor = panelBackground;
+        optionsPanel.BorderColor = palette.Border;
         optionsPanel.ColumnCount = 4;
         optionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
         optionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 250F));
@@ -209,7 +210,7 @@ partial class Form1
         shiftValue.Width = 70;
         shiftValue.ValueChanged += PreviewSettingChanged;
 
-        ConfigureButton(randomNumericKeyButton, "⟳", panelBackground, textPrimary, 34);
+        ConfigureButton(randomNumericKeyButton, "⟳", 34, palette);
         randomNumericKeyButton.Height = 29;
         randomNumericKeyButton.Margin = new Padding(7, 3, 0, 0);
         randomNumericKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
@@ -238,7 +239,7 @@ partial class Form1
         textKeyInput.Width = 135;
         textKeyInput.TextChanged += PreviewSettingChanged;
 
-        ConfigureButton(randomTextKeyButton, "⟳", panelBackground, textPrimary, 34);
+        ConfigureButton(randomTextKeyButton, "⟳", 34, palette);
         randomTextKeyButton.Height = 29;
         randomTextKeyButton.Margin = new Padding(7, 3, 0, 0);
         randomTextKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
@@ -261,6 +262,8 @@ partial class Form1
         editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
 
         inputGroup.Controls.Add(inputText);
+        inputGroup.BackColor = inputBackground;
+        inputGroup.BorderColor = palette.Border;
         inputGroup.Dock = DockStyle.Fill;
         inputGroup.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         inputGroup.ForeColor = textPrimary;
@@ -277,6 +280,8 @@ partial class Form1
         inputText.TextChanged += InputText_TextChanged;
 
         outputGroup.Controls.Add(outputText);
+        outputGroup.BackColor = inputBackground;
+        outputGroup.BorderColor = palette.Border;
         outputGroup.Dock = DockStyle.Fill;
         outputGroup.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         outputGroup.ForeColor = textPrimary;
@@ -302,22 +307,23 @@ partial class Form1
         actionsPanel.Controls.Add(livePreview);
         actionsPanel.Dock = DockStyle.Fill;
         actionsPanel.Padding = new Padding(0, 13, 0, 0);
+        actionsPanel.SetFlowBreak(clearButton, true);
 
-        ConfigureButton(importButton, "Import · Ctrl+O", panelBackground, textPrimary, 135);
+        ConfigureButton(importButton, "Načíst · Ctrl+O", 130, palette);
         importButton.Click += ImportButton_Click;
-        ConfigureButton(exportButton, "Export · Ctrl+S", panelBackground, textPrimary, 135);
+        ConfigureButton(exportButton, "Uložit · Ctrl+S", 130, palette);
         exportButton.Click += ExportButton_Click;
-        ConfigureButton(transformButton, "PROVÉST  ·  Ctrl+Enter", primary, Color.White, 210);
+        ConfigureButton(transformButton, "Provést  ·  Ctrl+Enter", 200, palette, primary: true);
         transformButton.Click += TransformButton_Click;
-        ConfigureButton(swapButton, "Prohodit", panelBackground, textPrimary, 120);
+        ConfigureButton(swapButton, "⇄  Prohodit", 115, palette);
         swapButton.Click += SwapButton_Click;
-        ConfigureButton(copyButton, "Kopírovat", panelBackground, textPrimary, 120);
+        ConfigureButton(copyButton, "Kopírovat", 110, palette);
         copyButton.Click += CopyButton_Click;
-        ConfigureButton(clearButton, "Vymazat", panelBackground, textPrimary, 110);
+        ConfigureButton(clearButton, "Vymazat", 100, palette);
         clearButton.Click += ClearButton_Click;
-        ConfigureButton(explainButton, "Vysvětlit", panelBackground, textPrimary, 120);
+        ConfigureButton(explainButton, "Jak to funguje", 135, palette);
         explainButton.Click += ExplainButton_Click;
-        ConfigureButton(detectButton, "Odhad šifry", panelBackground, textPrimary, 120);
+        ConfigureButton(detectButton, "Odhad šifry", 125, palette);
         detectButton.Click += DetectButton_Click;
 
         livePreview.AutoSize = true;
@@ -325,7 +331,7 @@ partial class Form1
         livePreview.CheckState = CheckState.Checked;
         livePreview.Font = new Font("Segoe UI", 10F);
         livePreview.ForeColor = textPrimary;
-        livePreview.Margin = new Padding(10, 9, 0, 0);
+        livePreview.Margin = new Padding(8, 10, 0, 0);
         livePreview.Text = "Živý náhled";
         livePreview.CheckedChanged += LivePreview_CheckedChanged;
 
@@ -357,27 +363,15 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.7";
+        Text = "CipherDeck · v0.8";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
         ResumeLayout(false);
     }
 
-    private static void ConfigureButton(Button button, string text, Color background, Color foreground, int width)
-    {
-        button.BackColor = background;
-        button.Cursor = Cursors.Hand;
-        button.FlatAppearance.BorderSize = 0;
-        button.FlatStyle = FlatStyle.Flat;
-        button.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        button.ForeColor = foreground;
-        button.Height = 38;
-        button.Margin = new Padding(0, 0, 10, 0);
-        button.Text = text;
-        button.UseVisualStyleBackColor = false;
-        button.Width = width;
-    }
+    private static void ConfigureButton(Button button, string text, int width, UiPalette palette, bool primary = false) =>
+        UiStyles.ConfigureButton(button, text, width, palette, primary);
 
     private TableLayoutPanel mainLayout = null!;
     private Panel headerPanel = null!;
@@ -389,7 +383,7 @@ partial class Form1
     private Button analysisButton = null!;
     private Button helpButton = null!;
     private Button themeButton = null!;
-    private TableLayoutPanel optionsPanel = null!;
+    private RoundedTableLayoutPanel optionsPanel = null!;
     private Label cipherLabel = null!;
     private ComboBox cipherSelector = null!;
     private FlowLayoutPanel modePanel = null!;
@@ -405,9 +399,9 @@ partial class Form1
     private Button randomTextKeyButton = null!;
     private Label cipherDescription = null!;
     private TableLayoutPanel editorLayout = null!;
-    private GroupBox inputGroup = null!;
+    private SmoothGroupBox inputGroup = null!;
     private RichTextBox inputText = null!;
-    private GroupBox outputGroup = null!;
+    private SmoothGroupBox outputGroup = null!;
     private RichTextBox outputText = null!;
     private FlowLayoutPanel actionsPanel = null!;
     private Button importButton = null!;

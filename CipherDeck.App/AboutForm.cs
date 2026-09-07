@@ -4,10 +4,11 @@ internal sealed class AboutForm : Form
 {
     public AboutForm(bool darkTheme)
     {
-        var background = darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var text = darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = darkTheme ? Color.FromArgb(203, 213, 225) : Color.FromArgb(51, 65, 85);
+        var palette = UiTheme.GetPalette(darkTheme);
+        var background = palette.Background;
+        var panel = palette.Surface;
+        var text = palette.Text;
+        var secondary = palette.Muted;
 
         Text = "O aplikaci CipherDeck";
         StartPosition = FormStartPosition.CenterParent;
@@ -33,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.7"
+            Text = "CipherDeck  v0.8"
         };
         var tagline = new Label
         {
@@ -57,29 +58,11 @@ internal sealed class AboutForm : Form
             Text = HelpText
         };
 
-        var closeButton = new Button
-        {
-            Anchor = AnchorStyles.Right,
-            BackColor = Color.FromArgb(124, 58, 237),
-            FlatStyle = FlatStyle.Flat,
-            ForeColor = Color.White,
-            Height = 36,
-            Text = "Rozumím",
-            UseVisualStyleBackColor = false,
-            Width = 120
-        };
+        var closeButton = UiStyles.CreateButton("Rozumím", 120, palette, primary: true);
+        closeButton.Anchor = AnchorStyles.Right;
         closeButton.Click += (_, _) => Close();
 
-        var githubButton = new Button
-        {
-            BackColor = panel,
-            FlatStyle = FlatStyle.Flat,
-            ForeColor = text,
-            Height = 36,
-            Text = "Otevřít GitHub",
-            UseVisualStyleBackColor = false,
-            Width = 140
-        };
+        var githubButton = UiStyles.CreateButton("Otevřít GitHub", 140, palette);
         githubButton.Click += (_, _) => System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
             FileName = "https://github.com/Sodicek/CipherDeck",

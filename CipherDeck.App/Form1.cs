@@ -421,59 +421,59 @@ public partial class Form1 : Form
 
     private void ApplyTheme()
     {
-        var background = _darkTheme ? Color.FromArgb(15, 23, 42) : Color.FromArgb(241, 245, 249);
-        var panel = _darkTheme ? Color.FromArgb(30, 41, 59) : Color.White;
-        var input = _darkTheme ? Color.FromArgb(17, 24, 39) : Color.FromArgb(248, 250, 252);
-        var text = _darkTheme ? Color.FromArgb(241, 245, 249) : Color.FromArgb(15, 23, 42);
-        var secondary = _darkTheme ? Color.FromArgb(148, 163, 184) : Color.FromArgb(71, 85, 105);
+        var palette = UiTheme.GetPalette(_darkTheme);
 
-        BackColor = background;
-        mainLayout.BackColor = background;
-        optionsPanel.BackColor = panel;
-        inputGroup.ForeColor = text;
-        outputGroup.ForeColor = text;
-        inputText.BackColor = input;
-        inputText.ForeColor = text;
-        outputText.BackColor = input;
-        outputText.ForeColor = _darkTheme ? Color.FromArgb(196, 181, 253) : Color.FromArgb(91, 33, 182);
-        cipherSelector.BackColor = input;
-        cipherSelector.ForeColor = text;
-        shiftValue.BackColor = input;
-        shiftValue.ForeColor = text;
-        textKeyInput.BackColor = input;
-        textKeyInput.ForeColor = text;
+        BackColor = palette.Background;
+        mainLayout.BackColor = palette.Background;
+        optionsPanel.BackColor = palette.Surface;
+        optionsPanel.BorderColor = palette.Border;
+        inputGroup.BackColor = palette.Content;
+        inputGroup.BorderColor = palette.Border;
+        inputGroup.ForeColor = palette.Text;
+        outputGroup.BackColor = palette.Content;
+        outputGroup.BorderColor = palette.Border;
+        outputGroup.ForeColor = palette.Text;
+        inputText.BackColor = palette.Content;
+        inputText.ForeColor = palette.Text;
+        outputText.BackColor = palette.Content;
+        outputText.ForeColor = palette.OutputText;
+        cipherSelector.BackColor = palette.Content;
+        cipherSelector.ForeColor = palette.Text;
+        shiftValue.BackColor = palette.Content;
+        shiftValue.ForeColor = palette.Text;
+        textKeyInput.BackColor = palette.Content;
+        textKeyInput.ForeColor = palette.Text;
 
-        titleLabel.ForeColor = text;
-        subtitleLabel.ForeColor = secondary;
-        cipherLabel.ForeColor = text;
-        cipherDescription.ForeColor = secondary;
-        encryptMode.ForeColor = text;
-        decryptMode.ForeColor = text;
-        keyLabel.ForeColor = text;
-        textKeyLabel.ForeColor = text;
-        characterCount.ForeColor = secondary;
-        livePreview.ForeColor = text;
+        titleLabel.ForeColor = palette.Text;
+        subtitleLabel.ForeColor = palette.Muted;
+        cipherLabel.ForeColor = palette.Text;
+        cipherDescription.ForeColor = palette.Muted;
+        encryptMode.ForeColor = palette.Text;
+        decryptMode.ForeColor = palette.Text;
+        keyLabel.ForeColor = palette.Text;
+        textKeyLabel.ForeColor = palette.Text;
+        characterCount.ForeColor = palette.Muted;
+        livePreview.ForeColor = palette.Text;
 
         foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, detectButton, randomNumericKeyButton, randomTextKeyButton, challengeButton, historyButton, analysisButton, helpButton, themeButton })
-        {
-            button.BackColor = panel;
-            button.ForeColor = text;
-        }
+            UiStyles.ApplyButtonTheme(button, palette);
 
-        transformButton.BackColor = Color.FromArgb(124, 58, 237);
-        transformButton.ForeColor = Color.White;
+        UiStyles.ApplyButtonTheme(transformButton, palette, primary: true);
         themeButton.Text = _darkTheme ? "☀  Světlý" : "☾  Tmavý";
+        optionsPanel.Invalidate();
+        inputGroup.Invalidate();
+        outputGroup.Invalidate();
     }
 
     private void SetSuccess(string message)
     {
-        statusLabel.ForeColor = _darkTheme ? Color.FromArgb(134, 239, 172) : Color.FromArgb(22, 101, 52);
+        statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Success;
         statusLabel.Text = message;
     }
 
     private void SetError(string message)
     {
-        statusLabel.ForeColor = _darkTheme ? Color.FromArgb(253, 164, 175) : Color.FromArgb(190, 18, 60);
+        statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Error;
         statusLabel.Text = message;
     }
 }
