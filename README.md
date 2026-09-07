@@ -4,6 +4,9 @@
 
 [![Build and test](https://github.com/Sodicek/CipherDeck/actions/workflows/ci.yml/badge.svg)](https://github.com/Sodicek/CipherDeck/actions/workflows/ci.yml)
 [![Latest release](https://img.shields.io/github/v/release/Sodicek/CipherDeck)](https://github.com/Sodicek/CipherDeck/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+🇬🇧 [Read this in English](README.en.md)
 
 <p align="center">
   <img src="CipherDeck.App/Assets/cipherdeck-logo.png" alt="CipherDeck logo" width="180">
@@ -11,7 +14,11 @@
 
 CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasických šifer. Nabízí jednoduché rozhraní, okamžitý převod textu a oddělené, automaticky testované šifrovací algoritmy.
 
-## Co umí v0.5
+<p align="center">
+  <img src="docs/screenshots/main-window-dark.png" alt="Hlavní okno CipherDecku v tmavém motivu" width="640">
+</p>
+
+## Co umí v0.6
 
 - text pozpátku s korektní podporou Unicode znaků,
 - Caesarovu šifru s volitelným posunem,
@@ -29,6 +36,8 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - import a export textových souborů v UTF-8,
 - vlastní ikonu aplikace,
 - analýzu četnosti písmen s grafem a podrobnou tabulkou,
+- Learn Mode s vysvětlením každé šifry krok za krokem,
+- generátor vhodných číselných a textových klíčů,
 - klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
 
 > [!WARNING]
@@ -65,6 +74,20 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmapa
 
-Další plánované funkce zahrnují interaktivní vysvětlení algoritmů, šifrovací výzvy a českou i anglickou lokalizaci.
+Další plánované funkce zahrnují šifrovací výzvy, automatický odhad jednoduché šifry a plnou lokalizaci rozhraní do angličtiny.
 
 Podrobný plán je v [ToDo.md](ToDo.md).
+
+## Přispívání
+
+Návrhy a opravy jsou vítány. Před posláním pull requestu:
+
+1. spusť `dotnet test CipherDeck.sln` a ověř, že všechny testy prochází,
+2. u nové šifry dodrž rozhraní `ICipher` a přidej k ní automatické testy,
+3. v popisu pull requestu stručně shrň, co a proč se mění.
+
+Chybu nebo nápad na novou funkci nahlas přes [GitHub Issues](https://github.com/Sodicek/CipherDeck/issues).
+
+## Licence
+
+Projekt je dostupný pod licencí [MIT](LICENSE).

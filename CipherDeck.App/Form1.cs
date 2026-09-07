@@ -1,5 +1,6 @@
 using CipherDeck.Core;
 using CipherDeck.Core.Analysis;
+using CipherDeck.Core.Learning;
 using System.Text;
 
 namespace CipherDeck;
@@ -287,6 +288,29 @@ public partial class Form1 : Form
         analysisForm.ShowDialog(this);
     }
 
+    private void ExplainButton_Click(object? sender, EventArgs e)
+    {
+        if (SelectedCipher is not { } cipher || !PerformTransform(addToHistory: false, showEmptyError: true))
+            return;
+
+        var explanation = CipherExplainer.Explain(cipher, inputText.Text, encryptMode.Checked, GetCurrentKey(cipher));
+        using var explanationForm = new ExplanationForm(explanation, _darkTheme);
+        explanationForm.ShowDialog(this);
+    }
+
+    private void GenerateKeyButton_Click(object? sender, EventArgs e)
+    {
+        if (SelectedCipher is not { } cipher || CipherKeyGenerator.Generate(cipher) is not { } key)
+            return;
+
+        if (key.Number is { } number)
+            shiftValue.Value = Math.Clamp(number, (int)shiftValue.Minimum, (int)shiftValue.Maximum);
+        if (key.Text is { } text)
+            textKeyInput.Text = text;
+
+        SetSuccess($"Vygenerován nový klíč pro: {cipher.Name}");
+    }
+
     private void ThemeButton_Click(object? sender, EventArgs e)
     {
         _darkTheme = !_darkTheme;
@@ -406,7 +430,7 @@ public partial class Form1 : Form
         characterCount.ForeColor = secondary;
         livePreview.ForeColor = text;
 
-        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, historyButton, analysisButton, helpButton, themeButton })
+        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, randomNumericKeyButton, randomTextKeyButton, historyButton, analysisButton, helpButton, themeButton })
         {
             button.BackColor = panel;
             button.ForeColor = text;

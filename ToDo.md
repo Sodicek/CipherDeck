@@ -68,8 +68,8 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Živý náhled výsledku při psaní.
 - [x] Trvalá historie posledních 30 operací s možností návratu a vymazání.
 - [x] Import a export textových souborů v UTF-8.
-- [ ] Režim krok za krokem, který vizuálně vysvětlí průběh šifry.
-- [ ] Náhodný generátor vhodných klíčů.
+- [x] Režim krok za krokem, který vizuálně vysvětlí průběh šifry.
+- [x] Náhodný generátor vhodných klíčů.
 - [x] Analýza četnosti písmen a jednoduchý sloupcový graf.
 - [ ] Detekce pravděpodobného typu jednoduché šifry.
 - [ ] Výzvy k rozluštění s několika úrovněmi obtížnosti.
@@ -81,8 +81,8 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Založit samostatný projekt s automatickými testy.
 - [x] Otestovat každý algoritmus na známých příkladech.
 - [x] Ověřit pravidlo `Decrypt(Encrypt(text, key), key) == text`.
-- [ ] Přidat testy prázdného vstupu, Unicode, diakritiky a velmi dlouhého textu.
-- [ ] Otestovat neplatné a hraniční hodnoty klíčů.
+- [x] Přidat testy prázdného vstupu, Unicode, diakritiky a velmi dlouhého textu.
+- [x] Otestovat neplatné a hraniční hodnoty klíčů.
 - [x] Zajistit sestavení bez chyb a varování.
 - [x] Nastavit automatické sestavení a testy přes GitHub Actions.
 - [ ] Provést ruční kontrolu UI při různém DPI a velikosti okna.
@@ -92,10 +92,11 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Inicializovat Git repozitář a vytvořit smysluplný `.gitignore`.
 - [x] Napsat úvodní `README.md`; před vydáním doplnit anglickou variantu a screenshoty.
 - [x] Do README vložit logo a seznam funkcí.
-- [ ] Do README doplnit screenshoty a krátkou ukázku použití.
-- [ ] Přidat instrukce pro spuštění, sestavení a přispívání.
-- [ ] Zvolit licenci, například MIT.
-- [ ] Přidat šablony pro bug report a návrh nové funkce.
+- [x] Do README doplnit screenshoty a krátkou ukázku použití.
+- [x] Přidat anglickou variantu README (`README.en.md`).
+- [x] Přidat instrukce pro spuštění, sestavení a přispívání.
+- [x] Zvolit licenci, například MIT.
+- [x] Přidat šablony pro bug report a návrh nové funkce.
 - [ ] Používat issues, milestones a označené verze.
 - [x] Vytvořit první GitHub Release s přenosnou sestavou aplikace.
 - [x] Připravit lokální samostatný `win-x64` Release balíček pro budoucí GitHub Release.
@@ -113,6 +114,15 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Nové rozhraní, motivy a historie.
 - Všech šest základních šifer.
 - Import, export a kvalitní nápověda.
+
+### v0.6 — Repo Polish
+
+- Testy pokrývají prázdný vstup, Unicode, diakritiku, dlouhý text a hraniční hodnoty klíčů.
+- Licence MIT a `LICENSE` soubor v repozitáři.
+- README se screenshotem a anglickou variantou (`README.en.md`).
+- Sekce Přispívání s pokyny pro pull requesty a hlášení chyb.
+- Learn Mode vysvětluje všech šest šifer krok za krokem.
+- Generátor vytváří vhodné číselné i textové klíče.
 
 ### v1.0 — GitHub Release
 

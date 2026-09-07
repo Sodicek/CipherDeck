@@ -26,6 +26,7 @@ partial class Form1
         headerPanel = new Panel();
         titleLabel = new Label();
         subtitleLabel = new Label();
+        headerActionsPanel = new FlowLayoutPanel();
         historyButton = new Button();
         analysisButton = new Button();
         helpButton = new Button();
@@ -39,9 +40,11 @@ partial class Form1
         keyPanel = new FlowLayoutPanel();
         keyLabel = new Label();
         shiftValue = new NumericUpDown();
+        randomNumericKeyButton = new Button();
         textKeyPanel = new FlowLayoutPanel();
         textKeyLabel = new Label();
         textKeyInput = new TextBox();
+        randomTextKeyButton = new Button();
         cipherDescription = new Label();
         editorLayout = new TableLayoutPanel();
         inputGroup = new GroupBox();
@@ -55,6 +58,7 @@ partial class Form1
         swapButton = new Button();
         copyButton = new Button();
         clearButton = new Button();
+        explainButton = new Button();
         livePreview = new CheckBox();
         footerPanel = new TableLayoutPanel();
         statusLabel = new Label();
@@ -83,10 +87,7 @@ partial class Form1
         headerPanel.Dock = DockStyle.Fill;
         headerPanel.Controls.Add(titleLabel);
         headerPanel.Controls.Add(subtitleLabel);
-        headerPanel.Controls.Add(historyButton);
-        headerPanel.Controls.Add(analysisButton);
-        headerPanel.Controls.Add(helpButton);
-        headerPanel.Controls.Add(themeButton);
+        headerPanel.Controls.Add(headerActionsPanel);
 
         titleLabel.AutoSize = true;
         titleLabel.Font = new Font("Segoe UI", 26F, FontStyle.Bold);
@@ -100,24 +101,25 @@ partial class Form1
         subtitleLabel.Location = new Point(4, 51);
         subtitleLabel.Text = "Classic ciphers. Modern interface.";
 
+        headerActionsPanel.Controls.Add(themeButton);
+        headerActionsPanel.Controls.Add(helpButton);
+        headerActionsPanel.Controls.Add(analysisButton);
+        headerActionsPanel.Controls.Add(historyButton);
+        headerActionsPanel.Dock = DockStyle.Right;
+        headerActionsPanel.FlowDirection = FlowDirection.RightToLeft;
+        headerActionsPanel.Padding = new Padding(0, 18, 0, 0);
+        headerActionsPanel.Width = 520;
+
         ConfigureButton(historyButton, "Historie (0)", panelBackground, textPrimary, 120);
-        historyButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        historyButton.Location = new Point(560, 18);
         historyButton.Click += HistoryButton_Click;
 
         ConfigureButton(analysisButton, "Analýza", panelBackground, textPrimary, 120);
-        analysisButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        analysisButton.Location = new Point(690, 18);
         analysisButton.Click += AnalysisButton_Click;
 
         ConfigureButton(helpButton, "Nápověda", panelBackground, textPrimary, 105);
-        helpButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        helpButton.Location = new Point(820, 18);
         helpButton.Click += HelpButton_Click;
 
         ConfigureButton(themeButton, "☀  Světlý", panelBackground, textPrimary, 115);
-        themeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-        themeButton.Location = new Point(935, 18);
         themeButton.Click += ThemeButton_Click;
 
         optionsPanel.BackColor = panelBackground;
@@ -181,6 +183,7 @@ partial class Form1
         keyPanel.AutoSize = true;
         keyPanel.Controls.Add(keyLabel);
         keyPanel.Controls.Add(shiftValue);
+        keyPanel.Controls.Add(randomNumericKeyButton);
         keyPanel.Margin = new Padding(0);
         keyPanel.Visible = false;
 
@@ -200,10 +203,17 @@ partial class Form1
         shiftValue.Width = 70;
         shiftValue.ValueChanged += PreviewSettingChanged;
 
+        ConfigureButton(randomNumericKeyButton, "⟳", panelBackground, textPrimary, 34);
+        randomNumericKeyButton.Height = 29;
+        randomNumericKeyButton.Margin = new Padding(7, 3, 0, 0);
+        randomNumericKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomNumericKeyButton.Click += GenerateKeyButton_Click;
+
         textKeyPanel.Anchor = AnchorStyles.Left;
         textKeyPanel.AutoSize = true;
         textKeyPanel.Controls.Add(textKeyLabel);
         textKeyPanel.Controls.Add(textKeyInput);
+        textKeyPanel.Controls.Add(randomTextKeyButton);
         textKeyPanel.Margin = new Padding(0);
         textKeyPanel.Visible = false;
 
@@ -221,6 +231,12 @@ partial class Form1
         textKeyInput.MaxLength = 64;
         textKeyInput.Width = 135;
         textKeyInput.TextChanged += PreviewSettingChanged;
+
+        ConfigureButton(randomTextKeyButton, "⟳", panelBackground, textPrimary, 34);
+        randomTextKeyButton.Height = 29;
+        randomTextKeyButton.Margin = new Padding(7, 3, 0, 0);
+        randomTextKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomTextKeyButton.Click += GenerateKeyButton_Click;
 
         cipherDescription.Anchor = AnchorStyles.Left;
         cipherDescription.AutoEllipsis = true;
@@ -275,6 +291,7 @@ partial class Form1
         actionsPanel.Controls.Add(swapButton);
         actionsPanel.Controls.Add(copyButton);
         actionsPanel.Controls.Add(clearButton);
+        actionsPanel.Controls.Add(explainButton);
         actionsPanel.Controls.Add(livePreview);
         actionsPanel.Dock = DockStyle.Fill;
         actionsPanel.Padding = new Padding(0, 13, 0, 0);
@@ -291,6 +308,8 @@ partial class Form1
         copyButton.Click += CopyButton_Click;
         ConfigureButton(clearButton, "Vymazat", panelBackground, textPrimary, 110);
         clearButton.Click += ClearButton_Click;
+        ConfigureButton(explainButton, "Vysvětlit", panelBackground, textPrimary, 120);
+        explainButton.Click += ExplainButton_Click;
 
         livePreview.AutoSize = true;
         livePreview.Checked = true;
@@ -329,7 +348,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.5";
+        Text = "CipherDeck · v0.6";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -355,6 +374,7 @@ partial class Form1
     private Panel headerPanel = null!;
     private Label titleLabel = null!;
     private Label subtitleLabel = null!;
+    private FlowLayoutPanel headerActionsPanel = null!;
     private Button historyButton = null!;
     private Button analysisButton = null!;
     private Button helpButton = null!;
@@ -368,9 +388,11 @@ partial class Form1
     private FlowLayoutPanel keyPanel = null!;
     private Label keyLabel = null!;
     private NumericUpDown shiftValue = null!;
+    private Button randomNumericKeyButton = null!;
     private FlowLayoutPanel textKeyPanel = null!;
     private Label textKeyLabel = null!;
     private TextBox textKeyInput = null!;
+    private Button randomTextKeyButton = null!;
     private Label cipherDescription = null!;
     private TableLayoutPanel editorLayout = null!;
     private GroupBox inputGroup = null!;
@@ -384,6 +406,7 @@ partial class Form1
     private Button swapButton = null!;
     private Button copyButton = null!;
     private Button clearButton = null!;
+    private Button explainButton = null!;
     private CheckBox livePreview = null!;
     private TableLayoutPanel footerPanel = null!;
     private Label statusLabel = null!;

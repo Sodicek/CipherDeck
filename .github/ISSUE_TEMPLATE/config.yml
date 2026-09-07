@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: CipherDeck documentation
+    url: https://github.com/Sodicek/CipherDeck#readme
+    about: Check the documentation before opening a new issue.
