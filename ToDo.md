@@ -71,8 +71,8 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Režim krok za krokem, který vizuálně vysvětlí průběh šifry.
 - [x] Náhodný generátor vhodných klíčů.
 - [x] Analýza četnosti písmen a jednoduchý sloupcový graf.
-- [ ] Detekce pravděpodobného typu jednoduché šifry.
-- [ ] Výzvy k rozluštění s několika úrovněmi obtížnosti.
+- [x] Detekce pravděpodobného typu jednoduché šifry.
+- [x] Výzvy k rozluštění s několika úrovněmi obtížnosti.
 - [ ] Export výsledku jako sdílitelná kartička nebo obrázek.
 - [ ] Lokalizace minimálně do češtiny a angličtiny.
 
@@ -123,6 +123,13 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Sekce Přispívání s pokyny pro pull requesty a hlášení chyb.
 - Learn Mode vysvětluje všech šest šifer krok za krokem.
 - Generátor vytváří vhodné číselné i textové klíče.
+
+### v0.7 — Crack & Challenge
+
+- Výzvy k rozluštění ve třech úrovních obtížnosti.
+- Nápověda, odhalení řešení a okamžitá kontrola odpovědi.
+- Heuristický odhad šifer Pozpátku, Atbash a Caesar.
+- Seřazené návrhy s mírou jistoty a náhledem rozluštěného textu.
 
 ### v1.0 — GitHub Release
 

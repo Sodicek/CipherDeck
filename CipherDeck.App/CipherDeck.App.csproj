@@ -9,7 +9,7 @@
     <RootNamespace>CipherDeck</RootNamespace>
     <Product>CipherDeck</Product>
     <Description>Classic ciphers with a modern desktop interface.</Description>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <ApplicationIcon>Assets\CipherDeck.ico</ApplicationIcon>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
   </PropertyGroup>

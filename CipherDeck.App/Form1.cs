@@ -1,5 +1,6 @@
 using CipherDeck.Core;
 using CipherDeck.Core.Analysis;
+using CipherDeck.Core.Detection;
 using CipherDeck.Core.Learning;
 using System.Text;
 
@@ -298,6 +299,29 @@ public partial class Form1 : Form
         explanationForm.ShowDialog(this);
     }
 
+    private void ChallengeButton_Click(object? sender, EventArgs e)
+    {
+        using var challengeForm = new ChallengeForm(_darkTheme);
+        challengeForm.ShowDialog(this);
+    }
+
+    private void DetectButton_Click(object? sender, EventArgs e)
+    {
+        var textToDetect = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
+        if (CipherDetector.Detect(textToDetect).Count == 0)
+        {
+            SetError("Pro odhad šifry je potřeba text obsahující alespoň jedno písmeno.");
+            return;
+        }
+
+        using var detectionForm = new DetectionForm(textToDetect, _darkTheme);
+        if (detectionForm.ShowDialog(this) != DialogResult.OK || detectionForm.SelectedDetection is not { } detection)
+            return;
+
+        outputText.Text = detection.SuggestedPlainText;
+        SetSuccess($"Použit odhad: {detection.CipherName} · jistota {detection.Confidence:P0}");
+    }
+
     private void GenerateKeyButton_Click(object? sender, EventArgs e)
     {
         if (SelectedCipher is not { } cipher || CipherKeyGenerator.Generate(cipher) is not { } key)
@@ -430,7 +454,7 @@ public partial class Form1 : Form
         characterCount.ForeColor = secondary;
         livePreview.ForeColor = text;
 
-        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, randomNumericKeyButton, randomTextKeyButton, historyButton, analysisButton, helpButton, themeButton })
+        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, detectButton, randomNumericKeyButton, randomTextKeyButton, challengeButton, historyButton, analysisButton, helpButton, themeButton })
         {
             button.BackColor = panel;
             button.ForeColor = text;

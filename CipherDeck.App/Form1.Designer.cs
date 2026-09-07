@@ -27,6 +27,7 @@ partial class Form1
         titleLabel = new Label();
         subtitleLabel = new Label();
         headerActionsPanel = new FlowLayoutPanel();
+        challengeButton = new Button();
         historyButton = new Button();
         analysisButton = new Button();
         helpButton = new Button();
@@ -59,6 +60,7 @@ partial class Form1
         copyButton = new Button();
         clearButton = new Button();
         explainButton = new Button();
+        detectButton = new Button();
         livePreview = new CheckBox();
         footerPanel = new TableLayoutPanel();
         statusLabel = new Label();
@@ -105,21 +107,25 @@ partial class Form1
         headerActionsPanel.Controls.Add(helpButton);
         headerActionsPanel.Controls.Add(analysisButton);
         headerActionsPanel.Controls.Add(historyButton);
+        headerActionsPanel.Controls.Add(challengeButton);
         headerActionsPanel.Dock = DockStyle.Right;
         headerActionsPanel.FlowDirection = FlowDirection.RightToLeft;
         headerActionsPanel.Padding = new Padding(0, 18, 0, 0);
-        headerActionsPanel.Width = 520;
+        headerActionsPanel.Width = 590;
 
-        ConfigureButton(historyButton, "Historie (0)", panelBackground, textPrimary, 120);
+        ConfigureButton(challengeButton, "Výzvy", panelBackground, textPrimary, 105);
+        challengeButton.Click += ChallengeButton_Click;
+
+        ConfigureButton(historyButton, "Historie (0)", panelBackground, textPrimary, 110);
         historyButton.Click += HistoryButton_Click;
 
-        ConfigureButton(analysisButton, "Analýza", panelBackground, textPrimary, 120);
+        ConfigureButton(analysisButton, "Analýza", panelBackground, textPrimary, 105);
         analysisButton.Click += AnalysisButton_Click;
 
-        ConfigureButton(helpButton, "Nápověda", panelBackground, textPrimary, 105);
+        ConfigureButton(helpButton, "Nápověda", panelBackground, textPrimary, 95);
         helpButton.Click += HelpButton_Click;
 
-        ConfigureButton(themeButton, "☀  Světlý", panelBackground, textPrimary, 115);
+        ConfigureButton(themeButton, "☀  Světlý", panelBackground, textPrimary, 105);
         themeButton.Click += ThemeButton_Click;
 
         optionsPanel.BackColor = panelBackground;
@@ -292,6 +298,7 @@ partial class Form1
         actionsPanel.Controls.Add(copyButton);
         actionsPanel.Controls.Add(clearButton);
         actionsPanel.Controls.Add(explainButton);
+        actionsPanel.Controls.Add(detectButton);
         actionsPanel.Controls.Add(livePreview);
         actionsPanel.Dock = DockStyle.Fill;
         actionsPanel.Padding = new Padding(0, 13, 0, 0);
@@ -310,6 +317,8 @@ partial class Form1
         clearButton.Click += ClearButton_Click;
         ConfigureButton(explainButton, "Vysvětlit", panelBackground, textPrimary, 120);
         explainButton.Click += ExplainButton_Click;
+        ConfigureButton(detectButton, "Odhad šifry", panelBackground, textPrimary, 120);
+        detectButton.Click += DetectButton_Click;
 
         livePreview.AutoSize = true;
         livePreview.Checked = true;
@@ -348,7 +357,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.6";
+        Text = "CipherDeck · v0.7";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -375,6 +384,7 @@ partial class Form1
     private Label titleLabel = null!;
     private Label subtitleLabel = null!;
     private FlowLayoutPanel headerActionsPanel = null!;
+    private Button challengeButton = null!;
     private Button historyButton = null!;
     private Button analysisButton = null!;
     private Button helpButton = null!;
@@ -407,6 +417,7 @@ partial class Form1
     private Button copyButton = null!;
     private Button clearButton = null!;
     private Button explainButton = null!;
+    private Button detectButton = null!;
     private CheckBox livePreview = null!;
     private TableLayoutPanel footerPanel = null!;
     private Label statusLabel = null!;

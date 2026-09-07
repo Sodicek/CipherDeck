@@ -18,7 +18,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
   <img src="docs/screenshots/main-window-dark.png" alt="CipherDeck main window in dark theme" width="640">
 </p>
 
-## What's in v0.6
+## What's in v0.7
 
 - reverse text with correct Unicode support,
 - the Caesar cipher with an adjustable shift,
@@ -38,6 +38,8 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - letter frequency analysis with a chart and a detailed table,
 - a Learn Mode that explains every cipher step by step,
 - a generator for suitable numeric and text keys,
+- cipher challenges in three difficulty levels, with hints and answer checking,
+- heuristic detection of simple ciphers with a preview of the most likely result,
 - keyboard shortcuts `Ctrl+Enter`, `Ctrl+O`, and `Ctrl+S`.
 
 > [!WARNING]
@@ -74,7 +76,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmap
 
-Planned features include cipher-cracking challenges, automatic simple-cipher detection, and full localization of the UI into English.
+Planned features include exporting results as shareable cards, full English UI localization, and further accessibility improvements.
 
 The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 
