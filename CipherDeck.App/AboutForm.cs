@@ -34,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.8"
+            Text = "CipherDeck  v0.8.1"
         };
         var tagline = new Label
         {
@@ -58,25 +58,27 @@ internal sealed class AboutForm : Form
             Text = HelpText
         };
 
-        var closeButton = UiStyles.CreateButton("Rozumím", 120, palette, primary: true);
-        closeButton.Anchor = AnchorStyles.Right;
+        var closeButton = UiStyles.CreateGridButton("Rozumím", palette, primary: true);
         closeButton.Click += (_, _) => Close();
 
-        var githubButton = UiStyles.CreateButton("Otevřít GitHub", 140, palette);
+        var githubButton = UiStyles.CreateGridButton("Otevřít GitHub", palette);
         githubButton.Click += (_, _) => System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
             FileName = "https://github.com/Sodicek/CipherDeck",
             UseShellExecute = true
         });
 
-        var buttons = new FlowLayoutPanel
+        var buttons = new TableLayoutPanel
         {
+            ColumnCount = 2,
             Dock = DockStyle.Fill,
-            FlowDirection = FlowDirection.RightToLeft,
-            Padding = new Padding(0, 7, 0, 0)
+            Padding = new Padding(0, 3, 0, 3),
+            RowCount = 1
         };
-        buttons.Controls.Add(closeButton);
-        buttons.Controls.Add(githubButton);
+        buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        buttons.Controls.Add(githubButton, 0, 0);
+        buttons.Controls.Add(closeButton, 1, 0);
 
         layout.Controls.Add(header, 0, 0);
         layout.Controls.Add(help, 0, 1);
