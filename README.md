@@ -18,7 +18,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
   <img src="docs/screenshots/main-window-dark.png" alt="Hlavní okno CipherDecku v tmavém motivu" width="640">
 </p>
 
-## Co umí v0.8
+## Co umí v0.9
 
 - text pozpátku s korektní podporou Unicode znaků,
 - Caesarovu šifru s volitelným posunem,
@@ -34,6 +34,8 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - světlý a tmavý motiv s uložením volby i naposledy použité šifry,
 - nápovědu a popisy všech podporovaných šifer přímo v aplikaci,
 - import a export textových souborů v UTF-8,
+- exportní centrum s živým náhledem výsledku,
+- sdílené PNG kartičky 1200 × 630 ve třech vzhledech a kopírování obrázku do schránky,
 - vlastní ikonu aplikace,
 - analýzu četnosti písmen s grafem a podrobnou tabulkou,
 - Learn Mode s vysvětlením každé šifry krok za krokem,
@@ -48,6 +50,18 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 
 > [!WARNING]
 > Klasické šifry nejsou bezpečné pro ochranu hesel ani citlivých dat. CipherDeck slouží pro výuku a zábavu.
+
+## Sdílené kartičky
+
+<p align="center">
+  <img src="docs/screenshots/export-center-dark.png" alt="Exportní centrum CipherDecku" width="640">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/share-card-violet.png" alt="Sdílitelná kartička vytvořená v CipherDecku" width="720">
+</p>
+
+Exportní centrum zachová běžné ukládání TXT a navíc vytvoří hotovou PNG kartičku. Nadpis i vzhled lze změnit před uložením nebo zkopírováním do schránky.
 
 ## Spuštění
 
@@ -80,7 +94,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmapa
 
-Další plánované funkce zahrnují export výsledku jako sdílitelnou kartičku, plnou lokalizaci rozhraní do angličtiny a další vylepšení přístupnosti.
+Další plánované funkce zahrnují plnou lokalizaci rozhraní do angličtiny, instalační balíček a další vylepšení přístupnosti.
 
 Podrobný plán je v [ToDo.md](ToDo.md).
 

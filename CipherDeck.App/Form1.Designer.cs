@@ -347,7 +347,7 @@ partial class Form1
         ConfigureGridButton(importButton, "Načíst · Ctrl+O", palette);
         importButton.TabIndex = 4;
         importButton.Click += ImportButton_Click;
-        ConfigureGridButton(exportButton, "Uložit · Ctrl+S", palette);
+        ConfigureGridButton(exportButton, "Exportovat · Ctrl+S", palette);
         exportButton.TabIndex = 5;
         exportButton.Click += ExportButton_Click;
         ConfigureGridButton(transformButton, "Provést  ·  Ctrl+Enter", palette, primary: true);
@@ -403,7 +403,7 @@ partial class Form1
         toolTip.SetToolTip(copyButton, "Zkopírovat výstup do schránky.");
         toolTip.SetToolTip(clearButton, "Vymazat vstup i výstup.");
         toolTip.SetToolTip(importButton, "Načíst textový soubor v UTF-8 (Ctrl+O).");
-        toolTip.SetToolTip(exportButton, "Uložit výstup nebo vstup jako UTF-8 (Ctrl+S).");
+        toolTip.SetToolTip(exportButton, "Otevřít export TXT a sdílitelných PNG kartiček (Ctrl+S).");
         toolTip.SetToolTip(explainButton, "Ukázat aktuální šifrování krok za krokem.");
         toolTip.SetToolTip(detectButton, "Odhadnout použitou jednoduchou šifru.");
         toolTip.SetToolTip(livePreview, "Automaticky přepočítá výsledek krátce po změně vstupu.");
@@ -429,7 +429,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.8.2";
+        Text = "CipherDeck · v0.9";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
