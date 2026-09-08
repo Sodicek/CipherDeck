@@ -241,34 +241,28 @@ public partial class Form1 : Form
 
     private void ExportButton_Click(object? sender, EventArgs e)
     {
-        var textToExport = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
+        var hasOutput = !string.IsNullOrEmpty(outputText.Text);
+        var textToExport = hasOutput ? outputText.Text : inputText.Text;
         if (string.IsNullOrEmpty(textToExport))
         {
             SetError("Není co exportovat.");
             return;
         }
 
-        using var dialog = new SaveFileDialog
+        var operationLabel = hasOutput
+            ? encryptMode.Checked ? "Zašifrováno" : "Odšifrováno"
+            : "Vstupní text";
+        var title = operationLabel switch
         {
-            AddExtension = true,
-            DefaultExt = "txt",
-            FileName = "cipherdeck-output.txt",
-            Filter = "Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*",
-            Title = "Exportovat výsledek z CipherDecku"
+            "Zašifrováno" => "Zašifrovaná zpráva",
+            "Odšifrováno" => "Rozšifrovaná zpráva",
+            _ => "Zpráva z CipherDecku"
         };
-
-        if (dialog.ShowDialog(this) != DialogResult.OK)
-            return;
-
-        try
-        {
-            File.WriteAllText(dialog.FileName, textToExport, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
-            SetSuccess($"Exportováno: {Path.GetFileName(dialog.FileName)}");
-        }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
-        {
-            SetError("Soubor se nepodařilo uložit.");
-        }
+        var data = new ShareCardData(title, textToExport, SelectedCipher?.Name ?? "CipherDeck", operationLabel);
+        using var exportForm = new ExportForm(data, _darkTheme);
+        exportForm.ShowDialog(this);
+        if (exportForm.CompletionMessage is { } completionMessage)
+            SetSuccess(completionMessage);
     }
 
     private void HelpButton_Click(object? sender, EventArgs e)

@@ -34,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.8.2"
+            Text = "CipherDeck  v0.9"
         };
         var tagline = new Label
         {
@@ -110,7 +110,7 @@ internal sealed class AboutForm : Form
 
         Ctrl+Enter provede operaci a přidá ji do historie.
         Ctrl+O importuje textový soubor.
-        Ctrl+S exportuje výsledek nebo vstupní text.
+        Ctrl+S otevře exportní centrum pro TXT a obrázkové kartičky.
 
         ANALÝZA ČETNOSTI
 
@@ -129,6 +129,12 @@ internal sealed class AboutForm : Form
         Ve Výzvách můžeš luštit náhodné zprávy ve třech obtížnostech. Odhad šifry
         vyzkouší obrácení textu, Atbash a všech 25 Caesarových posunů. Výsledek je
         pouze jazyková heuristika, proto zobrazené procento není zárukou správnosti.
+
+        EXPORTNÍ CENTRUM
+
+        Výsledek můžeš dál uložit jako obyčejný TXT nebo jako sdílitelnou PNG
+        kartičku v rozměru 1200 × 630. Před exportem lze upravit nadpis a vybrat
+        fialový, půlnoční nebo světlý vzhled. Obrázek jde také rovnou zkopírovat.
 
         SOUBORY A HISTORIE
 
