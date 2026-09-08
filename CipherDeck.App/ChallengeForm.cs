@@ -31,7 +31,15 @@ internal sealed class ChallengeForm : Form
         KeyDown += (_, eventArgs) =>
         {
             if (eventArgs.Control && eventArgs.KeyCode == Keys.Enter)
+            {
                 CheckAnswer();
+                eventArgs.SuppressKeyPress = true;
+            }
+            else if (eventArgs.KeyCode == Keys.Escape)
+            {
+                Close();
+                eventArgs.SuppressKeyPress = true;
+            }
         };
 
         var layout = new TableLayoutPanel
@@ -106,7 +114,8 @@ internal sealed class ChallengeForm : Form
         var buttons = new TableLayoutPanel { ColumnCount = 4, Dock = DockStyle.Fill, Padding = new Padding(0, 8, 0, 2), RowCount = 1 };
         for (var column = 0; column < 4; column++)
             buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-        var checkButton = UiStyles.CreateGridButton("Zkontrolovat · Ctrl+Enter", palette, primary: true);
+        var checkButton = UiStyles.CreateGridButton("Zkontrolovat", palette, primary: true);
+        checkButton.AccessibleDescription = "Zkontrolovat odpověď. Klávesová zkratka Ctrl+Enter.";
         var hintButton = UiStyles.CreateGridButton("Nápověda", palette);
         var revealButton = UiStyles.CreateGridButton("Odhalit", palette);
         var newButton = UiStyles.CreateGridButton("Nová výzva", palette);

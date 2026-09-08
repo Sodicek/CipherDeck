@@ -43,6 +43,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - consistent rounded controls with subtle hover, pressed, and focus states,
 - polished cards, spacing, and color contrast in both light and dark themes,
 - a precise grid of equally sized buttons without irregular wrapping,
+- logical keyboard navigation, initial input focus, and control tooltips,
 - keyboard shortcuts `Ctrl+Enter`, `Ctrl+O`, and `Ctrl+S`.
 
 > [!WARNING]

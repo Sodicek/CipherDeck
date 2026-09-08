@@ -83,6 +83,7 @@ internal sealed class HistoryForm : Form
         var useButton = UiStyles.CreateGridButton("Načíst operaci", palette, primary: true);
         var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
         var clearButton = UiStyles.CreateGridButton("Vymazat historii", palette);
+        closeButton.DialogResult = DialogResult.Cancel;
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
         clearButton.Click += (_, _) => ClearHistory();
@@ -95,6 +96,8 @@ internal sealed class HistoryForm : Form
         layout.Controls.Add(_preview, 0, 2);
         layout.Controls.Add(buttonPanel, 0, 3);
         Controls.Add(layout);
+        AcceptButton = useButton;
+        CancelButton = closeButton;
 
         if (entries.Count == 0)
         {

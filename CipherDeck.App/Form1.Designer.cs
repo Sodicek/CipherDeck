@@ -15,6 +15,7 @@ partial class Form1
 
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         var palette = UiTheme.GetPalette(darkTheme: true);
         var darkBackground = palette.Background;
         var panelBackground = palette.Surface;
@@ -65,6 +66,7 @@ partial class Form1
         footerPanel = new TableLayoutPanel();
         statusLabel = new Label();
         characterCount = new Label();
+        toolTip = new ToolTip(components);
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).BeginInit();
         SuspendLayout();
@@ -87,6 +89,7 @@ partial class Form1
         mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
 
         headerPanel.Dock = DockStyle.Fill;
+        headerPanel.TabIndex = 4;
         headerPanel.Controls.Add(titleLabel);
         headerPanel.Controls.Add(subtitleLabel);
         headerPanel.Controls.Add(headerActionsPanel);
@@ -118,18 +121,23 @@ partial class Form1
         headerActionsPanel.Width = 580;
 
         ConfigureGridButton(challengeButton, "Výzvy", palette);
+        challengeButton.TabIndex = 0;
         challengeButton.Click += ChallengeButton_Click;
 
         ConfigureGridButton(historyButton, "Historie (0)", palette);
+        historyButton.TabIndex = 1;
         historyButton.Click += HistoryButton_Click;
 
         ConfigureGridButton(analysisButton, "Analýza", palette);
+        analysisButton.TabIndex = 2;
         analysisButton.Click += AnalysisButton_Click;
 
         ConfigureGridButton(helpButton, "Nápověda", palette);
+        helpButton.TabIndex = 3;
         helpButton.Click += HelpButton_Click;
 
         ConfigureGridButton(themeButton, "☀  Světlý", palette);
+        themeButton.TabIndex = 4;
         themeButton.Click += ThemeButton_Click;
 
         optionsPanel.BackColor = panelBackground;
@@ -152,6 +160,7 @@ partial class Form1
         optionsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
         optionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         optionsPanel.SetColumnSpan(cipherDescription, 4);
+        optionsPanel.TabIndex = 0;
 
         cipherLabel.Anchor = AnchorStyles.Left;
         cipherLabel.AutoSize = true;
@@ -167,6 +176,7 @@ partial class Form1
         cipherSelector.ForeColor = textPrimary;
         cipherSelector.FormattingEnabled = true;
         cipherSelector.Margin = new Padding(0, 3, 20, 3);
+        cipherSelector.TabIndex = 0;
         cipherSelector.SelectedIndexChanged += CipherSelector_SelectedIndexChanged;
 
         modePanel.Anchor = AnchorStyles.Left;
@@ -175,12 +185,14 @@ partial class Form1
         modePanel.Controls.Add(decryptMode);
         modePanel.FlowDirection = FlowDirection.LeftToRight;
         modePanel.Margin = new Padding(0);
+        modePanel.TabIndex = 1;
 
         encryptMode.AutoSize = true;
         encryptMode.Font = new Font("Segoe UI", 10.5F);
         encryptMode.ForeColor = textPrimary;
         encryptMode.Margin = new Padding(0, 7, 18, 0);
         encryptMode.Text = "Zašifrovat";
+        encryptMode.TabIndex = 0;
         encryptMode.CheckedChanged += PreviewSettingChanged;
 
         decryptMode.AutoSize = true;
@@ -188,6 +200,7 @@ partial class Form1
         decryptMode.ForeColor = textPrimary;
         decryptMode.Margin = new Padding(0, 7, 0, 0);
         decryptMode.Text = "Odšifrovat";
+        decryptMode.TabIndex = 1;
         decryptMode.CheckedChanged += PreviewSettingChanged;
 
         keyPanel.Anchor = AnchorStyles.Left;
@@ -196,6 +209,7 @@ partial class Form1
         keyPanel.Controls.Add(shiftValue);
         keyPanel.Controls.Add(randomNumericKeyButton);
         keyPanel.Margin = new Padding(0);
+        keyPanel.TabIndex = 2;
         keyPanel.Visible = false;
 
         keyLabel.AutoSize = true;
@@ -212,12 +226,14 @@ partial class Form1
         shiftValue.Minimum = 1;
         shiftValue.Value = 3;
         shiftValue.Width = 70;
+        shiftValue.TabIndex = 0;
         shiftValue.ValueChanged += PreviewSettingChanged;
 
         ConfigureButton(randomNumericKeyButton, "⟳", 34, palette);
         randomNumericKeyButton.Height = 29;
         randomNumericKeyButton.Margin = new Padding(7, 3, 0, 0);
         randomNumericKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomNumericKeyButton.TabIndex = 1;
         randomNumericKeyButton.Click += GenerateKeyButton_Click;
 
         textKeyPanel.Anchor = AnchorStyles.Left;
@@ -226,6 +242,7 @@ partial class Form1
         textKeyPanel.Controls.Add(textKeyInput);
         textKeyPanel.Controls.Add(randomTextKeyButton);
         textKeyPanel.Margin = new Padding(0);
+        textKeyPanel.TabIndex = 2;
         textKeyPanel.Visible = false;
 
         textKeyLabel.AutoSize = true;
@@ -241,12 +258,14 @@ partial class Form1
         textKeyInput.Margin = new Padding(0, 3, 0, 0);
         textKeyInput.MaxLength = 64;
         textKeyInput.Width = 135;
+        textKeyInput.TabIndex = 0;
         textKeyInput.TextChanged += PreviewSettingChanged;
 
         ConfigureButton(randomTextKeyButton, "⟳", 34, palette);
         randomTextKeyButton.Height = 29;
         randomTextKeyButton.Margin = new Padding(7, 3, 0, 0);
         randomTextKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomTextKeyButton.TabIndex = 1;
         randomTextKeyButton.Click += GenerateKeyButton_Click;
 
         cipherDescription.Anchor = AnchorStyles.Left;
@@ -264,6 +283,7 @@ partial class Form1
         editorLayout.Dock = DockStyle.Fill;
         editorLayout.RowCount = 1;
         editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        editorLayout.TabIndex = 1;
 
         inputGroup.Controls.Add(inputText);
         inputGroup.BackColor = inputBackground;
@@ -274,6 +294,8 @@ partial class Form1
         inputGroup.Margin = new Padding(0, 0, 10, 0);
         inputGroup.Padding = new Padding(12, 10, 12, 12);
         inputGroup.Text = "  VSTUP  ";
+        inputGroup.TabIndex = 0;
+        inputGroup.TabStop = false;
 
         inputText.AcceptsTab = true;
         inputText.BackColor = inputBackground;
@@ -281,6 +303,7 @@ partial class Form1
         inputText.Dock = DockStyle.Fill;
         inputText.Font = new Font("Segoe UI", 12F);
         inputText.ForeColor = textPrimary;
+        inputText.TabIndex = 0;
         inputText.TextChanged += InputText_TextChanged;
 
         outputGroup.Controls.Add(outputText);
@@ -292,6 +315,8 @@ partial class Form1
         outputGroup.Margin = new Padding(10, 0, 0, 0);
         outputGroup.Padding = new Padding(12, 10, 12, 12);
         outputGroup.Text = "  VÝSTUP  ";
+        outputGroup.TabIndex = 1;
+        outputGroup.TabStop = false;
 
         outputText.BackColor = inputBackground;
         outputText.BorderStyle = BorderStyle.None;
@@ -299,6 +324,7 @@ partial class Form1
         outputText.Font = new Font("Segoe UI", 12F);
         outputText.ForeColor = Color.FromArgb(196, 181, 253);
         outputText.ReadOnly = true;
+        outputText.TabStop = false;
 
         actionsPanel.ColumnCount = 4;
         for (var column = 0; column < 4; column++)
@@ -316,22 +342,31 @@ partial class Form1
         actionsPanel.RowCount = 2;
         actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
         actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        actionsPanel.TabIndex = 2;
 
         ConfigureGridButton(importButton, "Načíst · Ctrl+O", palette);
+        importButton.TabIndex = 4;
         importButton.Click += ImportButton_Click;
         ConfigureGridButton(exportButton, "Uložit · Ctrl+S", palette);
+        exportButton.TabIndex = 5;
         exportButton.Click += ExportButton_Click;
         ConfigureGridButton(transformButton, "Provést  ·  Ctrl+Enter", palette, primary: true);
+        transformButton.TabIndex = 0;
         transformButton.Click += TransformButton_Click;
         ConfigureGridButton(swapButton, "⇄  Prohodit", palette);
+        swapButton.TabIndex = 1;
         swapButton.Click += SwapButton_Click;
         ConfigureGridButton(copyButton, "Kopírovat", palette);
+        copyButton.TabIndex = 2;
         copyButton.Click += CopyButton_Click;
         ConfigureGridButton(clearButton, "Vymazat", palette);
+        clearButton.TabIndex = 3;
         clearButton.Click += ClearButton_Click;
         ConfigureGridButton(explainButton, "Jak to funguje", palette);
+        explainButton.TabIndex = 6;
         explainButton.Click += ExplainButton_Click;
         ConfigureGridButton(detectButton, "Odhad šifry", palette);
+        detectButton.TabIndex = 7;
         detectButton.Click += DetectButton_Click;
 
         livePreview.AutoSize = true;
@@ -342,6 +377,7 @@ partial class Form1
         livePreview.Anchor = AnchorStyles.Right;
         livePreview.Margin = new Padding(0, 0, 28, 0);
         livePreview.Text = "Živý náhled";
+        livePreview.TabIndex = 0;
         livePreview.CheckedChanged += LivePreview_CheckedChanged;
 
         footerPanel.ColumnCount = 3;
@@ -352,6 +388,25 @@ partial class Form1
         footerPanel.Controls.Add(livePreview, 1, 0);
         footerPanel.Controls.Add(characterCount, 2, 0);
         footerPanel.Dock = DockStyle.Fill;
+        footerPanel.TabIndex = 3;
+
+        toolTip.AutoPopDelay = 8000;
+        toolTip.InitialDelay = 450;
+        toolTip.ReshowDelay = 100;
+        toolTip.SetToolTip(challengeButton, "Otevřít šifrovací výzvy ve třech obtížnostech.");
+        toolTip.SetToolTip(historyButton, "Zobrazit posledních 30 provedených operací.");
+        toolTip.SetToolTip(analysisButton, "Analyzovat četnost písmen ve vstupu nebo výstupu.");
+        toolTip.SetToolTip(helpButton, "Otevřít nápovědu a informace o aplikaci.");
+        toolTip.SetToolTip(themeButton, "Přepnout světlý a tmavý motiv.");
+        toolTip.SetToolTip(transformButton, "Provést vybranou operaci a uložit ji do historie (Ctrl+Enter).");
+        toolTip.SetToolTip(swapButton, "Přesunout výstup zpět do vstupu.");
+        toolTip.SetToolTip(copyButton, "Zkopírovat výstup do schránky.");
+        toolTip.SetToolTip(clearButton, "Vymazat vstup i výstup.");
+        toolTip.SetToolTip(importButton, "Načíst textový soubor v UTF-8 (Ctrl+O).");
+        toolTip.SetToolTip(exportButton, "Uložit výstup nebo vstup jako UTF-8 (Ctrl+S).");
+        toolTip.SetToolTip(explainButton, "Ukázat aktuální šifrování krok za krokem.");
+        toolTip.SetToolTip(detectButton, "Odhadnout použitou jednoduchou šifru.");
+        toolTip.SetToolTip(livePreview, "Automaticky přepočítá výsledek krátce po změně vstupu.");
 
         statusLabel.Anchor = AnchorStyles.Left;
         statusLabel.AutoSize = true;
@@ -374,7 +429,7 @@ partial class Form1
         MinimumSize = new Size(900, 640);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.8.1";
+        Text = "CipherDeck · v0.8.2";
         KeyDown += Form1_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -434,4 +489,5 @@ partial class Form1
     private TableLayoutPanel footerPanel = null!;
     private Label statusLabel = null!;
     private Label characterCount = null!;
+    private ToolTip toolTip = null!;
 }
