@@ -73,7 +73,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Analýza četnosti písmen a jednoduchý sloupcový graf.
 - [x] Detekce pravděpodobného typu jednoduché šifry.
 - [x] Výzvy k rozluštění s několika úrovněmi obtížnosti.
-- [ ] Export výsledku jako sdílitelná kartička nebo obrázek.
+- [x] Export výsledku jako sdílitelná kartička nebo obrázek.
 - [ ] Lokalizace minimálně do češtiny a angličtiny.
 
 ## 5. Testování a kvalita
@@ -146,6 +146,14 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Tooltipy pro důležité akce a jejich klávesové zkratky.
 - Konzistentní Enter a Escape ve vedlejších oknech.
 - Kontrola rozložení při minimální podporované velikosti okna.
+
+### v0.9 — Share Cards
+
+- Exportní centrum pro TXT a PNG na jednom místě.
+- Živý náhled kartičky v rozměru 1200 × 630.
+- Fialový, půlnoční a světlý vzhled kartičky.
+- Vlastní nadpis a automatické označení šifry i směru operace.
+- Uložení PNG a kopírování obrázku přímo do schránky.
 
 ### v1.0 — GitHub Release
 

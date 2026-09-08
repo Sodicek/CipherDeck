@@ -18,7 +18,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
   <img src="docs/screenshots/main-window-dark.png" alt="CipherDeck main window in dark theme" width="640">
 </p>
 
-## What's in v0.8
+## What's in v0.9
 
 - reverse text with correct Unicode support,
 - the Caesar cipher with an adjustable shift,
@@ -34,6 +34,8 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - light and dark themes, remembering both the chosen theme and the last used cipher,
 - built-in help and descriptions for every supported cipher,
 - importing and exporting UTF-8 text files,
+- an export center with a live result preview,
+- 1200 × 630 shareable PNG cards in three styles and image clipboard support,
 - a custom application icon,
 - letter frequency analysis with a chart and a detailed table,
 - a Learn Mode that explains every cipher step by step,
@@ -48,6 +50,18 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 
 > [!WARNING]
 > Classic ciphers are not safe for protecting passwords or sensitive data. CipherDeck is meant for learning and fun.
+
+## Shareable cards
+
+<p align="center">
+  <img src="docs/screenshots/export-center-dark.png" alt="CipherDeck export center" width="640">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/share-card-violet.png" alt="A shareable card created in CipherDeck" width="720">
+</p>
+
+The export center keeps standard TXT exports and adds ready-to-share PNG cards. The title and visual style can be changed before saving or copying the image.
 
 ## Running the app
 
@@ -80,7 +94,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmap
 
-Planned features include exporting results as shareable cards, full English UI localization, and further accessibility improvements.
+Planned features include full English UI localization, an installer package, and further accessibility improvements.
 
 The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 
