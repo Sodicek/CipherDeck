@@ -18,7 +18,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
   <img src="docs/screenshots/main-window-dark.png" alt="CipherDeck main window in dark theme" width="640">
 </p>
 
-## What's in v0.9
+## What's in v0.9.1
 
 - reverse text with correct Unicode support,
 - the Caesar cipher with an adjustable shift,
@@ -47,6 +47,9 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - a precise grid of equally sized buttons without irregular wrapping,
 - logical keyboard navigation, initial input focus, and control tooltips,
 - keyboard shortcuts `Ctrl+Enter`, `Ctrl+O`, and `Ctrl+S`.
+- resilient atomic history and preference storage that cannot leave a half-written file,
+- safe handling of a busy clipboard, an unavailable browser, and oversized history entries,
+- Unicode-safe truncation of long share-card messages.
 
 > [!WARNING]
 > Classic ciphers are not safe for protecting passwords or sensitive data. CipherDeck is meant for learning and fun.
