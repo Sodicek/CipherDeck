@@ -112,6 +112,7 @@ internal sealed class ExplanationForm : Form
         _nextButton = UiStyles.CreateGridButton("Další →", palette, primary: true);
         _previousButton = UiStyles.CreateGridButton("← Předchozí", palette);
         var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
+        closeButton.DialogResult = DialogResult.Cancel;
         _nextButton.Click += (_, _) => AdvanceOrClose();
         _previousButton.Click += (_, _) => MoveStep(-1);
         closeButton.Click += (_, _) => Close();
@@ -126,6 +127,8 @@ internal sealed class ExplanationForm : Form
         layout.Controls.Add(_snapshot, 0, 4);
         layout.Controls.Add(buttons, 0, 5);
         Controls.Add(layout);
+        AcceptButton = _nextButton;
+        CancelButton = closeButton;
 
         ShowCurrentStep();
     }

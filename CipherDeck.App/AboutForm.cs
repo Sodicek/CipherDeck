@@ -34,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.8.1"
+            Text = "CipherDeck  v0.8.2"
         };
         var tagline = new Label
         {
@@ -59,6 +59,7 @@ internal sealed class AboutForm : Form
         };
 
         var closeButton = UiStyles.CreateGridButton("Rozumím", palette, primary: true);
+        closeButton.DialogResult = DialogResult.Cancel;
         closeButton.Click += (_, _) => Close();
 
         var githubButton = UiStyles.CreateGridButton("Otevřít GitHub", palette);
@@ -84,6 +85,8 @@ internal sealed class AboutForm : Form
         layout.Controls.Add(help, 0, 1);
         layout.Controls.Add(buttons, 0, 2);
         Controls.Add(layout);
+        AcceptButton = closeButton;
+        CancelButton = closeButton;
     }
 
     private const string HelpText = """

@@ -84,6 +84,7 @@ internal sealed class AnalysisForm : Form
 
         var closeButton = UiStyles.CreateButton("Zavřít", 110, palette, primary: true);
         closeButton.Anchor = AnchorStyles.Right;
+        closeButton.DialogResult = DialogResult.Cancel;
         closeButton.Click += (_, _) => Close();
 
         layout.Controls.Add(heading, 0, 0);
@@ -92,5 +93,7 @@ internal sealed class AnalysisForm : Form
         layout.Controls.Add(grid, 0, 3);
         layout.Controls.Add(closeButton, 0, 4);
         Controls.Add(layout);
+        AcceptButton = closeButton;
+        CancelButton = closeButton;
     }
 }

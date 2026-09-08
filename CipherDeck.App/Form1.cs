@@ -33,6 +33,7 @@ public partial class Form1 : Form
         ApplyTheme();
         UpdateCharacterCount();
         UpdateHistoryButton();
+        Shown += (_, _) => inputText.Focus();
     }
 
     private ICipher? SelectedCipher => cipherSelector.SelectedItem as ICipher;

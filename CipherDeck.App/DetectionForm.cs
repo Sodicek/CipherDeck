@@ -95,6 +95,7 @@ internal sealed class DetectionForm : Form
         buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         var useButton = UiStyles.CreateGridButton("Použít návrh", palette, primary: true);
         var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
+        closeButton.DialogResult = DialogResult.Cancel;
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
         buttons.Controls.Add(closeButton, 0, 0);
@@ -107,6 +108,8 @@ internal sealed class DetectionForm : Form
         layout.Controls.Add(_preview, 0, 4);
         layout.Controls.Add(buttons, 0, 5);
         Controls.Add(layout);
+        AcceptButton = useButton;
+        CancelButton = closeButton;
 
         if (_detections.Count > 0)
             _results.SelectedIndex = 0;
