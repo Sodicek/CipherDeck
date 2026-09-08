@@ -58,8 +58,8 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Použít responzivní rozložení, které zvládne změnu velikosti okna.
 - [x] Zobrazovat nastavení dynamicky podle vybrané šifry.
 - [x] Přidat počítadlo znaků a nenápadnou stavovou zprávu po dokončení operace.
-- [ ] Zajistit ovládání klávesnicí a logické pořadí tabulátoru.
-- [ ] Doplnit tooltipy a dobře čitelné kontrasty.
+- [x] Zajistit ovládání klávesnicí a logické pořadí tabulátoru.
+- [x] Doplnit tooltipy a dobře čitelné kontrasty.
 - [x] Přidat obrazovku **O aplikaci** s verzí a nápovědou.
 - [x] Doplnit do obrazovky **O aplikaci** odkaz na GitHub.
 
@@ -138,6 +138,14 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Jemnější karty editoru a nastavení s konzistentními okraji.
 - Vyváženější rozložení akcí ve světlém i tmavém motivu.
 - Stejně široká a vysoká tlačítka v pravidelných řádcích a sloupcích.
+
+### v0.8.2 — Fix & Polish
+
+- Výchozí fokus přímo v textovém vstupu.
+- Logické pořadí tabulátoru v hlavním okně.
+- Tooltipy pro důležité akce a jejich klávesové zkratky.
+- Konzistentní Enter a Escape ve vedlejších oknech.
+- Kontrola rozložení při minimální podporované velikosti okna.
 
 ### v1.0 — GitHub Release
 
