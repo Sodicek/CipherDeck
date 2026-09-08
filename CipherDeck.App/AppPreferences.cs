@@ -1,9 +1,9 @@
-using System.Text.Json;
-
 namespace CipherDeck;
 
 internal sealed class AppPreferences
 {
+    private const int MaximumSettingsFileSizeBytes = 64 * 1024;
+
     private static readonly string SettingsDirectory = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "CipherDeck");
@@ -16,38 +16,9 @@ internal sealed class AppPreferences
 
     public static AppPreferences Load()
     {
-        try
-        {
-            return File.Exists(SettingsPath)
-                ? JsonSerializer.Deserialize<AppPreferences>(File.ReadAllText(SettingsPath)) ?? new AppPreferences()
-                : new AppPreferences();
-        }
-        catch (IOException)
-        {
-            return new AppPreferences();
-        }
-        catch (JsonException)
-        {
-            return new AppPreferences();
-        }
-        catch (UnauthorizedAccessException)
-        {
-            return new AppPreferences();
-        }
+        return JsonFileStore.Load<AppPreferences>(SettingsPath, MaximumSettingsFileSizeBytes)
+            ?? new AppPreferences();
     }
 
-    public void Save()
-    {
-        try
-        {
-            Directory.CreateDirectory(SettingsDirectory);
-            File.WriteAllText(SettingsPath, JsonSerializer.Serialize(this));
-        }
-        catch (IOException)
-        {
-        }
-        catch (UnauthorizedAccessException)
-        {
-        }
-    }
+    public bool Save() => JsonFileStore.Save(SettingsPath, this, MaximumSettingsFileSizeBytes);
 }

@@ -155,6 +155,16 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Vlastní nadpis a automatické označení šifry i směru operace.
 - Uložení PNG a kopírování obrázku přímo do schránky.
 
+### v0.9.1 — Stability Sweep
+
+- Atomické ukládání historie a nastavení odolné proti přerušenému zápisu.
+- Kontrola poškozených, nadměrných a neplatných lokálních dat.
+- Bezpečné chování při obsazené schránce a nedostupném systémovém prohlížeči.
+- Omezení velikosti ukládané historie bez omezení samotného zpracování textu.
+- Unicode-safe zkracování textu pro PNG kartičky bez rozdělení emoji nebo diakritiky.
+- CI kontroluje formátování a sestavení bez jediného varování.
+- Aktualizovaný testovací balíček xUnit a 94 automatických testů.
+
 ### v1.0 — GitHub Release
 
 - Dokončené testy a automatické sestavení.

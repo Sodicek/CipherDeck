@@ -40,4 +40,14 @@ public sealed class ShareCardRendererTests
 
         Assert.NotEqual(violet.GetPixel(0, 0), paper.GetPixel(0, 0));
     }
+
+    [Fact]
+    public void LongShareCardTextIsTruncatedBetweenUnicodeTextElements()
+    {
+        var text = string.Concat(Enumerable.Repeat("🔐", 701));
+
+        var prepared = ShareCardRenderer.PrepareMessage(text);
+
+        Assert.Equal(string.Concat(Enumerable.Repeat("🔐", 697)) + "…", prepared);
+    }
 }

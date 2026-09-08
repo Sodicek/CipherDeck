@@ -101,18 +101,31 @@ public partial class Form1 : Form
 
             if (addToHistory)
             {
-                _history.Insert(0, new HistoryEntry(
+                var entry = new HistoryEntry(
                     DateTime.Now,
                     cipher.Name,
                     isEncryption,
                     inputText.Text,
                     result,
-                    key));
+                    key);
+
+                if (!HistoryStore.CanStore(entry))
+                {
+                    SetWarning("Operace je hotová, ale výsledek je příliš dlouhý pro historii.");
+                    return true;
+                }
+
+                _history.Insert(0, entry);
 
                 if (_history.Count > 30)
                     _history.RemoveAt(_history.Count - 1);
-                HistoryStore.Save(_history);
                 UpdateHistoryButton();
+
+                if (!HistoryStore.Save(_history))
+                {
+                    SetWarning("Operace je hotová, ale historii se nepodařilo uložit.");
+                    return true;
+                }
             }
 
             SetSuccess(addToHistory
@@ -161,8 +174,15 @@ public partial class Form1 : Form
             return;
         }
 
-        Clipboard.SetText(outputText.Text);
-        SetSuccess("Výsledek je zkopírovaný ve schránce.");
+        try
+        {
+            Clipboard.SetText(outputText.Text);
+            SetSuccess("Výsledek je zkopírovaný ve schránce.");
+        }
+        catch (System.Runtime.InteropServices.ExternalException)
+        {
+            SetError("Schránka je právě zaneprázdněná. Zkus to znovu.");
+        }
     }
 
     private void ClearButton_Click(object? sender, EventArgs e)
@@ -181,9 +201,11 @@ public partial class Form1 : Form
         if (historyForm.ClearRequested)
         {
             _history.Clear();
-            HistoryStore.Save(_history);
             UpdateHistoryButton();
-            SetSuccess("Historie byla vymazána.");
+            if (HistoryStore.Save(_history))
+                SetSuccess("Historie byla vymazána.");
+            else
+                SetError("Historie je vymazaná pro toto spuštění, ale soubor se nepodařilo aktualizovat.");
             return;
         }
 
@@ -232,6 +254,7 @@ public partial class Form1 : Form
 
             inputText.Text = File.ReadAllText(dialog.FileName, Encoding.UTF8);
             SetSuccess($"Importováno: {Path.GetFileName(dialog.FileName)}");
+            inputText.Focus();
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
@@ -469,6 +492,12 @@ public partial class Form1 : Form
     private void SetError(string message)
     {
         statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Error;
+        statusLabel.Text = message;
+    }
+
+    private void SetWarning(string message)
+    {
+        statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Accent;
         statusLabel.Text = message;
     }
 }

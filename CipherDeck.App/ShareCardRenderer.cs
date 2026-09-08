@@ -1,5 +1,6 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Globalization;
 
 namespace CipherDeck;
 
@@ -119,10 +120,13 @@ internal static class ShareCardRenderer
         graphics.DrawString("Vytvořeno v CipherDecku · klasické šifry jsou určené pro výuku a zábavu", noteFont, mutedBrush, 72, 578);
     }
 
-    private static string PrepareMessage(string text)
+    internal static string PrepareMessage(string text)
     {
         var prepared = text.Replace("\t", "    ").Trim();
-        return prepared.Length <= 700 ? prepared : string.Concat(prepared.AsSpan(0, 697), "…");
+        var elementIndexes = StringInfo.ParseCombiningCharacters(prepared);
+        return elementIndexes.Length <= 700
+            ? prepared
+            : string.Concat(prepared.AsSpan(0, elementIndexes[697]), "…");
     }
 
     private static string NormalizeTitle(string title) => string.IsNullOrWhiteSpace(title)

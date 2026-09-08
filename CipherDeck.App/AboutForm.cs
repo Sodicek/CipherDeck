@@ -34,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.9"
+            Text = "CipherDeck  v0.9.1"
         };
         var tagline = new Label
         {
@@ -63,11 +63,7 @@ internal sealed class AboutForm : Form
         closeButton.Click += (_, _) => Close();
 
         var githubButton = UiStyles.CreateGridButton("Otevřít GitHub", palette);
-        githubButton.Click += (_, _) => System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-        {
-            FileName = "https://github.com/Sodicek/CipherDeck",
-            UseShellExecute = true
-        });
+        githubButton.Click += (_, _) => OpenGitHub();
 
         var buttons = new TableLayoutPanel
         {
@@ -87,6 +83,27 @@ internal sealed class AboutForm : Form
         Controls.Add(layout);
         AcceptButton = closeButton;
         CancelButton = closeButton;
+    }
+
+    private void OpenGitHub()
+    {
+        try
+        {
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://github.com/Sodicek/CipherDeck",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception exception) when (exception is System.ComponentModel.Win32Exception or InvalidOperationException)
+        {
+            MessageBox.Show(
+                this,
+                "Odkaz se nepodařilo otevřít. Repo najdeš na github.com/Sodicek/CipherDeck.",
+                "CipherDeck · GitHub",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
 
     private const string HelpText = """
