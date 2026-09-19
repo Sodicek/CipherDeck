@@ -37,6 +37,16 @@ public sealed class CipherTests
             cipher => Assert.IsType<SkipCipher>(cipher));
     }
 
+    [Fact]
+    public void CatalogUsesUniqueStableIdentifiers()
+    {
+        var identifiers = CipherCatalog.All.Select(cipher => cipher.Id).ToList();
+
+        Assert.All(identifiers, identifier => Assert.Matches("^[a-z]+(?:-[a-z]+)*$", identifier));
+        Assert.Equal(identifiers.Count, identifiers.Distinct(StringComparer.Ordinal).Count());
+        Assert.All(CipherCatalog.All, cipher => Assert.Same(cipher, CipherCatalog.FindById(cipher.Id)));
+    }
+
     [Theory]
     [InlineData("CipherDeck", "kceDrehpiC")]
     [InlineData("Ahoj 👋!", "!👋 johA")]

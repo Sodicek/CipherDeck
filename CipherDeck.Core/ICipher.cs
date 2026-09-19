@@ -2,6 +2,7 @@ namespace CipherDeck.Core;
 
 public interface ICipher
 {
+    string Id { get; }
     string Name { get; }
     string Description { get; }
     CipherKeyType KeyType { get; }

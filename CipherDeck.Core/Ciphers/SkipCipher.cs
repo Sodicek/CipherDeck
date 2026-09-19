@@ -4,6 +4,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class SkipCipher : ICipher
 {
+    public string Id => CipherIds.Skip;
     public string Name => "Přeskakování";
     public string Description => "Přečte nejprve každý N-tý znak a potom doplní zbývající sloupce. Funguje s libovolným textem.";
     public CipherKeyType KeyType => CipherKeyType.Number;

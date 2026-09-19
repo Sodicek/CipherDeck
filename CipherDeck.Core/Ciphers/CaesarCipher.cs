@@ -2,6 +2,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class CaesarCipher : ICipher
 {
+    public string Id => CipherIds.Caesar;
     public string Name => "Caesarova šifra";
     public string Description => "Posune písmena A–Z o zvolený počet míst. Ostatní znaky ponechá beze změny.";
     public CipherKeyType KeyType => CipherKeyType.Number;

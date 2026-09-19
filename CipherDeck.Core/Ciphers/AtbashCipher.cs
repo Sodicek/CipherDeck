@@ -2,6 +2,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class AtbashCipher : ICipher
 {
+    public string Id => CipherIds.Atbash;
     public string Name => "Atbash";
     public string Description => "Nahradí A za Z, B za Y a tak dále. Stejná operace text zašifruje i odšifruje.";
     public CipherKeyType KeyType => CipherKeyType.None;

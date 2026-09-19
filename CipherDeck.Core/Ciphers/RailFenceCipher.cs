@@ -4,6 +4,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class RailFenceCipher : ICipher
 {
+    public string Id => CipherIds.RailFence;
     public string Name => "Rail Fence";
     public string Description => "Zapíše text cikcak do několika řádků („hradeb“) a potom jej přečte po řádcích.";
     public CipherKeyType KeyType => CipherKeyType.Number;

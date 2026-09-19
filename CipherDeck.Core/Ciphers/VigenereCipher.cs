@@ -4,6 +4,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class VigenereCipher : ICipher
 {
+    public string Id => CipherIds.Vigenere;
     public string Name => "Vigenèrova šifra";
     public string Description => "Posouvá písmena podle opakujícího se textového klíče. Používá latinská písmena A–Z.";
     public CipherKeyType KeyType => CipherKeyType.Text;

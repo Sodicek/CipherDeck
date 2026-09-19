@@ -13,4 +13,10 @@ public static class CipherCatalog
         new RailFenceCipher(),
         new SkipCipher()
     ];
+
+    public static ICipher? FindById(string? id) => All.FirstOrDefault(
+        cipher => string.Equals(cipher.Id, id, StringComparison.Ordinal));
+
+    public static ICipher? FindByName(string? name) => All.FirstOrDefault(
+        cipher => string.Equals(cipher.Name, name, StringComparison.CurrentCulture));
 }

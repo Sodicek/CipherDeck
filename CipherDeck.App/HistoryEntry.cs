@@ -8,7 +8,8 @@ internal sealed record HistoryEntry(
     bool IsEncryption,
     string Input,
     string Output,
-    CipherKey? Key)
+    CipherKey? Key,
+    string? CipherId = null)
 {
     public string DisplayText => $"{Timestamp:HH:mm:ss}  ·  {CipherName}  ·  {(IsEncryption ? "šifrování" : "odšifrování")}";
 }

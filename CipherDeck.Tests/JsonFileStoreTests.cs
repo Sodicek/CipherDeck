@@ -1,3 +1,4 @@
+using CipherDeck.Core;
 using Xunit;
 
 namespace CipherDeck.Tests;
@@ -99,7 +100,7 @@ public sealed class JsonFileStoreTests
 
         var normalized = HistoryStore.Normalize([null, invalid, oversized, valid]);
 
-        Assert.Equal([valid], normalized);
+        Assert.Equal([valid with { CipherId = CipherIds.Atbash }], normalized);
     }
 
     [Fact]
@@ -114,6 +115,17 @@ public sealed class JsonFileStoreTests
         Assert.Equal(30, normalized.Count);
         Assert.Equal("0", normalized[0].Input);
         Assert.Equal("29", normalized[^1].Input);
+    }
+
+    [Fact]
+    public void HistoryNormalizationMigratesLegacyCipherNameToStableIdentifier()
+    {
+        var legacyEntry = CreateHistoryEntry("hello");
+
+        var normalized = HistoryStore.Normalize([legacyEntry]);
+
+        Assert.Single(normalized);
+        Assert.Equal(CipherIds.Atbash, normalized[0].CipherId);
     }
 
     private static HistoryEntry CreateHistoryEntry(string text) => new(
