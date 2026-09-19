@@ -96,7 +96,7 @@ internal static class ShareCardRenderer
         graphics.DrawString(NormalizeTitle(data.Title).ToUpperInvariant(), titleFont, mutedBrush, 132, 190);
 
         var preparedText = PrepareMessage(data.Text);
-        using var messageFont = new Font("Segoe UI", GetMessageFontSize(preparedText.Length), FontStyle.Bold);
+        using var messageFont = new Font("Segoe UI", GetMessageFontSize(preparedText), FontStyle.Bold);
         using var textBrush = new SolidBrush(colors.Text);
         using var messageFormat = new StringFormat
         {
@@ -133,7 +133,10 @@ internal static class ShareCardRenderer
         ? "Šifrovaná zpráva"
         : title.Trim();
 
-    private static float GetMessageFontSize(int length) => length switch
+    internal static float GetMessageFontSize(string text) =>
+        GetMessageFontSizeForLength(StringInfo.ParseCombiningCharacters(text).Length);
+
+    private static float GetMessageFontSizeForLength(int length) => length switch
     {
         <= 55 => 42F,
         <= 110 => 34F,
