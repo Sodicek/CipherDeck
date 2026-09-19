@@ -1,0 +1,45 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package Name="CipherDeck"
+           Manufacturer="Sodicek"
+           Version="$(var.ProductVersion)"
+           UpgradeCode="C5B10518-8558-4617-96F6-92AB19A77C41"
+           Scope="perMachine">
+    <SummaryInformation Description="Classic ciphers with a modern desktop interface." />
+    <MajorUpgrade AllowSameVersionUpgrades="yes"
+                  DowngradeErrorMessage="A newer version of CipherDeck is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="CipherDeck.ico" SourceFile="..\CipherDeck.App\Assets\CipherDeck.ico" />
+    <Property Id="ARPPRODUCTICON" Value="CipherDeck.ico" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="CipherDeck">
+        <Component Id="MainExecutable">
+          <File Id="CipherDeckExe" Source="$(var.PublishDir)\CipherDeck.exe" KeyPath="yes">
+            <Shortcut Id="StartMenuShortcut"
+                      Directory="ApplicationProgramsFolder"
+                      Name="CipherDeck"
+                      Description="Classic ciphers with a modern desktop interface."
+                      WorkingDirectory="INSTALLFOLDER"
+                      Icon="CipherDeck.ico"
+                      Advertise="yes" />
+          </File>
+          <RemoveFolder Id="RemoveApplicationProgramsFolder"
+                        Directory="ApplicationProgramsFolder"
+                        On="uninstall" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="CipherDeck" />
+    </StandardDirectory>
+
+    <Feature Id="MainFeature" Title="CipherDeck" Level="1">
+      <ComponentRef Id="MainExecutable" />
+    </Feature>
+
+    <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLFOLDER" />
+  </Package>
+</Wix>
