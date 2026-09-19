@@ -24,10 +24,10 @@ public static class CipherDetector
 
         var candidates = new List<Candidate>();
         var reverse = new ReverseCipher().Decrypt(input);
-        candidates.Add(new Candidate("Pozpátku", reverse, ScoreLanguage(reverse), "Text přečtený odzadu připomíná přirozený jazyk.", null));
+        candidates.Add(new Candidate(CipherIds.Reverse, "Pozpátku", reverse, ScoreLanguage(reverse), "Text přečtený odzadu připomíná přirozený jazyk.", null));
 
         var atbash = new AtbashCipher().Decrypt(input);
-        candidates.Add(new Candidate("Atbash", atbash, ScoreLanguage(atbash), "Zrcadlová abeceda vytváří jazykově pravděpodobný výsledek.", null));
+        candidates.Add(new Candidate(CipherIds.Atbash, "Atbash", atbash, ScoreLanguage(atbash), "Zrcadlová abeceda vytváří jazykově pravděpodobný výsledek.", null));
 
         var caesar = new CaesarCipher();
         for (var shift = 1; shift <= 25; shift++)
@@ -35,6 +35,7 @@ public static class CipherDetector
             var key = new CipherKey(Number: shift);
             var decoded = caesar.Decrypt(input, key);
             candidates.Add(new Candidate(
+                CipherIds.Caesar,
                 $"Caesarova šifra · posun {shift}",
                 decoded,
                 ScoreLanguage(decoded),
@@ -43,6 +44,7 @@ public static class CipherDetector
         }
 
         candidates.Add(new Candidate(
+            null,
             "Transpoziční nebo nezašifrovaný text",
             input,
             ScoreLanguage(input) * 0.85,
@@ -57,6 +59,7 @@ public static class CipherDetector
         var totalWeight = best.Sum(candidate => Math.Max(1, candidate.Score));
 
         return best.Select(candidate => new CipherDetection(
+                candidate.CipherId,
                 candidate.Name,
                 Math.Max(1, candidate.Score) / totalWeight,
                 candidate.PlainText,
@@ -106,5 +109,11 @@ public static class CipherDetector
         return count;
     }
 
-    private sealed record Candidate(string Name, string PlainText, double Score, string Reason, CipherKey? Key);
+    private sealed record Candidate(
+        string? CipherId,
+        string Name,
+        string PlainText,
+        double Score,
+        string Reason,
+        CipherKey? Key);
 }
