@@ -98,7 +98,7 @@ public static class CipherExplainer
     private static IReadOnlyList<ExplanationStep> ExplainRailFence(string input, string result, CipherKey? key, bool encrypt)
     {
         var railCount = key?.Number ?? 2;
-        var elements = TextElementUtility.Split(input);
+        var elements = TextElementUtility.Split(encrypt ? input : result);
         var rows = Enumerable.Range(0, railCount).Select(_ => new StringBuilder()).ToArray();
         var rail = 0;
         var direction = 1;
@@ -125,7 +125,7 @@ public static class CipherExplainer
     private static IReadOnlyList<ExplanationStep> ExplainSkip(string input, string result, CipherKey? key, bool encrypt)
     {
         var step = key?.Number ?? 2;
-        var elements = TextElementUtility.Split(input);
+        var elements = TextElementUtility.Split(encrypt ? input : result);
         var columns = new List<string>();
 
         for (var offset = 0; offset < step; offset++)

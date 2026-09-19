@@ -85,4 +85,10 @@ public sealed class ChallengeAndDetectionTests
     {
         Assert.Empty(CipherDetector.Detect("1234 !? 🔐"));
     }
+
+    [Fact]
+    public void DetectorRecognizesSupplementaryPlaneLettersAsText()
+    {
+        Assert.NotEmpty(CipherDetector.Detect("𐐀𐐁𐐂"));
+    }
 }

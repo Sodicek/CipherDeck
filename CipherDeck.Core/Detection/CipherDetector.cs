@@ -1,4 +1,5 @@
 using CipherDeck.Core.Ciphers;
+using System.Text;
 
 namespace CipherDeck.Core.Detection;
 
@@ -19,7 +20,7 @@ public static class CipherDetector
     public static IReadOnlyList<CipherDetection> Detect(string input)
     {
         ArgumentNullException.ThrowIfNull(input);
-        if (!input.Any(char.IsLetter))
+        if (!input.EnumerateRunes().Any(Rune.IsLetter))
             return [];
 
         var candidates = new List<Candidate>();
