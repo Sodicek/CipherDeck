@@ -1,4 +1,5 @@
 using CipherDeck.Core.Ciphers;
+using CipherDeck.Core.Localization;
 using System.Text;
 
 namespace CipherDeck.Core.Detection;
@@ -25,10 +26,10 @@ public static class CipherDetector
 
         var candidates = new List<Candidate>();
         var reverse = new ReverseCipher().Decrypt(input);
-        candidates.Add(new Candidate(CipherIds.Reverse, "Pozpátku", reverse, ScoreLanguage(reverse), "Text přečtený odzadu připomíná přirozený jazyk.", null));
+        candidates.Add(new Candidate(CipherIds.Reverse, new ReverseCipher().Name, reverse, ScoreLanguage(reverse), CoreText.Get("DetectionReverseReason"), null));
 
         var atbash = new AtbashCipher().Decrypt(input);
-        candidates.Add(new Candidate(CipherIds.Atbash, "Atbash", atbash, ScoreLanguage(atbash), "Zrcadlová abeceda vytváří jazykově pravděpodobný výsledek.", null));
+        candidates.Add(new Candidate(CipherIds.Atbash, new AtbashCipher().Name, atbash, ScoreLanguage(atbash), CoreText.Get("DetectionAtbashReason"), null));
 
         var caesar = new CaesarCipher();
         for (var shift = 1; shift <= 25; shift++)
@@ -37,19 +38,19 @@ public static class CipherDetector
             var decoded = caesar.Decrypt(input, key);
             candidates.Add(new Candidate(
                 CipherIds.Caesar,
-                $"Caesarova šifra · posun {shift}",
+                CoreText.Format("DetectionCaesarName", shift),
                 decoded,
                 ScoreLanguage(decoded),
-                $"Nejlépe působí posun abecedy o {shift} míst.",
+                CoreText.Format("DetectionCaesarReason", shift),
                 key));
         }
 
         candidates.Add(new Candidate(
             null,
-            "Transpoziční nebo nezašifrovaný text",
+            CoreText.Get("DetectionTranspositionName"),
             input,
             ScoreLanguage(input) * 0.85,
-            "Četnost písmen zůstává zachovaná; změněné může být pouze jejich pořadí.",
+            CoreText.Get("DetectionTranspositionReason"),
             null));
 
         var best = candidates

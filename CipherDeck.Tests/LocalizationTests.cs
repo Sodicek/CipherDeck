@@ -1,6 +1,9 @@
 using System.Globalization;
 using CipherDeck.Core;
 using CipherDeck.Core.Ciphers;
+using CipherDeck.Core.Challenges;
+using CipherDeck.Core.Detection;
+using CipherDeck.Core.Learning;
 using CipherDeck.Core.Localization;
 using Xunit;
 
@@ -39,20 +42,33 @@ public sealed class LocalizationTests
     [Fact]
     public void EveryBaseResourceHasAnEnglishTranslation()
     {
-        var resourceKeys = new[]
-        {
-            "ReverseName", "ReverseDescription", "CaesarName", "CaesarDescription", "CaesarKeyLabel",
-            "CaesarMissingKey", "AtbashName", "AtbashDescription", "VigenereName", "VigenereDescription",
-            "VigenereKeyLabel", "VigenereMissingKey", "VigenereInvalidKey", "RailFenceName",
-            "RailFenceDescription", "RailFenceKeyLabel", "RailFenceInvalidKey", "SkipName", "SkipDescription",
-            "SkipKeyLabel", "SkipInvalidKey"
-        };
+        var czech = CultureInfo.GetCultureInfo("cs-CZ");
+        var english = CultureInfo.GetCultureInfo("en-US");
+        var resourceKeys = CoreText.GetKeys(czech);
 
         foreach (var key in resourceKeys)
         {
-            Assert.False(string.IsNullOrWhiteSpace(CoreText.Get(key, CultureInfo.GetCultureInfo("cs-CZ"))));
-            Assert.False(string.IsNullOrWhiteSpace(CoreText.Get(key, CultureInfo.GetCultureInfo("en-US"))));
+            Assert.False(string.IsNullOrWhiteSpace(CoreText.Get(key, czech)));
+            Assert.False(string.IsNullOrWhiteSpace(CoreText.Get(key, english)));
         }
+
+        Assert.True(resourceKeys.SetEquals(CoreText.GetKeys(english)));
+    }
+
+    [Fact]
+    public void ChallengeDetectionAndExplanationUseEnglishResources()
+    {
+        using var culture = new TemporaryUiCulture("en-US");
+
+        var challenge = ChallengeGenerator.Generate(ChallengeDifficulty.Easy, new Random(0));
+        var detection = CipherDetector.Detect("DLROW OLLEH")[0];
+        var explanation = CipherExplainer.Explain(new ReverseCipher(), "HELLO", encrypt: true);
+
+        Assert.Contains(challenge.PlainText, CoreText.GetList("ChallengeEasyPhrases"));
+        Assert.DoesNotContain("Začni", challenge.Hint, StringComparison.Ordinal);
+        Assert.Equal("Reverse", detection.CipherName);
+        Assert.Equal("How the input text was encrypted", explanation.Summary);
+        Assert.Equal("Split into characters", explanation.Steps[0].Title);
     }
 
     [Fact]
