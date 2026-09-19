@@ -32,7 +32,7 @@ Resource-completeness tests compare the actual Czech and English resource key se
 
 Encryption, frequency analysis, Learn Mode, and cipher detection now run outside the UI thread. Built-in ciphers and analysis services accept cancellation tokens, while a latest-operation runner cancels and discards obsolete live-preview work before it can overwrite a newer result.
 
-## Follow-up work for v0.11
+## Follow-up work for v1.0.0-rc.1
 
 ### Separate UI coordination from controls
 
@@ -49,7 +49,7 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 ### Maintenance and release work
 
 - Upgrade the test SDK and xUnit runner in a dedicated tooling change because their latest releases are major-version migrations.
-- Add repeatable installer creation and installation/update/uninstallation checks for v0.11.
+- Add repeatable installer creation and installation/update/uninstallation checks for v1.0.0-rc.1.
 - Automate release packaging, checksums, and release-note publication after the v0.10 feature set is complete.
 
 ## Recommended order
@@ -57,4 +57,4 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 1. Run keyboard, minimum-size, and DPI review in both languages.
 2. Extract application services from `MainForm`.
 3. Split test boundaries and upgrade the test tooling.
-4. Prepare the v0.11 installer and release automation.
+4. Prepare the v1.0.0-rc.1 installer and release automation.

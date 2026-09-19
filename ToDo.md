@@ -20,7 +20,7 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [x] Zachovat kompatibilitu historie při změně jazyka; nepoužívat přeložený název jako identifikátor šifry.
 - [x] Ověřit úplnost překladů automatickým porovnáním českých a anglických resources.
 
-### v0.11 — Release Candidate
+### v1.0.0-rc.1 — Release Candidate
 
 - [x] Přesunout náročné operace mimo UI vlákno a rušit zastaralý živý náhled.
 - [ ] Oddělit platformně nezávislé Core testy od Windows UI a renderer testů.
@@ -32,11 +32,13 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
 - [ ] Založit GitHub issues a milestones pro zbývající práci.
 
-### v1.0 — Stable Release
+### v1.0.0 — Stable Release
 
 - [ ] Uzavřít zjištěné chyby z předchozích kontrol.
 - [ ] Aktualizovat nápovědu, screenshoty a oba soubory README podle finálního rozhraní.
 - [ ] Vydat ověřený instalátor a portable balíček se seznamem změn.
+
+Plán vydání: dokončit celý RC checklist, publikovat `v1.0.0-rc.1` jako předběžnou verzi, ověřit instalátor a oba distribuční balíčky v čistém prostředí a teprve potom označit stejný ověřený stav jako stabilní `v1.0.0`. Další funkční vývoj bude pokračovat jako `v1.1.0`.
 
 Každý bod dokončovat samostatně na pracovní branchi a rozdělit do logických commitů podle [CONTRIBUTING.md](CONTRIBUTING.md). Níže je historický přehled dokončených funkcí a zbývajících kontrol.
 
