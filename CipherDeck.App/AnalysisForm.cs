@@ -4,9 +4,9 @@ namespace CipherDeck;
 
 internal sealed class AnalysisForm : Form
 {
-    public AnalysisForm(string analyzedText, bool darkTheme)
+    public AnalysisForm(IReadOnlyList<LetterFrequency> frequencies, bool darkTheme)
     {
-        var frequencies = FrequencyAnalyzer.AnalyzeLetters(analyzedText);
+        ArgumentNullException.ThrowIfNull(frequencies);
         var palette = UiTheme.GetPalette(darkTheme);
         var background = palette.Background;
         var panel = palette.Surface;

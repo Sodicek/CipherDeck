@@ -87,6 +87,10 @@
   <data name="StatusDarkTheme" xml:space="preserve"><value>Dark theme enabled.</value></data>
   <data name="StatusLightTheme" xml:space="preserve"><value>Light theme enabled.</value></data>
   <data name="StatusLanguageChanged" xml:space="preserve"><value>Interface language changed to English.</value></data>
+  <data name="StatusWorking" xml:space="preserve"><value>Processing text…</value></data>
+  <data name="StatusAnalyzing" xml:space="preserve"><value>Calculating letter frequencies…</value></data>
+  <data name="StatusExplaining" xml:space="preserve"><value>Preparing the explanation…</value></data>
+  <data name="StatusDetecting" xml:space="preserve"><value>Looking for the most likely cipher…</value></data>
   <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Frequency analysis</value></data>
   <data name="AnalysisHeading" xml:space="preserve"><value>Letter frequency</value></data>
   <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} letters · {1:N0} distinct characters · chart shows the top 12</value></data>

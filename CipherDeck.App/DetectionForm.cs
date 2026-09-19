@@ -11,9 +11,10 @@ internal sealed class DetectionForm : Form
 
     public CipherDetection? SelectedDetection { get; private set; }
 
-    public DetectionForm(string input, bool darkTheme)
+    public DetectionForm(IReadOnlyList<CipherDetection> detections, bool darkTheme)
     {
-        _detections = CipherDetector.Detect(input);
+        ArgumentNullException.ThrowIfNull(detections);
+        _detections = detections;
         var palette = UiTheme.GetPalette(darkTheme);
         var background = palette.Background;
         var content = palette.Content;
