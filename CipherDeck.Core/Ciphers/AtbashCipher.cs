@@ -1,10 +1,12 @@
+using CipherDeck.Core.Localization;
+
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class AtbashCipher : ICipher
 {
     public string Id => CipherIds.Atbash;
-    public string Name => "Atbash";
-    public string Description => "Nahradí A za Z, B za Y a tak dále. Stejná operace text zašifruje i odšifruje.";
+    public string Name => CoreText.Get("AtbashName");
+    public string Description => CoreText.Get("AtbashDescription");
     public CipherKeyType KeyType => CipherKeyType.None;
     public string KeyLabel => string.Empty;
     public int MinimumNumericKey => 0;

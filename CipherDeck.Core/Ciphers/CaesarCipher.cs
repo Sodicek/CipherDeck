@@ -1,12 +1,14 @@
+using CipherDeck.Core.Localization;
+
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class CaesarCipher : ICipher
 {
     public string Id => CipherIds.Caesar;
-    public string Name => "Caesarova šifra";
-    public string Description => "Posune písmena A–Z o zvolený počet míst. Ostatní znaky ponechá beze změny.";
+    public string Name => CoreText.Get("CaesarName");
+    public string Description => CoreText.Get("CaesarDescription");
     public CipherKeyType KeyType => CipherKeyType.Number;
-    public string KeyLabel => "POSUN";
+    public string KeyLabel => CoreText.Get("CaesarKeyLabel");
     public int MinimumNumericKey => 1;
     public int MaximumNumericKey => 25;
     public int DefaultNumericKey => 3;
@@ -19,7 +21,7 @@ public sealed class CaesarCipher : ICipher
     {
         if (key?.Number is null)
         {
-            throw new ArgumentException("Caesarova šifra vyžaduje číselný posun.", nameof(key));
+            throw new ArgumentException(CoreText.Get("CaesarMissingKey"), nameof(key));
         }
 
         return ((key.Number.Value % 26) + 26) % 26;

@@ -1,14 +1,15 @@
 using System.Text;
+using CipherDeck.Core.Localization;
 
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class RailFenceCipher : ICipher
 {
     public string Id => CipherIds.RailFence;
-    public string Name => "Rail Fence";
-    public string Description => "Zapíše text cikcak do několika řádků („hradeb“) a potom jej přečte po řádcích.";
+    public string Name => CoreText.Get("RailFenceName");
+    public string Description => CoreText.Get("RailFenceDescription");
     public CipherKeyType KeyType => CipherKeyType.Number;
-    public string KeyLabel => "ŘÁDKY";
+    public string KeyLabel => CoreText.Get("RailFenceKeyLabel");
     public int MinimumNumericKey => 2;
     public int MaximumNumericKey => 20;
     public int DefaultNumericKey => 3;
@@ -52,7 +53,7 @@ public sealed class RailFenceCipher : ICipher
     private static int GetRailCount(CipherKey? key)
     {
         if (key?.Number is not { } rails || rails is < 2 or > 20)
-            throw new ArgumentException("Počet řádků musí být mezi 2 a 20.", nameof(key));
+            throw new ArgumentException(CoreText.Get("RailFenceInvalidKey"), nameof(key));
         return rails;
     }
 

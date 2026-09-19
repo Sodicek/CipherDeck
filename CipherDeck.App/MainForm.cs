@@ -429,11 +429,12 @@ public partial class MainForm : Form
 
     private int FindSavedCipherIndex()
     {
+        var selectedCipherId = _preferences.SelectedCipherId
+            ?? CipherCatalog.FindByName(_preferences.SelectedCipherName)?.Id;
+
         for (var index = 0; index < cipherSelector.Items.Count; index++)
         {
-            if (cipherSelector.Items[index] is ICipher cipher &&
-                (cipher.Id == _preferences.SelectedCipherId ||
-                 string.IsNullOrEmpty(_preferences.SelectedCipherId) && cipher.Name == _preferences.SelectedCipherName))
+            if (cipherSelector.Items[index] is ICipher cipher && cipher.Id == selectedCipherId)
                 return index;
         }
 

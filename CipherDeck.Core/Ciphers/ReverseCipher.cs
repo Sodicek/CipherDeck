@@ -1,12 +1,13 @@
 using System.Text;
+using CipherDeck.Core.Localization;
 
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class ReverseCipher : ICipher
 {
     public string Id => CipherIds.Reverse;
-    public string Name => "Pozpátku";
-    public string Description => "Obrátí pořadí znaků. Mezery, interpunkce i Unicode znaky zůstanou zachované.";
+    public string Name => CoreText.Get("ReverseName");
+    public string Description => CoreText.Get("ReverseDescription");
     public CipherKeyType KeyType => CipherKeyType.None;
     public string KeyLabel => string.Empty;
     public int MinimumNumericKey => 0;

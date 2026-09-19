@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="ReverseName" xml:space="preserve"><value>Pozpátku</value></data>
+  <data name="ReverseDescription" xml:space="preserve"><value>Obrátí pořadí znaků. Mezery, interpunkce i Unicode znaky zůstanou zachované.</value></data>
+  <data name="CaesarName" xml:space="preserve"><value>Caesarova šifra</value></data>
+  <data name="CaesarDescription" xml:space="preserve"><value>Posune písmena A–Z o zvolený počet míst. Ostatní znaky ponechá beze změny.</value></data>
+  <data name="CaesarKeyLabel" xml:space="preserve"><value>POSUN</value></data>
+  <data name="CaesarMissingKey" xml:space="preserve"><value>Caesarova šifra vyžaduje číselný posun.</value></data>
+  <data name="AtbashName" xml:space="preserve"><value>Atbash</value></data>
+  <data name="AtbashDescription" xml:space="preserve"><value>Nahradí A za Z, B za Y a tak dále. Stejná operace text zašifruje i odšifruje.</value></data>
+  <data name="VigenereName" xml:space="preserve"><value>Vigenèrova šifra</value></data>
+  <data name="VigenereDescription" xml:space="preserve"><value>Posouvá písmena podle opakujícího se textového klíče. Používá latinská písmena A–Z.</value></data>
+  <data name="VigenereKeyLabel" xml:space="preserve"><value>KLÍČ</value></data>
+  <data name="VigenereMissingKey" xml:space="preserve"><value>Vigenèrova šifra vyžaduje textový klíč.</value></data>
+  <data name="VigenereInvalidKey" xml:space="preserve"><value>Klíč může obsahovat pouze písmena A–Z a mezery.</value></data>
+  <data name="RailFenceName" xml:space="preserve"><value>Rail Fence</value></data>
+  <data name="RailFenceDescription" xml:space="preserve"><value>Zapíše text cikcak do několika řádků („hradeb“) a potom jej přečte po řádcích.</value></data>
+  <data name="RailFenceKeyLabel" xml:space="preserve"><value>ŘÁDKY</value></data>
+  <data name="RailFenceInvalidKey" xml:space="preserve"><value>Počet řádků musí být mezi 2 a 20.</value></data>
+  <data name="SkipName" xml:space="preserve"><value>Přeskakování</value></data>
+  <data name="SkipDescription" xml:space="preserve"><value>Přečte nejprve každý N-tý znak a potom doplní zbývající sloupce. Funguje s libovolným textem.</value></data>
+  <data name="SkipKeyLabel" xml:space="preserve"><value>KROK</value></data>
+  <data name="SkipInvalidKey" xml:space="preserve"><value>Krok musí být mezi 2 a 20.</value></data>
+</root>
