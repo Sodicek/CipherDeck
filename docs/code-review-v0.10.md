@@ -32,6 +32,10 @@ Resource-completeness tests compare the actual Czech and English resource key se
 
 Encryption, frequency analysis, Learn Mode, and cipher detection now run outside the UI thread. Built-in ciphers and analysis services accept cancellation tokens, while a latest-operation runner cancels and discards obsolete live-preview work before it can overwrite a newer result.
 
+### Separate UI and Core test projects
+
+Platform-independent cipher, analysis, challenge, detection, learning, localization, and cancellation tests now live in `CipherDeck.Core.Tests` targeting plain `net8.0`. Windows UI, renderer, persistence, and application-localization tests remain in `CipherDeck.Tests`. CI runs the Core suite independently on Linux and the full desktop solution on Windows.
+
 ## Follow-up work for v1.0.0-rc.1
 
 ### Separate UI coordination from controls
@@ -40,9 +44,7 @@ Encryption, frequency analysis, Learn Mode, and cipher detection now run outside
 
 Several secondary forms repeat layout and dialog-button setup. Small shared helpers can reduce duplication, but only after localization makes the common patterns clear.
 
-### Improve test project boundaries
-
-The single test project targets Windows because it references the WinForms application for renderer and persistence tests. Split platform-neutral Core tests from Windows UI/rendering tests so algorithm checks can run on Linux and Windows in CI.
+### Expand UI verification
 
 Add a small automated UI smoke suite for startup, language switching, keyboard navigation, and minimum-size layouts. Continue manual DPI checks at 100%, 125%, 150%, and 200% until those scenarios are reliable in automation.
 
@@ -50,11 +52,11 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 
 - Upgrade the test SDK and xUnit runner in a dedicated tooling change because their latest releases are major-version migrations.
 - Add repeatable installer creation and installation/update/uninstallation checks for v1.0.0-rc.1.
-- Automate release packaging, checksums, and release-note publication after the v0.10 feature set is complete.
+- Automate release packaging, checksums, and release-note publication for the v1 release-candidate flow.
 
 ## Recommended order
 
 1. Run keyboard, minimum-size, and DPI review in both languages.
 2. Extract application services from `MainForm`.
-3. Split test boundaries and upgrade the test tooling.
+3. Upgrade the test tooling.
 4. Prepare the v1.0.0-rc.1 installer and release automation.

@@ -1,7 +1,7 @@
 using System.Globalization;
 using CipherDeck.Core;
-using CipherDeck.Core.Ciphers;
 using CipherDeck.Core.Challenges;
+using CipherDeck.Core.Ciphers;
 using CipherDeck.Core.Detection;
 using CipherDeck.Core.Learning;
 using CipherDeck.Core.Localization;
@@ -10,7 +10,7 @@ using Xunit;
 namespace CipherDeck.Tests;
 
 [Collection("Culture-sensitive tests")]
-public sealed class LocalizationTests
+public sealed class CoreLocalizationTests
 {
     [Theory]
     [InlineData("cs-CZ", "Pozpátku", "POSUN", "Přeskakování")]
@@ -34,7 +34,8 @@ public sealed class LocalizationTests
     {
         using var culture = new TemporaryUiCulture("en-US");
 
-        var exception = Assert.Throws<ArgumentException>(() => new SkipCipher().Encrypt("text", new CipherKey(Number: 1)));
+        var exception = Assert.Throws<ArgumentException>(() =>
+            new SkipCipher().Encrypt("text", new CipherKey(Number: 1)));
 
         Assert.StartsWith("The step must be between 2 and 20.", exception.Message, StringComparison.Ordinal);
     }
@@ -72,63 +73,12 @@ public sealed class LocalizationTests
     }
 
     [Fact]
-    public void EveryAppResourceHasAnEnglishTranslation()
-    {
-        var czech = CultureInfo.GetCultureInfo("cs-CZ");
-        var english = CultureInfo.GetCultureInfo("en-US");
-        var resourceKeys = AppText.GetKeys(czech);
-
-        foreach (var key in resourceKeys)
-        {
-            Assert.False(string.IsNullOrWhiteSpace(AppText.Get(key, czech)));
-            Assert.False(string.IsNullOrWhiteSpace(AppText.Get(key, english)));
-        }
-
-        Assert.True(resourceKeys.SetEquals(AppText.GetKeys(english)));
-    }
-
-    [Fact]
-    public void HistoryUsesCurrentLanguageAndStableCipherId()
-    {
-        using var culture = new TemporaryUiCulture("en-US");
-        var entry = new HistoryEntry(
-            new DateTime(2026, 9, 19, 12, 34, 56),
-            "Pozpátku",
-            true,
-            "ABC",
-            "CBA",
-            null,
-            CipherIds.Reverse);
-
-        Assert.Contains("Reverse", entry.DisplayText, StringComparison.Ordinal);
-        Assert.Contains("encryption", entry.DisplayText, StringComparison.Ordinal);
-        Assert.DoesNotContain("Pozpátku", entry.DisplayText, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public void DisplayVersionMatchesReleaseVersion()
-    {
-        Assert.Equal("v0.10.0", AppInfo.DisplayVersion);
-    }
-
-    [Fact]
     public void LegacyCzechNamesResolveWhileEnglishIsActive()
     {
         using var culture = new TemporaryUiCulture("en-US");
 
         Assert.Equal(CipherIds.Reverse, CipherCatalog.FindByName("Pozpátku")?.Id);
         Assert.Equal(CipherIds.Vigenere, CipherCatalog.FindByName("Vigenèrova šifra")?.Id);
-    }
-
-    [Theory]
-    [InlineData(null, AppLanguage.Czech)]
-    [InlineData("de", AppLanguage.Czech)]
-    [InlineData("CS", AppLanguage.Czech)]
-    [InlineData("en", AppLanguage.English)]
-    [InlineData("EN", AppLanguage.English)]
-    public void AppLanguageNormalizesSupportedLanguageCodes(string? input, string expected)
-    {
-        Assert.Equal(expected, AppLanguage.Normalize(input));
     }
 
     private sealed class TemporaryUiCulture : IDisposable

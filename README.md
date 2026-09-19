@@ -94,7 +94,8 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 - `CipherDeck.App` – desktopové rozhraní CipherDecku,
 - `CipherDeck.Core` – šifrovací algoritmy nezávislé na UI,
-- `CipherDeck.Tests` – automatické testy,
+- `CipherDeck.Core.Tests` – platformně nezávislé testy algoritmů,
+- `CipherDeck.Tests` – Windows testy rozhraní, rendereru a ukládání,
 - `ToDo.md` – roadmapa dalších verzí.
 
 ## Roadmapa
