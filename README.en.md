@@ -18,7 +18,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
   <img src="docs/screenshots/main-window-dark.png" alt="CipherDeck main window in dark theme" width="640">
 </p>
 
-## What's in v0.9.1
+## What's in v0.10.0
 
 - reverse text with correct Unicode support,
 - the Caesar cipher with an adjustable shift,
@@ -50,6 +50,8 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - resilient atomic history and preference storage that cannot leave a half-written file,
 - safe handling of a busy clipboard, an unavailable browser, and oversized history entries,
 - Unicode-safe truncation of long share-card messages.
+- a complete Czech and English interface with a persistent `EN/CZ` switch,
+- localized challenges, cipher detection, Learn Mode, history, help, and share cards.
 
 > [!WARNING]
 > Classic ciphers are not safe for protecting passwords or sensitive data. CipherDeck is meant for learning and fun.
@@ -97,7 +99,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmap
 
-Planned features include full English UI localization, an installer package, and further accessibility improvements.
+Planned features include responsive processing for long texts, an installer package, and further accessibility improvements.
 
 The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 

@@ -106,6 +106,12 @@ public sealed class LocalizationTests
     }
 
     [Fact]
+    public void DisplayVersionMatchesReleaseVersion()
+    {
+        Assert.Equal("v0.10.0", AppInfo.DisplayVersion);
+    }
+
+    [Fact]
     public void LegacyCzechNamesResolveWhileEnglishIsActive()
     {
         using var culture = new TemporaryUiCulture("en-US");
