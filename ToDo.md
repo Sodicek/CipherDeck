@@ -6,7 +6,7 @@ Moderní desktopová aplikace pro zkoušení, vysvětlování a porovnávání k
 
 ## Aktuální stav a pořadí práce
 
-Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené vydání.
+Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené vydání.
 
 ### v0.10 — Bilingual Edition
 
@@ -14,12 +14,11 @@ Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené 
 - [x] Zavést stabilní identifikátory šifer a migraci staré historie i nastavení.
 - [x] Přesunout názvy, popisy, klíče a validační chyby šifer do českých a anglických resources.
 - [x] Zavést validovanou a ukládanou jazykovou předvolbu s českým výchozím nastavením.
-- [ ] Přesunout texty rozhraní do lokalizačních souborů.
-- [ ] Doplnit češtinu a angličtinu včetně nápovědy, chyb a exportních kartiček.
-- [ ] Přidat přepínač jazyka a uložit volbu do nastavení.
+- [x] Přesunout texty rozhraní do lokalizačních souborů.
+- [x] Doplnit češtinu a angličtinu včetně nápovědy, chyb a exportních kartiček.
+- [x] Přidat přepínač jazyka a uložit volbu do nastavení.
 - [x] Zachovat kompatibilitu historie při změně jazyka; nepoužívat přeložený název jako identifikátor šifry.
-- [ ] Ověřit úplnost překladů a správné chování přepínání jazyka.
-- [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
+- [x] Ověřit úplnost překladů automatickým porovnáním českých a anglických resources.
 
 ### v0.11 — Release Candidate
 
@@ -30,6 +29,7 @@ Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené 
 - [ ] Připravit Windows instalátor vedle portable ZIPu.
 - [ ] Ověřit instalaci, aktualizaci a odinstalaci v čistém prostředí.
 - [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
+- [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
 - [ ] Založit GitHub issues a milestones pro zbývající práci.
 
 ### v1.0 — Stable Release
@@ -112,7 +112,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Detekce pravděpodobného typu jednoduché šifry.
 - [x] Výzvy k rozluštění s několika úrovněmi obtížnosti.
 - [x] Export výsledku jako sdílitelná kartička nebo obrázek.
-- [ ] Lokalizace minimálně do češtiny a angličtiny.
+- [x] Lokalizace minimálně do češtiny a angličtiny.
 
 ## 5. Testování a kvalita
 
@@ -140,7 +140,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Vytvořit první GitHub Release s přenosnou sestavou aplikace.
 - [x] Připravit lokální samostatný `win-x64` Release balíček pro budoucí GitHub Release.
 
-## Historie milníků do v0.9.1
+## Historie milníků do v0.10.0
 
 ### v0.1 — Working Core
 
@@ -203,6 +203,14 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - Unicode-safe zkracování textu pro PNG kartičky bez rozdělení emoji nebo diakritiky.
 - CI kontroluje formátování a sestavení bez jediného varování.
 - Aktualizovaný testovací balíček xUnit a 94 automatických testů.
+
+### v0.10.0 — Bilingual Edition
+
+- Kompletní české a anglické rozhraní včetně chyb, nápovědy, výzev a exportních kartiček.
+- Přepínač `EN/CZ` bez ztráty rozepsaného textu, vybrané šifry nebo klíče.
+- Uložená jazyková volba a lokalizované číselné formáty.
+- Stabilní identifikátory šifer pro nastavení, historii, výzvy, detekci a Learn Mode.
+- Automatická kontrola úplnosti českých a anglických resources a 115 testů.
 
 ## Definition of Done pro každou šifru
 

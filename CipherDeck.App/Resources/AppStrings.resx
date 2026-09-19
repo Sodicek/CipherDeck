@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Tagline" xml:space="preserve"><value>Klasické šifry. Moderní prostředí.</value></data>
+  <data name="Close" xml:space="preserve"><value>Zavřít</value></data>
+  <data name="Done" xml:space="preserve"><value>Hotovo</value></data>
+  <data name="Next" xml:space="preserve"><value>Další →</value></data>
+  <data name="Previous" xml:space="preserve"><value>← Předchozí</value></data>
+  <data name="TextFilesFilter" xml:space="preserve"><value>Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*</value></data>
+  <data name="ClipboardBusy" xml:space="preserve"><value>Schránka je právě zaneprázdněná. Zkus to znovu.</value></data>
+  <data name="MainWindowTitle" xml:space="preserve"><value>CipherDeck · {0}</value></data>
+  <data name="MainChallenges" xml:space="preserve"><value>Výzvy</value></data>
+  <data name="MainHistory" xml:space="preserve"><value>Historie ({0})</value></data>
+  <data name="MainAnalysis" xml:space="preserve"><value>Analýza</value></data>
+  <data name="MainHelp" xml:space="preserve"><value>Nápověda</value></data>
+  <data name="MainThemeLight" xml:space="preserve"><value>☀  Světlý</value></data>
+  <data name="MainThemeDark" xml:space="preserve"><value>☾  Tmavý</value></data>
+  <data name="MainLanguageEnglish" xml:space="preserve"><value>EN</value></data>
+  <data name="MainLanguageCzech" xml:space="preserve"><value>CZ</value></data>
+  <data name="MainCipher" xml:space="preserve"><value>ŠIFRA</value></data>
+  <data name="MainEncrypt" xml:space="preserve"><value>Zašifrovat</value></data>
+  <data name="MainDecrypt" xml:space="preserve"><value>Odšifrovat</value></data>
+  <data name="MainInput" xml:space="preserve"><value>  VSTUP  </value></data>
+  <data name="MainOutput" xml:space="preserve"><value>  VÝSTUP  </value></data>
+  <data name="MainImport" xml:space="preserve"><value>Načíst · Ctrl+O</value></data>
+  <data name="MainExport" xml:space="preserve"><value>Exportovat · Ctrl+S</value></data>
+  <data name="MainTransform" xml:space="preserve"><value>Provést  ·  Ctrl+Enter</value></data>
+  <data name="MainSwap" xml:space="preserve"><value>⇄  Prohodit</value></data>
+  <data name="MainCopy" xml:space="preserve"><value>Kopírovat</value></data>
+  <data name="MainClear" xml:space="preserve"><value>Vymazat</value></data>
+  <data name="MainExplain" xml:space="preserve"><value>Jak to funguje</value></data>
+  <data name="MainDetect" xml:space="preserve"><value>Odhad šifry</value></data>
+  <data name="MainLivePreview" xml:space="preserve"><value>Živý náhled</value></data>
+  <data name="MainReady" xml:space="preserve"><value>Připraveno</value></data>
+  <data name="MainSelectCipher" xml:space="preserve"><value>Vyber šifru.</value></data>
+  <data name="MainReadyCipher" xml:space="preserve"><value>Připraveno · {0}</value></data>
+  <data name="MainGenerateKey" xml:space="preserve"><value>Vygenerovat náhodný klíč</value></data>
+  <data name="MainCharacters" xml:space="preserve"><value>{0:N0} znaků</value></data>
+  <data name="TipChallenges" xml:space="preserve"><value>Otevřít šifrovací výzvy ve třech obtížnostech.</value></data>
+  <data name="TipHistory" xml:space="preserve"><value>Zobrazit posledních 30 provedených operací.</value></data>
+  <data name="TipAnalysis" xml:space="preserve"><value>Analyzovat četnost písmen ve vstupu nebo výstupu.</value></data>
+  <data name="TipHelp" xml:space="preserve"><value>Otevřít nápovědu a informace o aplikaci.</value></data>
+  <data name="TipTheme" xml:space="preserve"><value>Přepnout světlý a tmavý motiv.</value></data>
+  <data name="TipLanguage" xml:space="preserve"><value>Switch the interface to English.</value></data>
+  <data name="TipTransform" xml:space="preserve"><value>Provést vybranou operaci a uložit ji do historie (Ctrl+Enter).</value></data>
+  <data name="TipSwap" xml:space="preserve"><value>Přesunout výstup zpět do vstupu.</value></data>
+  <data name="TipCopy" xml:space="preserve"><value>Zkopírovat výstup do schránky.</value></data>
+  <data name="TipClear" xml:space="preserve"><value>Vymazat vstup i výstup.</value></data>
+  <data name="TipImport" xml:space="preserve"><value>Načíst textový soubor v UTF-8 (Ctrl+O).</value></data>
+  <data name="TipExport" xml:space="preserve"><value>Otevřít export TXT a sdílitelných PNG kartiček (Ctrl+S).</value></data>
+  <data name="TipExplain" xml:space="preserve"><value>Ukázat aktuální šifrování krok za krokem.</value></data>
+  <data name="TipDetect" xml:space="preserve"><value>Odhadnout použitou jednoduchou šifru.</value></data>
+  <data name="TipLivePreview" xml:space="preserve"><value>Automaticky přepočítá výsledek krátce po změně vstupu.</value></data>
+  <data name="ErrorChooseCipher" xml:space="preserve"><value>Nejdřív vyber šifru.</value></data>
+  <data name="ErrorEnterText" xml:space="preserve"><value>Napiš nebo vlož text, který chceš zpracovat.</value></data>
+  <data name="WarningHistoryTooLong" xml:space="preserve"><value>Operace je hotová, ale výsledek je příliš dlouhý pro historii.</value></data>
+  <data name="WarningHistorySave" xml:space="preserve"><value>Operace je hotová, ale historii se nepodařilo uložit.</value></data>
+  <data name="StatusEncrypted" xml:space="preserve"><value>Zašifrováno pomocí: {0}</value></data>
+  <data name="StatusDecrypted" xml:space="preserve"><value>Odšifrováno pomocí: {0}</value></data>
+  <data name="StatusLivePreview" xml:space="preserve"><value>Živý náhled · {0}</value></data>
+  <data name="ErrorOutputEmpty" xml:space="preserve"><value>Výstup je zatím prázdný.</value></data>
+  <data name="StatusSwapped" xml:space="preserve"><value>Výstup byl přesunut zpět na vstup.</value></data>
+  <data name="ErrorNothingToCopy" xml:space="preserve"><value>Není co zkopírovat.</value></data>
+  <data name="StatusCopied" xml:space="preserve"><value>Výsledek je zkopírovaný ve schránce.</value></data>
+  <data name="StatusCleared" xml:space="preserve"><value>Textová pole byla vymazána.</value></data>
+  <data name="StatusHistoryCleared" xml:space="preserve"><value>Historie byla vymazána.</value></data>
+  <data name="ErrorHistoryFile" xml:space="preserve"><value>Historie je vymazaná pro toto spuštění, ale soubor se nepodařilo aktualizovat.</value></data>
+  <data name="StatusHistoryLoaded" xml:space="preserve"><value>Operace byla načtena z historie.</value></data>
+  <data name="ImportTitle" xml:space="preserve"><value>Importovat text do CipherDecku</value></data>
+  <data name="ErrorImportTooLarge" xml:space="preserve"><value>Soubor je příliš velký. Limit importu je 5 MB.</value></data>
+  <data name="StatusImported" xml:space="preserve"><value>Importováno: {0}</value></data>
+  <data name="ErrorImport" xml:space="preserve"><value>Soubor se nepodařilo načíst.</value></data>
+  <data name="ErrorNothingToExport" xml:space="preserve"><value>Není co exportovat.</value></data>
+  <data name="OperationEncrypted" xml:space="preserve"><value>Zašifrováno</value></data>
+  <data name="OperationDecrypted" xml:space="preserve"><value>Odšifrováno</value></data>
+  <data name="OperationInput" xml:space="preserve"><value>Vstupní text</value></data>
+  <data name="ShareEncryptedTitle" xml:space="preserve"><value>Zašifrovaná zpráva</value></data>
+  <data name="ShareDecryptedTitle" xml:space="preserve"><value>Rozšifrovaná zpráva</value></data>
+  <data name="ShareInputTitle" xml:space="preserve"><value>Zpráva z CipherDecku</value></data>
+  <data name="ErrorAnalysisNeedsLetters" xml:space="preserve"><value>Pro analýzu je potřeba text obsahující alespoň jedno písmeno.</value></data>
+  <data name="ErrorDetectionNeedsLetters" xml:space="preserve"><value>Pro odhad šifry je potřeba text obsahující alespoň jedno písmeno.</value></data>
+  <data name="StatusDetectionUsed" xml:space="preserve"><value>Použit odhad: {0} · jistota {1:P0}</value></data>
+  <data name="StatusKeyGenerated" xml:space="preserve"><value>Vygenerován nový klíč pro: {0}</value></data>
+  <data name="StatusDarkTheme" xml:space="preserve"><value>Zapnutý tmavý motiv.</value></data>
+  <data name="StatusLightTheme" xml:space="preserve"><value>Zapnutý světlý motiv.</value></data>
+  <data name="StatusLanguageChanged" xml:space="preserve"><value>Jazyk rozhraní byl změněn na češtinu.</value></data>
+  <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Analýza četnosti</value></data>
+  <data name="AnalysisHeading" xml:space="preserve"><value>Četnost písmen</value></data>
+  <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} písmen · {1:N0} různých znaků · graf zobrazuje 12 nejčastějších</value></data>
+  <data name="AnalysisLetter" xml:space="preserve"><value>Písmeno</value></data>
+  <data name="AnalysisCount" xml:space="preserve"><value>Počet</value></data>
+  <data name="AnalysisShare" xml:space="preserve"><value>Podíl</value></data>
+  <data name="DetectionTitle" xml:space="preserve"><value>CipherDeck · Odhad šifry</value></data>
+  <data name="DetectionHeading" xml:space="preserve"><value>Pravděpodobný typ šifry</value></data>
+  <data name="DetectionDisclaimer" xml:space="preserve"><value>Heuristický odhad pro Pozpátku, Atbash a Caesarovu šifru — ne zaručený výsledek.</value></data>
+  <data name="DetectionUse" xml:space="preserve"><value>Použít návrh</value></data>
+  <data name="ExplanationTitle" xml:space="preserve"><value>CipherDeck · Jak funguje {0}</value></data>
+  <data name="ExplanationStep" xml:space="preserve"><value>KROK {0}/{1}</value></data>
+  <data name="HistoryTitle" xml:space="preserve"><value>CipherDeck · Historie</value></data>
+  <data name="HistoryHeading" xml:space="preserve"><value>Historie operací</value></data>
+  <data name="HistoryUse" xml:space="preserve"><value>Načíst operaci</value></data>
+  <data name="HistoryClear" xml:space="preserve"><value>Vymazat historii</value></data>
+  <data name="HistoryEmpty" xml:space="preserve"><value>Historie je zatím prázdná. Operace se přidá po stisknutí tlačítka PROVÉST.</value></data>
+  <data name="HistoryInput" xml:space="preserve"><value>VSTUP</value></data>
+  <data name="HistoryOutput" xml:space="preserve"><value>VÝSTUP</value></data>
+  <data name="HistoryClearQuestion" xml:space="preserve"><value>Opravdu chceš trvale vymazat celou historii operací?</value></data>
+  <data name="HistoryDisplay" xml:space="preserve"><value>{0:HH:mm:ss}  ·  {1}  ·  {2}</value></data>
+  <data name="HistoryEncryption" xml:space="preserve"><value>šifrování</value></data>
+  <data name="HistoryDecryption" xml:space="preserve"><value>odšifrování</value></data>
+  <data name="ChallengeTitle" xml:space="preserve"><value>CipherDeck · Výzvy</value></data>
+  <data name="ChallengeHeading" xml:space="preserve"><value>Rozlušti zprávu</value></data>
+  <data name="ChallengeEasy" xml:space="preserve"><value>Lehká</value></data>
+  <data name="ChallengeMedium" xml:space="preserve"><value>Střední</value></data>
+  <data name="ChallengeHard" xml:space="preserve"><value>Těžká</value></data>
+  <data name="ChallengeCipherText" xml:space="preserve"><value>ZAŠIFROVANÁ ZPRÁVA</value></data>
+  <data name="ChallengeAnswer" xml:space="preserve"><value>TVŮJ ROZLUŠTĚNÝ TEXT</value></data>
+  <data name="ChallengeHintHidden" xml:space="preserve"><value>Nápověda je zatím skrytá.</value></data>
+  <data name="ChallengeTry" xml:space="preserve"><value>Zkus najít původní zprávu.</value></data>
+  <data name="ChallengeCheck" xml:space="preserve"><value>Zkontrolovat</value></data>
+  <data name="ChallengeCheckAccessible" xml:space="preserve"><value>Zkontrolovat odpověď. Klávesová zkratka Ctrl+Enter.</value></data>
+  <data name="ChallengeHint" xml:space="preserve"><value>Nápověda</value></data>
+  <data name="ChallengeReveal" xml:space="preserve"><value>Odhalit</value></data>
+  <data name="ChallengeNew" xml:space="preserve"><value>Nová výzva</value></data>
+  <data name="ChallengeCorrect" xml:space="preserve"><value>Správně! Výzva je vyřešená.</value></data>
+  <data name="ChallengeIncorrect" xml:space="preserve"><value>Ještě ne. Zkontroluj pořadí a jednotlivá písmena.</value></data>
+  <data name="ChallengeHintShown" xml:space="preserve"><value>NÁPOVĚDA · {0}</value></data>
+  <data name="ChallengeNoKey" xml:space="preserve"><value>bez klíče</value></data>
+  <data name="ChallengeRevealStatus" xml:space="preserve"><value>Použitá šifra: {0} · klíč: {1}</value></data>
+  <data name="ExportTitle" xml:space="preserve"><value>CipherDeck · Exportní centrum</value></data>
+  <data name="ExportHeading" xml:space="preserve"><value>Exportovat výsledek</value></data>
+  <data name="ExportSummary" xml:space="preserve"><value>Ulož text, vytvoř PNG kartičku nebo zkopíruj obrázek rovnou do schránky.</value></data>
+  <data name="ExportName" xml:space="preserve"><value>NÁZEV</value></data>
+  <data name="ExportStyle" xml:space="preserve"><value>VZHLED</value></data>
+  <data name="ExportViolet" xml:space="preserve"><value>Fialová</value></data>
+  <data name="ExportMidnight" xml:space="preserve"><value>Půlnoční</value></data>
+  <data name="ExportPaper" xml:space="preserve"><value>Světlá</value></data>
+  <data name="ExportSaveText" xml:space="preserve"><value>Uložit TXT</value></data>
+  <data name="ExportCopyImage" xml:space="preserve"><value>Kopírovat obrázek</value></data>
+  <data name="ExportSaveImage" xml:space="preserve"><value>Uložit PNG</value></data>
+  <data name="ExportSaveTextTitle" xml:space="preserve"><value>Uložit text z CipherDecku</value></data>
+  <data name="ExportTextSaved" xml:space="preserve"><value>TXT uloženo: {0}</value></data>
+  <data name="ExportTextError" xml:space="preserve"><value>Textový soubor se nepodařilo uložit.</value></data>
+  <data name="ExportPngFilter" xml:space="preserve"><value>PNG obrázek (*.png)|*.png</value></data>
+  <data name="ExportSaveImageTitle" xml:space="preserve"><value>Uložit sdílitelnou kartičku</value></data>
+  <data name="ExportImageSaved" xml:space="preserve"><value>PNG uloženo: {0}</value></data>
+  <data name="ExportImageError" xml:space="preserve"><value>Obrázek se nepodařilo uložit.</value></data>
+  <data name="ExportImageCopied" xml:space="preserve"><value>Kartička je zkopírovaná ve schránce.</value></data>
+  <data name="ShareTagline" xml:space="preserve"><value>KLASICKÉ ŠIFRY · MODERNÍ PROSTŘEDÍ</value></data>
+  <data name="ShareBadge" xml:space="preserve"><value>SDÍLENÁ KARTA</value></data>
+  <data name="ShareNoCipher" xml:space="preserve"><value>Bez vybrané šifry</value></data>
+  <data name="ShareFooter" xml:space="preserve"><value>Vytvořeno v CipherDecku · klasické šifry jsou určené pro výuku a zábavu</value></data>
+  <data name="ShareDefaultTitle" xml:space="preserve"><value>Šifrovaná zpráva</value></data>
+  <data name="AboutTitle" xml:space="preserve"><value>O aplikaci CipherDeck</value></data>
+  <data name="AboutHeading" xml:space="preserve"><value>CipherDeck  {0}</value></data>
+  <data name="AboutClose" xml:space="preserve"><value>Rozumím</value></data>
+  <data name="AboutGitHub" xml:space="preserve"><value>Otevřít GitHub</value></data>
+  <data name="AboutGitHubError" xml:space="preserve"><value>Odkaz se nepodařilo otevřít. Repo najdeš na github.com/Sodicek/CipherDeck.</value></data>
+  <data name="AboutHelp" xml:space="preserve"><value>JAK APLIKACI POUŽÍVAT
+
+1. Vyber šifru a režim Zašifrovat nebo Odšifrovat.
+2. Pokud je potřeba, nastav číselný nebo textový klíč.
+3. Napiš text do levého pole. Živý náhled zobrazí výsledek automaticky.
+4. Tlačítkem PROVÉST uložíš operaci také do historie.
+
+PODPOROVANÉ ŠIFRY
+
+• Pozpátku — obrátí pořadí znaků.
+• Caesarova šifra — posouvá latinská písmena o zadaný počet míst.
+• Atbash — zrcadlí latinskou abecedu.
+• Vigenèrova šifra — používá opakující se textový klíč A–Z.
+• Rail Fence — zapisuje text cikcak do několika řádků.
+• Přeskakování — čte text po sloupcích se zvoleným krokem.
+
+KLÁVESOVÉ ZKRATKY
+
+Ctrl+Enter provede operaci a přidá ji do historie.
+Ctrl+O importuje textový soubor.
+Ctrl+S otevře exportní centrum pro TXT a obrázkové kartičky.
+
+DALŠÍ NÁSTROJE
+
+Analýza zobrazí četnost písmen. Jak to funguje rozloží aktuální operaci do názorných kroků. Ve Výzvách můžeš luštit náhodné zprávy ve třech obtížnostech a Odhad šifry zkouší jednoduché jazykové heuristiky.
+
+SOUBORY A HISTORIE
+
+Textové soubory používají UTF-8. Historie obsahuje nejvýše 30 posledních ručně provedených operací a zůstane dostupná i po restartu.
+
+BEZPEČNOSTNÍ UPOZORNĚNÍ
+
+Klasické šifry nejsou bezpečné pro ochranu hesel ani citlivých dat. CipherDeck je vzdělávací a zábavní aplikace.</value></data>
+</root>

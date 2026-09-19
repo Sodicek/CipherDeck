@@ -25,4 +25,58 @@
   <data name="SkipDescription" xml:space="preserve"><value>Reads every Nth character first, then appends the remaining columns. It works with any text.</value></data>
   <data name="SkipKeyLabel" xml:space="preserve"><value>STEP</value></data>
   <data name="SkipInvalidKey" xml:space="preserve"><value>The step must be between 2 and 20.</value></data>
+  <data name="ChallengeEasyPhrases" xml:space="preserve"><value>SECRET MESSAGE|HELLO WORLD|FIND THE KEY|CIPHERS ARE FUN</value></data>
+  <data name="ChallengeMediumPhrases" xml:space="preserve"><value>EVERY CIPHER HAS A PATTERN|PATIENCE UNLOCKS THE MYSTERY|LETTERS CAN CHANGE POSITION|A GOOD SOLVER LOOKS FOR PATTERNS</value></data>
+  <data name="ChallengeHardPhrases" xml:space="preserve"><value>THE BEST CLUE MAY BE HIDDEN IN A DETAIL|LETTER FREQUENCY CAN REVEAL THE CIPHER|SENDER AND RECEIVER MUST KNOW THE SECRET KEY|WHEN THE FIRST IDEA FAILS TRY ANOTHER ANGLE</value></data>
+  <data name="ChallengeReverseHint" xml:space="preserve"><value>Start at the end.</value></data>
+  <data name="ChallengeAtbashHint" xml:space="preserve"><value>The first letter of the alphabet pairs with the last.</value></data>
+  <data name="ChallengeCaesarHint" xml:space="preserve"><value>Each letter is shifted by {0} positions.</value></data>
+  <data name="ChallengeSkipHint" xml:space="preserve"><value>The text was split into {0} columns.</value></data>
+  <data name="ChallengeVigenereHint" xml:space="preserve"><value>The repeating key has {0} letters.</value></data>
+  <data name="ChallengeRailFenceHint" xml:space="preserve"><value>The text zigzags across {0} rails.</value></data>
+  <data name="DetectionReverseReason" xml:space="preserve"><value>Reading the text backwards resembles natural language.</value></data>
+  <data name="DetectionAtbashReason" xml:space="preserve"><value>The mirrored alphabet produces a language-like result.</value></data>
+  <data name="DetectionCaesarName" xml:space="preserve"><value>Caesar cipher · shift {0}</value></data>
+  <data name="DetectionCaesarReason" xml:space="preserve"><value>An alphabet shift of {0} positions gives the most plausible result.</value></data>
+  <data name="DetectionTranspositionName" xml:space="preserve"><value>Transposition or plain text</value></data>
+  <data name="DetectionTranspositionReason" xml:space="preserve"><value>Letter frequency is preserved; only the order may have changed.</value></data>
+  <data name="ExplanationEncryptSummary" xml:space="preserve"><value>How the input text was encrypted</value></data>
+  <data name="ExplanationDecryptSummary" xml:space="preserve"><value>How the input text was decrypted</value></data>
+  <data name="ExplanationResultTitle" xml:space="preserve"><value>Result</value></data>
+  <data name="ExplanationSplitTitle" xml:space="preserve"><value>Split into characters</value></data>
+  <data name="ExplanationSplitDetail" xml:space="preserve"><value>The text is split into user-perceived characters. Emoji and combining marks stay together.</value></data>
+  <data name="ExplanationReverseTitle" xml:space="preserve"><value>Reverse the order</value></data>
+  <data name="ExplanationReverseDetail" xml:space="preserve"><value>The characters are read from last to first.</value></data>
+  <data name="ExplanationComposeTitle" xml:space="preserve"><value>Build the result</value></data>
+  <data name="ExplanationReverseComposeDetail" xml:space="preserve"><value>The reversed characters are joined back into one text.</value></data>
+  <data name="ExplanationShiftTitle" xml:space="preserve"><value>Set the shift</value></data>
+  <data name="ExplanationShiftDetail" xml:space="preserve"><value>The A–Z alphabet is treated as a circle; A follows Z.</value></data>
+  <data name="ExplanationShiftSnapshot" xml:space="preserve"><value>Shift: {0}</value></data>
+  <data name="ExplanationAtbashTitle" xml:space="preserve"><value>Mirrored alphabet</value></data>
+  <data name="ExplanationAtbashDetail" xml:space="preserve"><value>The first letter pairs with the last: A↔Z, B↔Y, C↔X…</value></data>
+  <data name="ExplanationKeyRepeatTitle" xml:space="preserve"><value>Repeat the key</value></data>
+  <data name="ExplanationKeyRepeatDetail" xml:space="preserve"><value>The key repeats over letters only; spaces and punctuation do not advance it.</value></data>
+  <data name="ExplanationLetterShiftsTitle" xml:space="preserve"><value>Shift the letters</value></data>
+  <data name="ExplanationKeyAddDetail" xml:space="preserve"><value>The key letter value is added.</value></data>
+  <data name="ExplanationKeySubtractDetail" xml:space="preserve"><value>The key letter value is subtracted.</value></data>
+  <data name="ExplanationVigenereComposeDetail" xml:space="preserve"><value>Changed letters and preserved characters are joined together.</value></data>
+  <data name="ExplanationRailRow" xml:space="preserve"><value>Rail {0}: {1}</value></data>
+  <data name="ExplanationRailPatternTitle" xml:space="preserve"><value>Zigzag pattern</value></data>
+  <data name="ExplanationRailPatternDetail" xml:space="preserve"><value>The text moves down and up across {0} rails.</value></data>
+  <data name="ExplanationRailReadTitle" xml:space="preserve"><value>Read the rails</value></data>
+  <data name="ExplanationRailRestoreTitle" xml:space="preserve"><value>Restore zigzag order</value></data>
+  <data name="ExplanationRailReadDetail" xml:space="preserve"><value>The rails are joined from top to bottom.</value></data>
+  <data name="ExplanationRailRestoreDetail" xml:space="preserve"><value>Characters return to their positions in the zigzag pattern.</value></data>
+  <data name="ExplanationTranspositionResultDetail" xml:space="preserve"><value>Transposition changes the order without adding or removing characters.</value></data>
+  <data name="ExplanationSkipSplitTitle" xml:space="preserve"><value>Split by step</value></data>
+  <data name="ExplanationSkipSplitDetail" xml:space="preserve"><value>Step {0} is used. Characters are grouped by the remainder of their position.</value></data>
+  <data name="ExplanationSkipColumn" xml:space="preserve"><value>Column {0}: {1}</value></data>
+  <data name="ExplanationSkipReadTitle" xml:space="preserve"><value>Read the columns</value></data>
+  <data name="ExplanationSkipRestoreTitle" xml:space="preserve"><value>Restore original positions</value></data>
+  <data name="ExplanationSkipReadDetail" xml:space="preserve"><value>The columns are read from left to right.</value></data>
+  <data name="ExplanationSkipRestoreDetail" xml:space="preserve"><value>Characters from the columns return to their original positions.</value></data>
+  <data name="ExplanationSkipResultDetail" xml:space="preserve"><value>Every input character appears in the result exactly once.</value></data>
+  <data name="ExplanationChangesTitle" xml:space="preserve"><value>Convert the letters</value></data>
+  <data name="ExplanationChangesDetail" xml:space="preserve"><value>A sample of changed letters; spaces, numbers, and punctuation stay unchanged.</value></data>
+  <data name="ExplanationConvertedResultDetail" xml:space="preserve"><value>The converted characters are joined into the output text.</value></data>
 </root>

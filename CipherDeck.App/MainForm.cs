@@ -12,6 +12,7 @@ public partial class MainForm : Form
     private readonly System.Windows.Forms.Timer _previewTimer;
     private readonly AppPreferences _preferences;
     private bool _darkTheme;
+    private bool _changingLanguage;
 
     public MainForm()
     {
@@ -31,9 +32,7 @@ public partial class MainForm : Form
         FormClosed += (_, _) => _previewTimer.Dispose();
         cipherSelector.SelectedIndex = FindSavedCipherIndex();
         encryptMode.Checked = true;
-        ApplyTheme();
-        UpdateCharacterCount();
-        UpdateHistoryButton();
+        ApplyLocalization();
         Shown += (_, _) => inputText.Focus();
     }
 
@@ -51,24 +50,28 @@ public partial class MainForm : Form
             keyLabel.Text = cipher.KeyLabel;
             shiftValue.Minimum = cipher.MinimumNumericKey;
             shiftValue.Maximum = cipher.MaximumNumericKey;
-            shiftValue.Value = cipher.DefaultNumericKey;
+            if (!_changingLanguage)
+                shiftValue.Value = cipher.DefaultNumericKey;
         }
 
         if (cipher?.KeyType == CipherKeyType.Text)
         {
             textKeyLabel.Text = cipher.KeyLabel;
-            textKeyInput.Text = cipher.DefaultTextKey;
+            if (!_changingLanguage)
+                textKeyInput.Text = cipher.DefaultTextKey;
         }
 
-        statusLabel.Text = cipher is null ? "Vyber šifru." : $"Připraveno · {cipher.Name}";
+        statusLabel.Text = cipher is null ? AppText.Get("MainSelectCipher") : AppText.Format("MainReadyCipher", cipher.Name);
         if (cipher is not null &&
+            !_changingLanguage &&
             (_preferences.SelectedCipherId != cipher.Id || _preferences.SelectedCipherName != cipher.Name))
         {
             _preferences.SelectedCipherId = cipher.Id;
             _preferences.SelectedCipherName = cipher.Name;
             _preferences.Save();
         }
-        SchedulePreview();
+        if (!_changingLanguage)
+            SchedulePreview();
     }
 
     private void TransformButton_Click(object? sender, EventArgs e) => PerformTransform(addToHistory: true, showEmptyError: true);
@@ -78,7 +81,7 @@ public partial class MainForm : Form
         if (SelectedCipher is not { } cipher)
         {
             if (showEmptyError)
-                SetError("Nejdřív vyber šifru.");
+                SetError(AppText.Get("ErrorChooseCipher"));
             return false;
         }
 
@@ -87,7 +90,7 @@ public partial class MainForm : Form
             outputText.Clear();
             if (showEmptyError)
             {
-                SetError("Napiš nebo vlož text, který chceš zpracovat.");
+                SetError(AppText.Get("ErrorEnterText"));
                 inputText.Focus();
             }
             return false;
@@ -115,7 +118,7 @@ public partial class MainForm : Form
 
                 if (!HistoryStore.CanStore(entry))
                 {
-                    SetWarning("Operace je hotová, ale výsledek je příliš dlouhý pro historii.");
+                    SetWarning(AppText.Get("WarningHistoryTooLong"));
                     return true;
                 }
 
@@ -127,14 +130,14 @@ public partial class MainForm : Form
 
                 if (!HistoryStore.Save(_history))
                 {
-                    SetWarning("Operace je hotová, ale historii se nepodařilo uložit.");
+                    SetWarning(AppText.Get("WarningHistorySave"));
                     return true;
                 }
             }
 
             SetSuccess(addToHistory
-                ? $"{(isEncryption ? "Zašifrováno" : "Odšifrováno")} pomocí: {cipher.Name}"
-                : $"Živý náhled · {cipher.Name}");
+                ? AppText.Format(isEncryption ? "StatusEncrypted" : "StatusDecrypted", cipher.Name)
+                : AppText.Format("StatusLivePreview", cipher.Name));
             return true;
         }
         catch (ArgumentException exception)
@@ -156,7 +159,7 @@ public partial class MainForm : Form
     {
         if (string.IsNullOrEmpty(outputText.Text))
         {
-            SetError("Výstup je zatím prázdný.");
+            SetError(AppText.Get("ErrorOutputEmpty"));
             return;
         }
 
@@ -166,7 +169,7 @@ public partial class MainForm : Form
             decryptMode.Checked = true;
         else
             encryptMode.Checked = true;
-        SetSuccess("Výstup byl přesunut zpět na vstup.");
+        SetSuccess(AppText.Get("StatusSwapped"));
         inputText.Focus();
     }
 
@@ -174,18 +177,18 @@ public partial class MainForm : Form
     {
         if (string.IsNullOrEmpty(outputText.Text))
         {
-            SetError("Není co zkopírovat.");
+            SetError(AppText.Get("ErrorNothingToCopy"));
             return;
         }
 
         try
         {
             Clipboard.SetText(outputText.Text);
-            SetSuccess("Výsledek je zkopírovaný ve schránce.");
+            SetSuccess(AppText.Get("StatusCopied"));
         }
         catch (System.Runtime.InteropServices.ExternalException)
         {
-            SetError("Schránka je právě zaneprázdněná. Zkus to znovu.");
+            SetError(AppText.Get("ClipboardBusy"));
         }
     }
 
@@ -194,7 +197,7 @@ public partial class MainForm : Form
         _previewTimer.Stop();
         inputText.Clear();
         outputText.Clear();
-        SetSuccess("Textová pole byla vymazána.");
+        SetSuccess(AppText.Get("StatusCleared"));
         inputText.Focus();
     }
 
@@ -207,9 +210,9 @@ public partial class MainForm : Form
             _history.Clear();
             UpdateHistoryButton();
             if (HistoryStore.Save(_history))
-                SetSuccess("Historie byla vymazána.");
+                SetSuccess(AppText.Get("StatusHistoryCleared"));
             else
-                SetError("Historie je vymazaná pro toto spuštění, ale soubor se nepodařilo aktualizovat.");
+                SetError(AppText.Get("ErrorHistoryFile"));
             return;
         }
 
@@ -233,7 +236,7 @@ public partial class MainForm : Form
             textKeyInput.Text = text;
         inputText.Text = entry.Input;
         outputText.Text = entry.Output;
-        SetSuccess("Operace byla načtena z historie.");
+        SetSuccess(AppText.Get("StatusHistoryLoaded"));
     }
 
     private void ImportButton_Click(object? sender, EventArgs e)
@@ -241,8 +244,8 @@ public partial class MainForm : Form
         using var dialog = new OpenFileDialog
         {
             CheckFileExists = true,
-            Filter = "Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*",
-            Title = "Importovat text do CipherDecku"
+            Filter = AppText.Get("TextFilesFilter"),
+            Title = AppText.Get("ImportTitle")
         };
 
         if (dialog.ShowDialog(this) != DialogResult.OK)
@@ -252,17 +255,17 @@ public partial class MainForm : Form
         {
             if (new FileInfo(dialog.FileName).Length > 5 * 1024 * 1024)
             {
-                SetError("Soubor je příliš velký. Limit importu je 5 MB.");
+                SetError(AppText.Get("ErrorImportTooLarge"));
                 return;
             }
 
             inputText.Text = File.ReadAllText(dialog.FileName, Encoding.UTF8);
-            SetSuccess($"Importováno: {Path.GetFileName(dialog.FileName)}");
+            SetSuccess(AppText.Format("StatusImported", Path.GetFileName(dialog.FileName)));
             inputText.Focus();
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
-            SetError("Soubor se nepodařilo načíst.");
+            SetError(AppText.Get("ErrorImport"));
         }
     }
 
@@ -272,19 +275,16 @@ public partial class MainForm : Form
         var textToExport = hasOutput ? outputText.Text : inputText.Text;
         if (string.IsNullOrEmpty(textToExport))
         {
-            SetError("Není co exportovat.");
+            SetError(AppText.Get("ErrorNothingToExport"));
             return;
         }
 
         var operationLabel = hasOutput
-            ? encryptMode.Checked ? "Zašifrováno" : "Odšifrováno"
-            : "Vstupní text";
-        var title = operationLabel switch
-        {
-            "Zašifrováno" => "Zašifrovaná zpráva",
-            "Odšifrováno" => "Rozšifrovaná zpráva",
-            _ => "Zpráva z CipherDecku"
-        };
+            ? AppText.Get(encryptMode.Checked ? "OperationEncrypted" : "OperationDecrypted")
+            : AppText.Get("OperationInput");
+        var title = AppText.Get(hasOutput
+            ? encryptMode.Checked ? "ShareEncryptedTitle" : "ShareDecryptedTitle"
+            : "ShareInputTitle");
         var data = new ShareCardData(title, textToExport, SelectedCipher?.Name ?? "CipherDeck", operationLabel);
         using var exportForm = new ExportForm(data, _darkTheme);
         exportForm.ShowDialog(this);
@@ -303,7 +303,7 @@ public partial class MainForm : Form
         var textToAnalyze = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
         if (FrequencyAnalyzer.AnalyzeLetters(textToAnalyze).Count == 0)
         {
-            SetError("Pro analýzu je potřeba text obsahující alespoň jedno písmeno.");
+            SetError(AppText.Get("ErrorAnalysisNeedsLetters"));
             return;
         }
 
@@ -332,7 +332,7 @@ public partial class MainForm : Form
         var textToDetect = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
         if (CipherDetector.Detect(textToDetect).Count == 0)
         {
-            SetError("Pro odhad šifry je potřeba text obsahující alespoň jedno písmeno.");
+            SetError(AppText.Get("ErrorDetectionNeedsLetters"));
             return;
         }
 
@@ -341,7 +341,7 @@ public partial class MainForm : Form
             return;
 
         outputText.Text = detection.SuggestedPlainText;
-        SetSuccess($"Použit odhad: {detection.CipherName} · jistota {detection.Confidence:P0}");
+        SetSuccess(AppText.Format("StatusDetectionUsed", detection.CipherName, detection.Confidence));
     }
 
     private void GenerateKeyButton_Click(object? sender, EventArgs e)
@@ -354,7 +354,7 @@ public partial class MainForm : Form
         if (key.Text is { } text)
             textKeyInput.Text = text;
 
-        SetSuccess($"Vygenerován nový klíč pro: {cipher.Name}");
+        SetSuccess(AppText.Format("StatusKeyGenerated", cipher.Name));
     }
 
     private void ThemeButton_Click(object? sender, EventArgs e)
@@ -363,7 +363,40 @@ public partial class MainForm : Form
         _preferences.DarkTheme = _darkTheme;
         _preferences.Save();
         ApplyTheme();
-        SetSuccess(_darkTheme ? "Zapnutý tmavý motiv." : "Zapnutý světlý motiv.");
+        SetSuccess(AppText.Get(_darkTheme ? "StatusDarkTheme" : "StatusLightTheme"));
+    }
+
+    private void LanguageButton_Click(object? sender, EventArgs e)
+    {
+        var selectedCipherId = SelectedCipher?.Id;
+        var numericKey = (int)shiftValue.Value;
+        var textKey = textKeyInput.Text;
+
+        _previewTimer.Stop();
+        _preferences.LanguageCode = AppLanguage.Normalize(_preferences.LanguageCode) == AppLanguage.Czech
+            ? AppLanguage.English
+            : AppLanguage.Czech;
+        AppLanguage.Apply(_preferences.LanguageCode);
+        _preferences.Save();
+
+        _changingLanguage = true;
+        cipherSelector.BeginUpdate();
+        cipherSelector.Items.Clear();
+        foreach (var cipher in CipherCatalog.All)
+            cipherSelector.Items.Add(cipher);
+        cipherSelector.SelectedIndex = Enumerable.Range(0, cipherSelector.Items.Count)
+            .FirstOrDefault(index => cipherSelector.Items[index] is ICipher cipher && cipher.Id == selectedCipherId);
+        cipherSelector.EndUpdate();
+        _changingLanguage = false;
+
+        if (SelectedCipher?.KeyType == CipherKeyType.Number)
+            shiftValue.Value = Math.Clamp(numericKey, (int)shiftValue.Minimum, (int)shiftValue.Maximum);
+        if (SelectedCipher?.KeyType == CipherKeyType.Text)
+            textKeyInput.Text = textKey;
+
+        ApplyLocalization();
+        SetSuccess(AppText.Get("StatusLanguageChanged"));
+        SchedulePreview();
     }
 
     private void LivePreview_CheckedChanged(object? sender, EventArgs e)
@@ -416,7 +449,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void UpdateCharacterCount() => characterCount.Text = $"{inputText.TextLength:N0} znaků";
+    private void UpdateCharacterCount() => characterCount.Text = AppText.Format("MainCharacters", inputText.TextLength);
 
     private void LoadApplicationIcon()
     {
@@ -442,7 +475,63 @@ public partial class MainForm : Form
         return 0;
     }
 
-    private void UpdateHistoryButton() => historyButton.Text = $"Historie ({_history.Count})";
+    private void UpdateHistoryButton() => historyButton.Text = AppText.Format("MainHistory", _history.Count);
+
+    private void ApplyLocalization()
+    {
+        Text = AppText.Format("MainWindowTitle", AppInfo.DisplayVersion);
+        subtitleLabel.Text = AppText.Get("Tagline");
+        challengeButton.Text = AppText.Get("MainChallenges");
+        analysisButton.Text = AppText.Get("MainAnalysis");
+        helpButton.Text = AppText.Get("MainHelp");
+        cipherLabel.Text = AppText.Get("MainCipher");
+        encryptMode.Text = AppText.Get("MainEncrypt");
+        decryptMode.Text = AppText.Get("MainDecrypt");
+        inputGroup.Text = AppText.Get("MainInput");
+        outputGroup.Text = AppText.Get("MainOutput");
+        importButton.Text = AppText.Get("MainImport");
+        exportButton.Text = AppText.Get("MainExport");
+        transformButton.Text = AppText.Get("MainTransform");
+        swapButton.Text = AppText.Get("MainSwap");
+        copyButton.Text = AppText.Get("MainCopy");
+        clearButton.Text = AppText.Get("MainClear");
+        explainButton.Text = AppText.Get("MainExplain");
+        detectButton.Text = AppText.Get("MainDetect");
+        livePreview.Text = AppText.Get("MainLivePreview");
+        randomNumericKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
+        randomTextKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
+        languageButton.Text = AppLanguage.Normalize(_preferences.LanguageCode) == AppLanguage.Czech
+            ? AppText.Get("MainLanguageEnglish")
+            : AppText.Get("MainLanguageCzech");
+        cipherDescription.Text = SelectedCipher?.Description ?? string.Empty;
+        if (SelectedCipher is { KeyType: CipherKeyType.Number } numericCipher)
+            keyLabel.Text = numericCipher.KeyLabel;
+        if (SelectedCipher is { KeyType: CipherKeyType.Text } textCipher)
+            textKeyLabel.Text = textCipher.KeyLabel;
+        UpdateHistoryButton();
+        UpdateCharacterCount();
+        ApplyToolTips();
+        ApplyTheme();
+    }
+
+    private void ApplyToolTips()
+    {
+        toolTip.SetToolTip(challengeButton, AppText.Get("TipChallenges"));
+        toolTip.SetToolTip(historyButton, AppText.Get("TipHistory"));
+        toolTip.SetToolTip(analysisButton, AppText.Get("TipAnalysis"));
+        toolTip.SetToolTip(helpButton, AppText.Get("TipHelp"));
+        toolTip.SetToolTip(themeButton, AppText.Get("TipTheme"));
+        toolTip.SetToolTip(languageButton, AppText.Get("TipLanguage"));
+        toolTip.SetToolTip(transformButton, AppText.Get("TipTransform"));
+        toolTip.SetToolTip(swapButton, AppText.Get("TipSwap"));
+        toolTip.SetToolTip(copyButton, AppText.Get("TipCopy"));
+        toolTip.SetToolTip(clearButton, AppText.Get("TipClear"));
+        toolTip.SetToolTip(importButton, AppText.Get("TipImport"));
+        toolTip.SetToolTip(exportButton, AppText.Get("TipExport"));
+        toolTip.SetToolTip(explainButton, AppText.Get("TipExplain"));
+        toolTip.SetToolTip(detectButton, AppText.Get("TipDetect"));
+        toolTip.SetToolTip(livePreview, AppText.Get("TipLivePreview"));
+    }
 
     private void ApplyTheme()
     {
@@ -480,11 +569,11 @@ public partial class MainForm : Form
         characterCount.ForeColor = palette.Muted;
         livePreview.ForeColor = palette.Text;
 
-        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, detectButton, randomNumericKeyButton, randomTextKeyButton, challengeButton, historyButton, analysisButton, helpButton, themeButton })
+        foreach (var button in new[] { swapButton, copyButton, clearButton, importButton, exportButton, explainButton, detectButton, randomNumericKeyButton, randomTextKeyButton, challengeButton, historyButton, analysisButton, helpButton, themeButton, languageButton })
             UiStyles.ApplyButtonTheme(button, palette);
 
         UiStyles.ApplyButtonTheme(transformButton, palette, primary: true);
-        themeButton.Text = _darkTheme ? "☀  Světlý" : "☾  Tmavý";
+        themeButton.Text = AppText.Get(_darkTheme ? "MainThemeLight" : "MainThemeDark");
         optionsPanel.Invalidate();
         inputGroup.Invalidate();
         outputGroup.Invalidate();

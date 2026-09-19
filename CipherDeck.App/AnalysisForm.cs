@@ -14,7 +14,7 @@ internal sealed class AnalysisForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = "CipherDeck · Analýza četnosti";
+        Text = AppText.Get("AnalysisTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(820, 650);
         MinimumSize = new Size(680, 520);
@@ -40,14 +40,14 @@ internal sealed class AnalysisForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 20F, FontStyle.Bold),
             ForeColor = text,
-            Text = "Četnost písmen"
+            Text = AppText.Get("AnalysisHeading")
         };
         var totalLetters = frequencies.Sum(item => item.Count);
         var summary = new Label
         {
             AutoSize = true,
             ForeColor = secondary,
-            Text = $"{totalLetters:N0} písmen · {frequencies.Count:N0} různých znaků · graf zobrazuje 12 nejčastějších"
+            Text = AppText.Format("AnalysisSummary", totalLetters, frequencies.Count)
         };
 
         var chart = new FrequencyChartPanel { Dock = DockStyle.Fill, Margin = new Padding(0, 8, 0, 12) };
@@ -77,12 +77,12 @@ internal sealed class AnalysisForm : Form
         grid.DefaultCellStyle.ForeColor = text;
         grid.DefaultCellStyle.SelectionBackColor = palette.AccentPressed;
         grid.DefaultCellStyle.SelectionForeColor = Color.White;
-        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Symbol), HeaderText = "Písmeno" });
-        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Count), HeaderText = "Počet" });
-        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Percentage), HeaderText = "Podíl", DefaultCellStyle = new DataGridViewCellStyle { Format = "0.00' %'" } });
+        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Symbol), HeaderText = AppText.Get("AnalysisLetter") });
+        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Count), HeaderText = AppText.Get("AnalysisCount") });
+        grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = nameof(LetterFrequency.Percentage), HeaderText = AppText.Get("AnalysisShare"), DefaultCellStyle = new DataGridViewCellStyle { Format = "0.00' %'" } });
         grid.DataSource = frequencies.ToList();
 
-        var closeButton = UiStyles.CreateButton("Zavřít", 110, palette, primary: true);
+        var closeButton = UiStyles.CreateButton(AppText.Get("Close"), 110, palette, primary: true);
         closeButton.Anchor = AnchorStyles.Right;
         closeButton.DialogResult = DialogResult.Cancel;
         closeButton.Click += (_, _) => Close();

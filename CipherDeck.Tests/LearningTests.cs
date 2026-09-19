@@ -19,6 +19,7 @@ public sealed class LearningTests
 
         var explanation = CipherExplainer.Explain(cipher, input, encrypt: true, key);
 
+        Assert.Equal(cipher.Id, explanation.CipherId);
         Assert.Equal(cipher.Name, explanation.CipherName);
         Assert.Equal(cipher.Encrypt(input, key), explanation.Result);
         Assert.True(explanation.Steps.Count >= 3);

@@ -20,13 +20,15 @@ Baseline verification completed with a warning-free Release build, formatting ve
 
 Each behavior change has a regression test.
 
-## Remaining work before v0.10
+## Completed after the review
 
 ### Complete localization
 
-Most WinForms labels, messages, tooltips, help text, challenge text, detection explanations, and Learn Mode steps are still hard-coded in Czech. Move them into Czech and English resources, add the language switch, refresh the main form without losing input or keys, and resolve history display names through stable cipher IDs.
+All WinForms labels, messages, tooltips, help text, challenge text, detection explanations, Learn Mode steps, and share cards now use matching Czech and English resources. The persisted `EN/CZ` switch refreshes the main form without losing input or keys, and history display names resolve through stable cipher IDs.
 
-Resource-completeness tests should compare the actual Czech and English resource key sets. A manually maintained list of expected keys can drift as strings are added.
+Resource-completeness tests compare the actual Czech and English resource key sets, avoiding a manually maintained list that could drift.
+
+## Follow-up work for v0.11
 
 ### Keep long operations responsive
 
@@ -52,9 +54,8 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 
 ## Recommended order
 
-1. Finish all Czech and English resources and resource-key validation.
-2. Add the persisted language switch and refresh every open main-window label safely.
-3. Localize history, challenges, detection, Learn Mode, export cards, help, and runtime errors.
-4. Run keyboard, minimum-size, and DPI review in both languages.
-5. Move expensive operations off the UI thread.
-6. Split test boundaries and prepare the v0.11 installer pipeline.
+1. Run keyboard, minimum-size, and DPI review in both languages.
+2. Move expensive operations off the UI thread.
+3. Extract application services from `MainForm`.
+4. Split test boundaries and upgrade the test tooling.
+5. Prepare the v0.11 installer and release automation.

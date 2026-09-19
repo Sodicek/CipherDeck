@@ -21,7 +21,7 @@ internal sealed class ChallengeForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = "CipherDeck · Výzvy";
+        Text = AppText.Get("ChallengeTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(780, 620);
         MinimumSize = new Size(650, 540);
@@ -65,7 +65,7 @@ internal sealed class ChallengeForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 20F, FontStyle.Bold),
             ForeColor = text,
-            Text = "Rozlušti zprávu"
+            Text = AppText.Get("ChallengeHeading")
         };
         _difficulty = new ComboBox
         {
@@ -76,13 +76,13 @@ internal sealed class ChallengeForm : Form
             Width = 190
         };
         _difficulty.Items.AddRange([
-            new DifficultyOption("Lehká", ChallengeDifficulty.Easy),
-            new DifficultyOption("Střední", ChallengeDifficulty.Medium),
-            new DifficultyOption("Těžká", ChallengeDifficulty.Hard)
+            new DifficultyOption(AppText.Get("ChallengeEasy"), ChallengeDifficulty.Easy),
+            new DifficultyOption(AppText.Get("ChallengeMedium"), ChallengeDifficulty.Medium),
+            new DifficultyOption(AppText.Get("ChallengeHard"), ChallengeDifficulty.Hard)
         ]);
         _difficulty.SelectedIndexChanged += (_, _) => NewChallenge();
 
-        var cipherLabel = CreateLabel("ZAŠIFROVANÁ ZPRÁVA", text, bold: true);
+        var cipherLabel = CreateLabel(AppText.Get("ChallengeCipherText"), text, bold: true);
         _cipherText = new RichTextBox
         {
             BackColor = input,
@@ -98,9 +98,9 @@ internal sealed class ChallengeForm : Form
             Dock = DockStyle.Fill,
             ForeColor = secondary,
             Padding = new Padding(0, 12, 0, 0),
-            Text = "Nápověda je zatím skrytá."
+            Text = AppText.Get("ChallengeHintHidden")
         };
-        var answerLabel = CreateLabel("TVŮJ ROZLUŠTĚNÝ TEXT", text, bold: true);
+        var answerLabel = CreateLabel(AppText.Get("ChallengeAnswer"), text, bold: true);
         _answer = new RichTextBox
         {
             BackColor = input,
@@ -109,16 +109,16 @@ internal sealed class ChallengeForm : Form
             Font = new Font("Segoe UI", 12F),
             ForeColor = text
         };
-        _status = new Label { AutoSize = true, ForeColor = secondary, Text = "Zkus najít původní zprávu." };
+        _status = new Label { AutoSize = true, ForeColor = secondary, Text = AppText.Get("ChallengeTry") };
 
         var buttons = new TableLayoutPanel { ColumnCount = 4, Dock = DockStyle.Fill, Padding = new Padding(0, 8, 0, 2), RowCount = 1 };
         for (var column = 0; column < 4; column++)
             buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-        var checkButton = UiStyles.CreateGridButton("Zkontrolovat", palette, primary: true);
-        checkButton.AccessibleDescription = "Zkontrolovat odpověď. Klávesová zkratka Ctrl+Enter.";
-        var hintButton = UiStyles.CreateGridButton("Nápověda", palette);
-        var revealButton = UiStyles.CreateGridButton("Odhalit", palette);
-        var newButton = UiStyles.CreateGridButton("Nová výzva", palette);
+        var checkButton = UiStyles.CreateGridButton(AppText.Get("ChallengeCheck"), palette, primary: true);
+        checkButton.AccessibleDescription = AppText.Get("ChallengeCheckAccessible");
+        var hintButton = UiStyles.CreateGridButton(AppText.Get("ChallengeHint"), palette);
+        var revealButton = UiStyles.CreateGridButton(AppText.Get("ChallengeReveal"), palette);
+        var newButton = UiStyles.CreateGridButton(AppText.Get("ChallengeNew"), palette);
         checkButton.Click += (_, _) => CheckAnswer();
         hintButton.Click += (_, _) => ShowHint();
         revealButton.Click += (_, _) => RevealAnswer();
@@ -150,9 +150,9 @@ internal sealed class ChallengeForm : Form
         _challenge = ChallengeGenerator.Generate(option.Value);
         _cipherText.Text = _challenge.EncryptedText;
         _answer.Clear();
-        _hint.Text = "Nápověda je zatím skrytá.";
+        _hint.Text = AppText.Get("ChallengeHintHidden");
         _status.ForeColor = UiTheme.GetPalette(_darkTheme).Muted;
-        _status.Text = "Zkus najít původní zprávu.";
+        _status.Text = AppText.Get("ChallengeTry");
         _answer.Focus();
     }
 
@@ -164,13 +164,13 @@ internal sealed class ChallengeForm : Form
         var correct = _challenge.IsCorrect(_answer.Text);
         var palette = UiTheme.GetPalette(_darkTheme);
         _status.ForeColor = correct ? palette.Success : palette.Error;
-        _status.Text = correct ? "Správně! Výzva je vyřešená." : "Ještě ne. Zkontroluj pořadí a jednotlivá písmena.";
+        _status.Text = AppText.Get(correct ? "ChallengeCorrect" : "ChallengeIncorrect");
     }
 
     private void ShowHint()
     {
         if (_challenge is not null)
-            _hint.Text = $"NÁPOVĚDA · {_challenge.Hint}";
+            _hint.Text = AppText.Format("ChallengeHintShown", _challenge.Hint);
     }
 
     private void RevealAnswer()
@@ -178,10 +178,10 @@ internal sealed class ChallengeForm : Form
         if (_challenge is null)
             return;
 
-        var key = _challenge.Key?.Number?.ToString() ?? _challenge.Key?.Text ?? "bez klíče";
+        var key = _challenge.Key?.Number?.ToString() ?? _challenge.Key?.Text ?? AppText.Get("ChallengeNoKey");
         _answer.Text = _challenge.PlainText;
         _status.ForeColor = UiTheme.GetPalette(_darkTheme).OutputText;
-        _status.Text = $"Použitá šifra: {_challenge.CipherName} · klíč: {key}";
+        _status.Text = AppText.Format("ChallengeRevealStatus", _challenge.CipherName, key);
     }
 
     private static Label CreateLabel(string text, Color color, bool bold) => new()

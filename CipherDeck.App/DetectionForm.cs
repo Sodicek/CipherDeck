@@ -20,7 +20,7 @@ internal sealed class DetectionForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = "CipherDeck · Odhad šifry";
+        Text = AppText.Get("DetectionTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(780, 560);
         MinimumSize = new Size(650, 480);
@@ -47,13 +47,13 @@ internal sealed class DetectionForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 20F, FontStyle.Bold),
             ForeColor = text,
-            Text = "Pravděpodobný typ šifry"
+            Text = AppText.Get("DetectionHeading")
         };
         var disclaimer = new Label
         {
             AutoSize = true,
             ForeColor = secondary,
-            Text = "Heuristický odhad pro Pozpátku, Atbash a Caesarovu šifru — ne zaručený výsledek."
+            Text = AppText.Get("DetectionDisclaimer")
         };
         _results = new ListBox
         {
@@ -93,8 +93,8 @@ internal sealed class DetectionForm : Form
         };
         buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        var useButton = UiStyles.CreateGridButton("Použít návrh", palette, primary: true);
-        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
+        var useButton = UiStyles.CreateGridButton(AppText.Get("DetectionUse"), palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton(AppText.Get("Close"), palette);
         closeButton.DialogResult = DialogResult.Cancel;
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();

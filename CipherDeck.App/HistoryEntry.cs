@@ -11,5 +11,9 @@ internal sealed record HistoryEntry(
     CipherKey? Key,
     string? CipherId = null)
 {
-    public string DisplayText => $"{Timestamp:HH:mm:ss}  ·  {CipherName}  ·  {(IsEncryption ? "šifrování" : "odšifrování")}";
+    public string DisplayText => AppText.Format(
+        "HistoryDisplay",
+        Timestamp,
+        HistoryStore.ResolveCipher(this)?.Name ?? CipherName,
+        AppText.Get(IsEncryption ? "HistoryEncryption" : "HistoryDecryption"));
 }

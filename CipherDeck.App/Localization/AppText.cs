@@ -1,31 +1,28 @@
+using System.Collections;
 using System.Globalization;
 using System.Resources;
-using System.Collections;
 
-namespace CipherDeck.Core.Localization;
+namespace CipherDeck;
 
-internal static class CoreText
+internal static class AppText
 {
     private static readonly ResourceManager Resources = new(
-        "CipherDeck.Core.Resources.CoreStrings",
-        typeof(CoreText).Assembly);
+        "CipherDeck.Resources.AppStrings",
+        typeof(AppText).Assembly);
 
     public static string Get(string key) => Get(key, CultureInfo.CurrentUICulture);
 
     public static string Format(string key, params object?[] arguments) =>
         string.Format(CultureInfo.CurrentUICulture, Get(key), arguments);
 
-    public static string[] GetList(string key) =>
-        Get(key).Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-
     internal static string Get(string key, CultureInfo culture) =>
         Resources.GetString(key, culture)
-        ?? throw new InvalidOperationException($"Missing localized Core string: {key} ({culture.Name}).");
+        ?? throw new InvalidOperationException($"Missing localized app string: {key} ({culture.Name}).");
 
     internal static IReadOnlySet<string> GetKeys(CultureInfo culture) =>
         Resources.GetResourceSet(culture, true, true)?
             .Cast<DictionaryEntry>()
             .Select(entry => (string)entry.Key)
             .ToHashSet(StringComparer.Ordinal)
-        ?? throw new InvalidOperationException($"Missing Core resource set: {culture.Name}.");
+        ?? throw new InvalidOperationException($"Missing app resource set: {culture.Name}.");
 }

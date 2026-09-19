@@ -66,7 +66,7 @@ internal static class ShareCardRenderer
         using var brandBrush = new SolidBrush(colors.Text);
         using var mutedBrush = new SolidBrush(colors.MutedText);
         graphics.DrawString("CipherDeck", brandFont, brandBrush, 68, 50);
-        graphics.DrawString("CLASSIC CIPHERS · MODERN INTERFACE", taglineFont, mutedBrush, 72, 100);
+        graphics.DrawString(AppText.Get("ShareTagline"), taglineFont, mutedBrush, 72, 100);
 
         var badgeBounds = new RectangleF(920, 60, 210, 44);
         using var badgePath = SmoothButton.CreateRoundedPath(badgeBounds, 22);
@@ -75,7 +75,7 @@ internal static class ShareCardRenderer
         using var badgeFont = new Font("Segoe UI Semibold", 11F);
         using var accentBrush = new SolidBrush(colors.Accent);
         using var badgeFormat = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-        graphics.DrawString("SHARE CARD", badgeFont, accentBrush, badgeBounds, badgeFormat);
+        graphics.DrawString(AppText.Get("ShareBadge"), badgeFont, accentBrush, badgeBounds, badgeFormat);
     }
 
     private static void DrawMessageCard(Graphics graphics, CardColors colors, ShareCardData data)
@@ -115,9 +115,9 @@ internal static class ShareCardRenderer
         using var accentBrush = new SolidBrush(colors.Accent);
         using var mutedBrush = new SolidBrush(colors.MutedText);
 
-        var cipherName = string.IsNullOrWhiteSpace(data.CipherName) ? "Bez vybrané šifry" : data.CipherName.Trim();
+        var cipherName = string.IsNullOrWhiteSpace(data.CipherName) ? AppText.Get("ShareNoCipher") : data.CipherName.Trim();
         graphics.DrawString($"{cipherName}  ·  {data.OperationLabel}", metaFont, accentBrush, 72, 540);
-        graphics.DrawString("Vytvořeno v CipherDecku · klasické šifry jsou určené pro výuku a zábavu", noteFont, mutedBrush, 72, 578);
+        graphics.DrawString(AppText.Get("ShareFooter"), noteFont, mutedBrush, 72, 578);
     }
 
     internal static string PrepareMessage(string text)
@@ -130,7 +130,7 @@ internal static class ShareCardRenderer
     }
 
     private static string NormalizeTitle(string title) => string.IsNullOrWhiteSpace(title)
-        ? "Šifrovaná zpráva"
+        ? AppText.Get("ShareDefaultTitle")
         : title.Trim();
 
     internal static float GetMessageFontSize(string text) =>

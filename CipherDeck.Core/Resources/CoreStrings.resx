@@ -25,4 +25,58 @@
   <data name="SkipDescription" xml:space="preserve"><value>Přečte nejprve každý N-tý znak a potom doplní zbývající sloupce. Funguje s libovolným textem.</value></data>
   <data name="SkipKeyLabel" xml:space="preserve"><value>KROK</value></data>
   <data name="SkipInvalidKey" xml:space="preserve"><value>Krok musí být mezi 2 a 20.</value></data>
+  <data name="ChallengeEasyPhrases" xml:space="preserve"><value>TAJNA ZPRAVA|AHOJ SVETE|NAJDI KLIC|SIFRY BAVI</value></data>
+  <data name="ChallengeMediumPhrases" xml:space="preserve"><value>KAZDA SIFRA MA SVUJ PRINCIP|TRPELIVOST ODEMYKA TAJEMSTVI|ZNAKY SE MOHOU PREMISTIT|DOBRY LUSTITEL HLEDA VZORY</value></data>
+  <data name="ChallengeHardPhrases" xml:space="preserve"><value>NEJCENNEJSI NAPOVEDA BYVA UKRYTA V DETAILU|FREKVENCE PISMEN MUZE PROZRADIT DRUH SIFRY|TAJNY KLIC MUSI ZNAT ODESILATEL I PRIJEMCE|KDYZ SELZE PRVNI NAPAD ZKUS JINY UHEL POHLEDU</value></data>
+  <data name="ChallengeReverseHint" xml:space="preserve"><value>Začni od konce.</value></data>
+  <data name="ChallengeAtbashHint" xml:space="preserve"><value>První písmeno abecedy se páruje s posledním.</value></data>
+  <data name="ChallengeCaesarHint" xml:space="preserve"><value>Každé písmeno je posunuté o {0} míst.</value></data>
+  <data name="ChallengeSkipHint" xml:space="preserve"><value>Text byl rozdělen do {0} sloupců.</value></data>
+  <data name="ChallengeVigenereHint" xml:space="preserve"><value>Opakující se klíč má {0} písmen.</value></data>
+  <data name="ChallengeRailFenceHint" xml:space="preserve"><value>Text běží cikcak přes {0} řádky.</value></data>
+  <data name="DetectionReverseReason" xml:space="preserve"><value>Text přečtený odzadu připomíná přirozený jazyk.</value></data>
+  <data name="DetectionAtbashReason" xml:space="preserve"><value>Zrcadlová abeceda vytváří jazykově pravděpodobný výsledek.</value></data>
+  <data name="DetectionCaesarName" xml:space="preserve"><value>Caesarova šifra · posun {0}</value></data>
+  <data name="DetectionCaesarReason" xml:space="preserve"><value>Nejlépe působí posun abecedy o {0} míst.</value></data>
+  <data name="DetectionTranspositionName" xml:space="preserve"><value>Transpoziční nebo nezašifrovaný text</value></data>
+  <data name="DetectionTranspositionReason" xml:space="preserve"><value>Četnost písmen zůstává zachovaná; změněné může být pouze jejich pořadí.</value></data>
+  <data name="ExplanationEncryptSummary" xml:space="preserve"><value>Jak se vstupní text zašifroval</value></data>
+  <data name="ExplanationDecryptSummary" xml:space="preserve"><value>Jak se vstupní text odšifroval</value></data>
+  <data name="ExplanationResultTitle" xml:space="preserve"><value>Výsledek</value></data>
+  <data name="ExplanationSplitTitle" xml:space="preserve"><value>Rozdělení na znaky</value></data>
+  <data name="ExplanationSplitDetail" xml:space="preserve"><value>Text se rozdělí na uživatelské znaky. Emoji a kombinovaná diakritika zůstávají pohromadě.</value></data>
+  <data name="ExplanationReverseTitle" xml:space="preserve"><value>Obrácení pořadí</value></data>
+  <data name="ExplanationReverseDetail" xml:space="preserve"><value>Znaky se přečtou od posledního k prvnímu.</value></data>
+  <data name="ExplanationComposeTitle" xml:space="preserve"><value>Složení výsledku</value></data>
+  <data name="ExplanationReverseComposeDetail" xml:space="preserve"><value>Obrácené znaky se znovu spojí do jednoho textu.</value></data>
+  <data name="ExplanationShiftTitle" xml:space="preserve"><value>Nastavení posunu</value></data>
+  <data name="ExplanationShiftDetail" xml:space="preserve"><value>Abeceda A–Z se chápe jako kruh; po Z následuje znovu A.</value></data>
+  <data name="ExplanationShiftSnapshot" xml:space="preserve"><value>Posun: {0}</value></data>
+  <data name="ExplanationAtbashTitle" xml:space="preserve"><value>Zrcadlová abeceda</value></data>
+  <data name="ExplanationAtbashDetail" xml:space="preserve"><value>První písmeno se páruje s posledním: A↔Z, B↔Y, C↔X…</value></data>
+  <data name="ExplanationKeyRepeatTitle" xml:space="preserve"><value>Opakování klíče</value></data>
+  <data name="ExplanationKeyRepeatDetail" xml:space="preserve"><value>Klíč se opakuje pouze nad písmeny; mezery a interpunkce jej neposouvají.</value></data>
+  <data name="ExplanationLetterShiftsTitle" xml:space="preserve"><value>Posuny písmen</value></data>
+  <data name="ExplanationKeyAddDetail" xml:space="preserve"><value>Hodnota písmene klíče se přičte.</value></data>
+  <data name="ExplanationKeySubtractDetail" xml:space="preserve"><value>Hodnota písmene klíče se odečte.</value></data>
+  <data name="ExplanationVigenereComposeDetail" xml:space="preserve"><value>Změněná písmena a zachované ostatní znaky se spojí.</value></data>
+  <data name="ExplanationRailRow" xml:space="preserve"><value>Řádek {0}: {1}</value></data>
+  <data name="ExplanationRailPatternTitle" xml:space="preserve"><value>Cikcak vzor</value></data>
+  <data name="ExplanationRailPatternDetail" xml:space="preserve"><value>Text se rozloží do {0} řádků pohybem dolů a nahoru.</value></data>
+  <data name="ExplanationRailReadTitle" xml:space="preserve"><value>Čtení po řádcích</value></data>
+  <data name="ExplanationRailRestoreTitle" xml:space="preserve"><value>Obnovení cikcak pořadí</value></data>
+  <data name="ExplanationRailReadDetail" xml:space="preserve"><value>Jednotlivé řádky se spojí shora dolů.</value></data>
+  <data name="ExplanationRailRestoreDetail" xml:space="preserve"><value>Znaky se vrátí na pozice podle cikcak vzoru.</value></data>
+  <data name="ExplanationTranspositionResultDetail" xml:space="preserve"><value>Transpozice mění pořadí, ale žádný znak nepřidává ani neodebírá.</value></data>
+  <data name="ExplanationSkipSplitTitle" xml:space="preserve"><value>Rozdělení podle kroku</value></data>
+  <data name="ExplanationSkipSplitDetail" xml:space="preserve"><value>Použije se krok {0}. Znaky se rozdělí podle zbytku jejich pozice.</value></data>
+  <data name="ExplanationSkipColumn" xml:space="preserve"><value>Sloupec {0}: {1}</value></data>
+  <data name="ExplanationSkipReadTitle" xml:space="preserve"><value>Čtení sloupců</value></data>
+  <data name="ExplanationSkipRestoreTitle" xml:space="preserve"><value>Vrácení na původní pozice</value></data>
+  <data name="ExplanationSkipReadDetail" xml:space="preserve"><value>Sloupce se přečtou postupně zleva doprava.</value></data>
+  <data name="ExplanationSkipRestoreDetail" xml:space="preserve"><value>Znaky se ze sloupců rozloží zpět na původní pozice.</value></data>
+  <data name="ExplanationSkipResultDetail" xml:space="preserve"><value>Každý vstupní znak se ve výsledku objeví právě jednou.</value></data>
+  <data name="ExplanationChangesTitle" xml:space="preserve"><value>Převod písmen</value></data>
+  <data name="ExplanationChangesDetail" xml:space="preserve"><value>Ukázka změněných písmen; mezery, čísla a interpunkce zůstávají beze změny.</value></data>
+  <data name="ExplanationConvertedResultDetail" xml:space="preserve"><value>Převedené znaky se spojí do výstupního textu.</value></data>
 </root>

@@ -1,5 +1,6 @@
 using System.Text;
 using CipherDeck.Core.Ciphers;
+using CipherDeck.Core.Localization;
 
 namespace CipherDeck.Core.Learning;
 
@@ -19,12 +20,13 @@ public static class CipherExplainer
             VigenereCipher => ExplainVigenere(input, result, key, encrypt),
             RailFenceCipher => ExplainRailFence(input, result, key, encrypt),
             SkipCipher => ExplainSkip(input, result, key, encrypt),
-            _ => [new ExplanationStep("Výsledek", cipher.Description, result)]
+            _ => [new ExplanationStep(CoreText.Get("ExplanationResultTitle"), cipher.Description, result)]
         };
 
         return new CipherExplanation(
+            cipher.Id,
             cipher.Name,
-            encrypt ? "Jak se vstupní text zašifroval" : "Jak se vstupní text odšifroval",
+            CoreText.Get(encrypt ? "ExplanationEncryptSummary" : "ExplanationDecryptSummary"),
             result,
             steps);
     }
@@ -37,9 +39,9 @@ public static class CipherExplainer
 
         return
         [
-            new("Rozdělení na znaky", "Text se rozdělí na uživatelské znaky. Emoji a kombinovaná diakritika zůstávají pohromadě.", indexed),
-            new("Obrácení pořadí", "Znaky se přečtou od posledního k prvnímu.", reversed),
-            new("Složení výsledku", "Obrácené znaky se znovu spojí do jednoho textu.", result)
+            new(CoreText.Get("ExplanationSplitTitle"), CoreText.Get("ExplanationSplitDetail"), indexed),
+            new(CoreText.Get("ExplanationReverseTitle"), CoreText.Get("ExplanationReverseDetail"), reversed),
+            new(CoreText.Get("ExplanationComposeTitle"), CoreText.Get("ExplanationReverseComposeDetail"), result)
         ];
     }
 
@@ -51,7 +53,7 @@ public static class CipherExplainer
             $"{source} → {target}   (posun {(signedShift >= 0 ? "+" : string.Empty)}{signedShift})");
 
         return WithResult(
-            new ExplanationStep("Nastavení posunu", "Abeceda A–Z se chápe jako kruh; po Z následuje znovu A.", $"Posun: {signedShift}"),
+            new ExplanationStep(CoreText.Get("ExplanationShiftTitle"), CoreText.Get("ExplanationShiftDetail"), CoreText.Format("ExplanationShiftSnapshot", signedShift)),
             changes,
             result);
     }
@@ -62,7 +64,7 @@ public static class CipherExplainer
             $"{source} ↔ {target}");
 
         return WithResult(
-            new ExplanationStep("Zrcadlová abeceda", "První písmeno se páruje s posledním: A↔Z, B↔Y, C↔X…", "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nZYXWVUTSRQPONMLKJIHGFEDCBA"),
+            new ExplanationStep(CoreText.Get("ExplanationAtbashTitle"), CoreText.Get("ExplanationAtbashDetail"), "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nZYXWVUTSRQPONMLKJIHGFEDCBA"),
             changes,
             result);
     }
@@ -89,9 +91,9 @@ public static class CipherExplainer
 
         return
         [
-            new("Opakování klíče", "Klíč se opakuje pouze nad písmeny; mezery a interpunkce jej neposouvají.", normalizedKey),
-            new("Posuny písmen", encrypt ? "Hodnota písmene klíče se přičte." : "Hodnota písmene klíče se odečte.", string.Join(Environment.NewLine, details)),
-            new("Složení výsledku", "Změněná písmena a zachované ostatní znaky se spojí.", result)
+            new(CoreText.Get("ExplanationKeyRepeatTitle"), CoreText.Get("ExplanationKeyRepeatDetail"), normalizedKey),
+            new(CoreText.Get("ExplanationLetterShiftsTitle"), CoreText.Get(encrypt ? "ExplanationKeyAddDetail" : "ExplanationKeySubtractDetail"), string.Join(Environment.NewLine, details)),
+            new(CoreText.Get("ExplanationComposeTitle"), CoreText.Get("ExplanationVigenereComposeDetail"), result)
         ];
     }
 
@@ -113,12 +115,12 @@ public static class CipherExplainer
             rail += direction;
         }
 
-        var snapshot = string.Join(Environment.NewLine, rows.Select((row, index) => $"Řádek {index + 1}: {row}"));
+        var snapshot = string.Join(Environment.NewLine, rows.Select((row, index) => CoreText.Format("ExplanationRailRow", index + 1, row)));
         return
         [
-            new("Cikcak vzor", $"Text se rozloží do {railCount} řádků pohybem dolů a nahoru.", snapshot),
-            new(encrypt ? "Čtení po řádcích" : "Obnovení cikcak pořadí", encrypt ? "Jednotlivé řádky se spojí shora dolů." : "Znaky se vrátí na pozice podle cikcak vzoru.", result),
-            new("Výsledek", "Transpozice mění pořadí, ale žádný znak nepřidává ani neodebírá.", result)
+            new(CoreText.Get("ExplanationRailPatternTitle"), CoreText.Format("ExplanationRailPatternDetail", railCount), snapshot),
+            new(CoreText.Get(encrypt ? "ExplanationRailReadTitle" : "ExplanationRailRestoreTitle"), CoreText.Get(encrypt ? "ExplanationRailReadDetail" : "ExplanationRailRestoreDetail"), result),
+            new(CoreText.Get("ExplanationResultTitle"), CoreText.Get("ExplanationTranspositionResultDetail"), result)
         ];
     }
 
@@ -133,9 +135,9 @@ public static class CipherExplainer
 
         return
         [
-            new("Rozdělení podle kroku", $"Použije se krok {step}. Znaky se rozdělí podle zbytku jejich pozice.", string.Join(Environment.NewLine, columns.Select((column, index) => $"Sloupec {index + 1}: {column}"))),
-            new(encrypt ? "Čtení sloupců" : "Vrácení na původní pozice", encrypt ? "Sloupce se přečtou postupně zleva doprava." : "Znaky se ze sloupců rozloží zpět na původní pozice.", result),
-            new("Výsledek", "Každý vstupní znak se ve výsledku objeví právě jednou.", result)
+            new(CoreText.Get("ExplanationSkipSplitTitle"), CoreText.Format("ExplanationSkipSplitDetail", step), string.Join(Environment.NewLine, columns.Select((column, index) => CoreText.Format("ExplanationSkipColumn", index + 1, column)))),
+            new(CoreText.Get(encrypt ? "ExplanationSkipReadTitle" : "ExplanationSkipRestoreTitle"), CoreText.Get(encrypt ? "ExplanationSkipReadDetail" : "ExplanationSkipRestoreDetail"), result),
+            new(CoreText.Get("ExplanationResultTitle"), CoreText.Get("ExplanationSkipResultDetail"), result)
         ];
     }
 
@@ -153,7 +155,7 @@ public static class CipherExplainer
 
         return
         [
-            new ExplanationStep("Převod písmen", "Ukázka změněných písmen; mezery, čísla a interpunkce zůstávají beze změny.", string.Join(Environment.NewLine, lines))
+            new ExplanationStep(CoreText.Get("ExplanationChangesTitle"), CoreText.Get("ExplanationChangesDetail"), string.Join(Environment.NewLine, lines))
         ];
     }
 
@@ -161,7 +163,7 @@ public static class CipherExplainer
         ExplanationStep introduction,
         IReadOnlyList<ExplanationStep> changes,
         string result) =>
-        [introduction, .. changes, new ExplanationStep("Výsledek", "Převedené znaky se spojí do výstupního textu.", result)];
+        [introduction, .. changes, new ExplanationStep(CoreText.Get("ExplanationResultTitle"), CoreText.Get("ExplanationConvertedResultDetail"), result)];
 
     private static bool IsAsciiLetter(char character) =>
         character is >= 'A' and <= 'Z' or >= 'a' and <= 'z';
