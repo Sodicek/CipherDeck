@@ -92,7 +92,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Struktura projektu
 
-- `CipherDeck.App` – desktopové rozhraní CipherDecku,
+- `CipherDeck.App` – desktopové rozhraní a aplikační služby CipherDecku,
 - `CipherDeck.Core` – šifrovací algoritmy nezávislé na UI,
 - `CipherDeck.Core.Tests` – platformně nezávislé testy algoritmů,
 - `CipherDeck.Tests` – Windows testy rozhraní, rendereru a ukládání,
@@ -100,7 +100,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmapa
 
-Další milník je `v1.0.0-rc.1`: instalační balíček, DPI a přístupnost, čistší architektura a oddělené testy. Po jeho ověření bude následovat stabilní `v1.0.0`.
+Další milník je `v1.0.0-rc.1`: instalační balíček a důkladná kontrola DPI, klávesnice a přístupnosti. Po jeho ověření bude následovat stabilní `v1.0.0`.
 
 Podrobný plán je v [ToDo.md](ToDo.md).
 

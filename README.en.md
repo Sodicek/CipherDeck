@@ -92,7 +92,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Project structure
 
-- `CipherDeck.App` – CipherDeck's desktop UI,
+- `CipherDeck.App` – CipherDeck's desktop UI and application services,
 - `CipherDeck.Core` – cipher algorithms, independent of the UI,
 - `CipherDeck.Core.Tests` – platform-independent algorithm tests,
 - `CipherDeck.Tests` – Windows UI, renderer, and persistence tests,
@@ -100,7 +100,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmap
 
-The next milestone is `v1.0.0-rc.1`: an installer package, DPI and accessibility checks, cleaner architecture, and separated test suites. A verified stable `v1.0.0` will follow.
+The next milestone is `v1.0.0-rc.1`: an installer package and thorough DPI, keyboard, and accessibility checks. A verified stable `v1.0.0` will follow.
 
 The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 
