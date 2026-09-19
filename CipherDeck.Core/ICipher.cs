@@ -13,4 +13,20 @@ public interface ICipher
     string DefaultTextKey { get; }
     string Encrypt(string input, CipherKey? key = null);
     string Decrypt(string input, CipherKey? key = null);
+
+    string Encrypt(string input, CipherKey? key, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var result = Encrypt(input, key);
+        cancellationToken.ThrowIfCancellationRequested();
+        return result;
+    }
+
+    string Decrypt(string input, CipherKey? key, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var result = Decrypt(input, key);
+        cancellationToken.ThrowIfCancellationRequested();
+        return result;
+    }
 }

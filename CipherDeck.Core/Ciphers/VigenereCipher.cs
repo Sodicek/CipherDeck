@@ -15,8 +15,10 @@ public sealed class VigenereCipher : ICipher
     public int DefaultNumericKey => 0;
     public string DefaultTextKey => "KLIC";
 
-    public string Encrypt(string input, CipherKey? key = null) => Transform(input, GetShifts(key), decrypt: false);
-    public string Decrypt(string input, CipherKey? key = null) => Transform(input, GetShifts(key), decrypt: true);
+    public string Encrypt(string input, CipherKey? key = null) => Encrypt(input, key, CancellationToken.None);
+    public string Decrypt(string input, CipherKey? key = null) => Decrypt(input, key, CancellationToken.None);
+    public string Encrypt(string input, CipherKey? key, CancellationToken cancellationToken) => Transform(input, GetShifts(key), decrypt: false, cancellationToken);
+    public string Decrypt(string input, CipherKey? key, CancellationToken cancellationToken) => Transform(input, GetShifts(key), decrypt: true, cancellationToken);
 
     private static int[] GetShifts(CipherKey? key)
     {
@@ -35,14 +37,17 @@ public sealed class VigenereCipher : ICipher
             .ToArray();
     }
 
-    private static string Transform(string input, IReadOnlyList<int> shifts, bool decrypt)
+    private static string Transform(string input, IReadOnlyList<int> shifts, bool decrypt, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(input);
         var result = new StringBuilder(input.Length);
         var keyIndex = 0;
 
-        foreach (var character in input)
+        for (var index = 0; index < input.Length; index++)
         {
+            if ((index & 1023) == 0)
+                cancellationToken.ThrowIfCancellationRequested();
+            var character = input[index];
             if (!IsAsciiLetter(character))
             {
                 result.Append(character);

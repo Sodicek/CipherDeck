@@ -87,6 +87,10 @@
   <data name="StatusDarkTheme" xml:space="preserve"><value>Zapnutý tmavý motiv.</value></data>
   <data name="StatusLightTheme" xml:space="preserve"><value>Zapnutý světlý motiv.</value></data>
   <data name="StatusLanguageChanged" xml:space="preserve"><value>Jazyk rozhraní byl změněn na češtinu.</value></data>
+  <data name="StatusWorking" xml:space="preserve"><value>Zpracovávám text…</value></data>
+  <data name="StatusAnalyzing" xml:space="preserve"><value>Počítám četnost písmen…</value></data>
+  <data name="StatusExplaining" xml:space="preserve"><value>Připravuji vysvětlení…</value></data>
+  <data name="StatusDetecting" xml:space="preserve"><value>Hledám pravděpodobnou šifru…</value></data>
   <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Analýza četnosti</value></data>
   <data name="AnalysisHeading" xml:space="preserve"><value>Četnost písmen</value></data>
   <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} písmen · {1:N0} různých znaků · graf zobrazuje 12 nejčastějších</value></data>

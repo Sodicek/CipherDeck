@@ -11,6 +11,7 @@ public partial class MainForm : Form
     private readonly List<HistoryEntry> _history = [];
     private readonly System.Windows.Forms.Timer _previewTimer;
     private readonly AppPreferences _preferences;
+    private readonly LatestOperationRunner _operations = new();
     private bool _darkTheme;
     private bool _changingLanguage;
 
@@ -29,7 +30,11 @@ public partial class MainForm : Form
 
         _history.AddRange(HistoryStore.Load().Take(30));
         _previewTimer.Tick += PreviewTimer_Tick;
-        FormClosed += (_, _) => _previewTimer.Dispose();
+        FormClosed += (_, _) =>
+        {
+            _previewTimer.Dispose();
+            _operations.Dispose();
+        };
         cipherSelector.SelectedIndex = FindSavedCipherIndex();
         encryptMode.Checked = true;
         ApplyLocalization();
@@ -74,10 +79,23 @@ public partial class MainForm : Form
             SchedulePreview();
     }
 
-    private void TransformButton_Click(object? sender, EventArgs e) => PerformTransform(addToHistory: true, showEmptyError: true);
-
-    private bool PerformTransform(bool addToHistory, bool showEmptyError)
+    private async void TransformButton_Click(object? sender, EventArgs e)
     {
+        transformButton.Enabled = false;
+        try
+        {
+            await PerformTransformAsync(addToHistory: true, showEmptyError: true);
+        }
+        finally
+        {
+            if (!IsDisposed)
+                transformButton.Enabled = true;
+        }
+    }
+
+    private async Task<bool> PerformTransformAsync(bool addToHistory, bool showEmptyError)
+    {
+        _operations.Cancel();
         if (SelectedCipher is not { } cipher)
         {
             if (showEmptyError)
@@ -93,59 +111,81 @@ public partial class MainForm : Form
                 SetError(AppText.Get("ErrorEnterText"));
                 inputText.Focus();
             }
+            else
+            {
+                SetReadyStatus();
+            }
             return false;
         }
 
-        try
+        var key = GetCurrentKey(cipher);
+        var isEncryption = encryptMode.Checked;
+        var input = inputText.Text;
+        if (addToHistory)
+            SetWorking(AppText.Get("StatusWorking"));
+
+        var operation = await _operations.RunAsync(cancellationToken =>
         {
-            var key = GetCurrentKey(cipher);
-            var isEncryption = encryptMode.Checked;
-            var result = isEncryption
-                ? cipher.Encrypt(inputText.Text, key)
-                : cipher.Decrypt(inputText.Text, key);
-            outputText.Text = result;
-
-            if (addToHistory)
+            try
             {
-                var entry = new HistoryEntry(
-                    DateTime.Now,
-                    cipher.Name,
-                    isEncryption,
-                    inputText.Text,
-                    result,
-                    key,
-                    cipher.Id);
-
-                if (!HistoryStore.CanStore(entry))
-                {
-                    SetWarning(AppText.Get("WarningHistoryTooLong"));
-                    return true;
-                }
-
-                _history.Insert(0, entry);
-
-                if (_history.Count > 30)
-                    _history.RemoveAt(_history.Count - 1);
-                UpdateHistoryButton();
-
-                if (!HistoryStore.Save(_history))
-                {
-                    SetWarning(AppText.Get("WarningHistorySave"));
-                    return true;
-                }
+                var result = isEncryption
+                    ? cipher.Encrypt(input, key, cancellationToken)
+                    : cipher.Decrypt(input, key, cancellationToken);
+                return new TransformComputation(result, null);
             }
+            catch (ArgumentException exception)
+            {
+                return new TransformComputation(null, exception.Message);
+            }
+        });
 
-            SetSuccess(addToHistory
-                ? AppText.Format(isEncryption ? "StatusEncrypted" : "StatusDecrypted", cipher.Name)
-                : AppText.Format("StatusLivePreview", cipher.Name));
-            return true;
-        }
-        catch (ArgumentException exception)
+        if (!operation.IsCurrent || IsDisposed)
+            return false;
+
+        if (operation.Value.ErrorMessage is { } errorMessage)
         {
             outputText.Clear();
-            SetError(exception.Message);
+            SetError(errorMessage);
             return false;
         }
+
+        var result = operation.Value.Result!;
+        outputText.Text = result;
+
+        if (addToHistory)
+        {
+            var entry = new HistoryEntry(
+                DateTime.Now,
+                cipher.Name,
+                isEncryption,
+                input,
+                result,
+                key,
+                cipher.Id);
+
+            if (!HistoryStore.CanStore(entry))
+            {
+                SetWarning(AppText.Get("WarningHistoryTooLong"));
+                return true;
+            }
+
+            _history.Insert(0, entry);
+
+            if (_history.Count > 30)
+                _history.RemoveAt(_history.Count - 1);
+            UpdateHistoryButton();
+
+            if (!HistoryStore.Save(_history))
+            {
+                SetWarning(AppText.Get("WarningHistorySave"));
+                return true;
+            }
+        }
+
+        SetSuccess(addToHistory
+            ? AppText.Format(isEncryption ? "StatusEncrypted" : "StatusDecrypted", cipher.Name)
+            : AppText.Format("StatusLivePreview", cipher.Name));
+        return true;
     }
 
     private CipherKey? GetCurrentKey(ICipher cipher) => cipher.KeyType switch
@@ -195,6 +235,7 @@ public partial class MainForm : Form
     private void ClearButton_Click(object? sender, EventArgs e)
     {
         _previewTimer.Stop();
+        _operations.Cancel();
         inputText.Clear();
         outputText.Clear();
         SetSuccess(AppText.Get("StatusCleared"));
@@ -298,27 +339,62 @@ public partial class MainForm : Form
         aboutForm.ShowDialog(this);
     }
 
-    private void AnalysisButton_Click(object? sender, EventArgs e)
+    private async void AnalysisButton_Click(object? sender, EventArgs e)
     {
         var textToAnalyze = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
-        if (FrequencyAnalyzer.AnalyzeLetters(textToAnalyze).Count == 0)
+        SetWorking(AppText.Get("StatusAnalyzing"));
+        analysisButton.Enabled = false;
+        LatestOperationResult<IReadOnlyList<LetterFrequency>> operation;
+        try
+        {
+            operation = await _operations.RunAsync(cancellationToken =>
+                FrequencyAnalyzer.AnalyzeLetters(textToAnalyze, cancellationToken));
+        }
+        finally
+        {
+            if (!IsDisposed)
+                analysisButton.Enabled = true;
+        }
+
+        if (!operation.IsCurrent || IsDisposed)
+            return;
+
+        if (operation.Value.Count == 0)
         {
             SetError(AppText.Get("ErrorAnalysisNeedsLetters"));
             return;
         }
 
-        using var analysisForm = new AnalysisForm(textToAnalyze, _darkTheme);
+        using var analysisForm = new AnalysisForm(operation.Value, _darkTheme);
         analysisForm.ShowDialog(this);
     }
 
-    private void ExplainButton_Click(object? sender, EventArgs e)
+    private async void ExplainButton_Click(object? sender, EventArgs e)
     {
-        if (SelectedCipher is not { } cipher || !PerformTransform(addToHistory: false, showEmptyError: true))
-            return;
+        explainButton.Enabled = false;
+        try
+        {
+            if (!await PerformTransformAsync(addToHistory: false, showEmptyError: true) ||
+                SelectedCipher is not { } cipher)
+                return;
 
-        var explanation = CipherExplainer.Explain(cipher, inputText.Text, encryptMode.Checked, GetCurrentKey(cipher));
-        using var explanationForm = new ExplanationForm(explanation, _darkTheme);
-        explanationForm.ShowDialog(this);
+            var input = inputText.Text;
+            var encrypt = encryptMode.Checked;
+            var key = GetCurrentKey(cipher);
+            SetWorking(AppText.Get("StatusExplaining"));
+            var operation = await _operations.RunAsync(cancellationToken =>
+                CipherExplainer.Explain(cipher, input, encrypt, key, cancellationToken));
+            if (!operation.IsCurrent || IsDisposed)
+                return;
+
+            using var explanationForm = new ExplanationForm(operation.Value, _darkTheme);
+            explanationForm.ShowDialog(this);
+        }
+        finally
+        {
+            if (!IsDisposed)
+                explainButton.Enabled = true;
+        }
     }
 
     private void ChallengeButton_Click(object? sender, EventArgs e)
@@ -327,16 +403,33 @@ public partial class MainForm : Form
         challengeForm.ShowDialog(this);
     }
 
-    private void DetectButton_Click(object? sender, EventArgs e)
+    private async void DetectButton_Click(object? sender, EventArgs e)
     {
         var textToDetect = string.IsNullOrEmpty(outputText.Text) ? inputText.Text : outputText.Text;
-        if (CipherDetector.Detect(textToDetect).Count == 0)
+        SetWorking(AppText.Get("StatusDetecting"));
+        detectButton.Enabled = false;
+        LatestOperationResult<IReadOnlyList<CipherDetection>> operation;
+        try
+        {
+            operation = await _operations.RunAsync(cancellationToken =>
+                CipherDetector.Detect(textToDetect, cancellationToken));
+        }
+        finally
+        {
+            if (!IsDisposed)
+                detectButton.Enabled = true;
+        }
+
+        if (!operation.IsCurrent || IsDisposed)
+            return;
+
+        if (operation.Value.Count == 0)
         {
             SetError(AppText.Get("ErrorDetectionNeedsLetters"));
             return;
         }
 
-        using var detectionForm = new DetectionForm(textToDetect, _darkTheme);
+        using var detectionForm = new DetectionForm(operation.Value, _darkTheme);
         if (detectionForm.ShowDialog(this) != DialogResult.OK || detectionForm.SelectedDetection is not { } detection)
             return;
 
@@ -373,6 +466,7 @@ public partial class MainForm : Form
         var textKey = textKeyInput.Text;
 
         _previewTimer.Stop();
+        _operations.Cancel();
         _preferences.LanguageCode = AppLanguage.Normalize(_preferences.LanguageCode) == AppLanguage.Czech
             ? AppLanguage.English
             : AppLanguage.Czech;
@@ -404,7 +498,11 @@ public partial class MainForm : Form
         if (livePreview.Checked)
             SchedulePreview();
         else
+        {
             _previewTimer.Stop();
+            _operations.Cancel();
+            SetReadyStatus();
+        }
     }
 
     private void PreviewSettingChanged(object? sender, EventArgs e) => SchedulePreview();
@@ -417,17 +515,21 @@ public partial class MainForm : Form
 
     private void SchedulePreview()
     {
-        if (!livePreview.Checked)
-            return;
-
         _previewTimer.Stop();
+        _operations.Cancel();
+        if (!livePreview.Checked)
+        {
+            SetReadyStatus();
+            return;
+        }
+
         _previewTimer.Start();
     }
 
-    private void PreviewTimer_Tick(object? sender, EventArgs e)
+    private async void PreviewTimer_Tick(object? sender, EventArgs e)
     {
         _previewTimer.Stop();
-        PerformTransform(addToHistory: false, showEmptyError: false);
+        await PerformTransformAsync(addToHistory: false, showEmptyError: false);
     }
 
     private void MainForm_KeyDown(object? sender, KeyEventArgs e)
@@ -596,4 +698,20 @@ public partial class MainForm : Form
         statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Accent;
         statusLabel.Text = message;
     }
+
+    private void SetWorking(string message)
+    {
+        statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Muted;
+        statusLabel.Text = message;
+    }
+
+    private void SetReadyStatus()
+    {
+        statusLabel.ForeColor = UiTheme.GetPalette(_darkTheme).Success;
+        statusLabel.Text = SelectedCipher is { } cipher
+            ? AppText.Format("MainReadyCipher", cipher.Name)
+            : AppText.Get("MainSelectCipher");
+    }
+
+    private sealed record TransformComputation(string? Result, string? ErrorMessage);
 }

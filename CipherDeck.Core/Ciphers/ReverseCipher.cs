@@ -15,16 +15,20 @@ public sealed class ReverseCipher : ICipher
     public int DefaultNumericKey => 0;
     public string DefaultTextKey => string.Empty;
 
-    public string Encrypt(string input, CipherKey? key = null) => Reverse(input);
-    public string Decrypt(string input, CipherKey? key = null) => Reverse(input);
+    public string Encrypt(string input, CipherKey? key = null) => Encrypt(input, key, CancellationToken.None);
+    public string Decrypt(string input, CipherKey? key = null) => Decrypt(input, key, CancellationToken.None);
+    public string Encrypt(string input, CipherKey? key, CancellationToken cancellationToken) => Reverse(input, cancellationToken);
+    public string Decrypt(string input, CipherKey? key, CancellationToken cancellationToken) => Reverse(input, cancellationToken);
 
-    private static string Reverse(string input)
+    private static string Reverse(string input, CancellationToken cancellationToken)
     {
-        var elements = TextElementUtility.Split(input);
+        var elements = TextElementUtility.Split(input, cancellationToken);
 
         var result = new StringBuilder(input.Length);
         for (var index = elements.Length - 1; index >= 0; index--)
         {
+            if ((index & 1023) == 0)
+                cancellationToken.ThrowIfCancellationRequested();
             result.Append(elements[index]);
         }
 
