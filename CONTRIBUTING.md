@@ -31,6 +31,8 @@ Explain the problem, resulting behavior, and verification in the PR description.
 
 Keep release notes in `docs/releases/<version>.md`. Use real newlines and blank lines before lists. Publish Markdown from files with `gh release create --notes-file` or `gh release edit --notes-file`. For PR descriptions, use `gh pr create --body-file` or `gh pr edit --body-file`.
 
+Build the portable ZIP, Windows MSI, and checksums together with `./scripts/Build-ReleasePackages.ps1 -Version <version>`. Keep the WiX license text synchronized with `LICENSE` when the license changes.
+
 Do not pass multiline prose as a shell argument containing literal `\n`. After publishing, read back the body and confirm its formatting, version, download asset, and checksum.
 
 Documentation-only changes do not require an application version bump or a new binary release.

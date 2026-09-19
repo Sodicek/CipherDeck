@@ -84,16 +84,19 @@ dotnet run --project CipherDeck.App/CipherDeck.App.csproj
 dotnet test CipherDeck.sln
 ```
 
-## Vytvoření samostatné Windows aplikace
+## Vytvoření release balíčků
 
 ```powershell
-dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
+./scripts/Build-ReleasePackages.ps1
 ```
+
+Skript vytvoří self-contained portable ZIP, x64 MSI instalátor a společný soubor s SHA-256 součty v `artifacts/release/v<verze>`. Verzi lze zadat například pomocí `-Version 1.0.0-rc.1`; bez parametru se použije verze aplikace.
 
 ## Struktura projektu
 
 - `CipherDeck.App` – desktopové rozhraní a aplikační služby CipherDecku,
 - `CipherDeck.Core` – šifrovací algoritmy nezávislé na UI,
+- `CipherDeck.Setup` – WiX projekt pro Windows MSI instalátor,
 - `CipherDeck.Core.Tests` – platformně nezávislé testy algoritmů,
 - `CipherDeck.Tests` – Windows testy rozhraní, rendereru a ukládání,
 - `ToDo.md` – roadmapa dalších verzí.
