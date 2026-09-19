@@ -23,7 +23,7 @@ internal static class CoreText
         ?? throw new InvalidOperationException($"Missing localized Core string: {key} ({culture.Name}).");
 
     internal static IReadOnlySet<string> GetKeys(CultureInfo culture) =>
-        Resources.GetResourceSet(culture, true, false)?
+        Resources.GetResourceSet(culture, true, true)?
             .Cast<DictionaryEntry>()
             .Select(entry => (string)entry.Key)
             .ToHashSet(StringComparer.Ordinal)
