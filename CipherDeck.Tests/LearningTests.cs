@@ -42,6 +42,32 @@ public sealed class LearningTests
         Assert.Contains(explanation.Steps, step => step.Snapshot.Contains("A  +  L"));
     }
 
+    [Fact]
+    public void RailFenceDecryptionExplanationBuildsRowsFromRestoredText()
+    {
+        var explanation = CipherExplainer.Explain(
+            new RailFenceCipher(),
+            "HLOEL",
+            encrypt: false,
+            new CipherKey(Number: 2));
+
+        Assert.Equal("HELLO", explanation.Result);
+        Assert.Contains(explanation.Steps, step => step.Snapshot.Contains("H L O", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void SkipDecryptionExplanationBuildsColumnsFromRestoredText()
+    {
+        var explanation = CipherExplainer.Explain(
+            new SkipCipher(),
+            "ADGBECF",
+            encrypt: false,
+            new CipherKey(Number: 3));
+
+        Assert.Equal("ABCDEFG", explanation.Result);
+        Assert.Contains(explanation.Steps, step => step.Snapshot.Contains("ADG", StringComparison.Ordinal));
+    }
+
     [Theory]
     [InlineData(1)]
     [InlineData(20)]

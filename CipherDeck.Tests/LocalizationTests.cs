@@ -64,6 +64,17 @@ public sealed class LocalizationTests
         Assert.Equal(CipherIds.Vigenere, CipherCatalog.FindByName("Vigenèrova šifra")?.Id);
     }
 
+    [Theory]
+    [InlineData(null, AppLanguage.Czech)]
+    [InlineData("de", AppLanguage.Czech)]
+    [InlineData("CS", AppLanguage.Czech)]
+    [InlineData("en", AppLanguage.English)]
+    [InlineData("EN", AppLanguage.English)]
+    public void AppLanguageNormalizesSupportedLanguageCodes(string? input, string expected)
+    {
+        Assert.Equal(expected, AppLanguage.Normalize(input));
+    }
+
     private sealed class TemporaryUiCulture : IDisposable
     {
         private readonly CultureInfo _original = CultureInfo.CurrentUICulture;

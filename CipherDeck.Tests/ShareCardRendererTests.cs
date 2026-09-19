@@ -50,4 +50,15 @@ public sealed class ShareCardRendererTests
 
         Assert.Equal(string.Concat(Enumerable.Repeat("🔐", 697)) + "…", prepared);
     }
+
+    [Fact]
+    public void MessageFontSizeCountsUnicodeTextElementsInsteadOfUtf16Units()
+    {
+        var asciiText = new string('A', 55);
+        var emojiText = string.Concat(Enumerable.Repeat("🔐", 55));
+
+        Assert.Equal(
+            ShareCardRenderer.GetMessageFontSize(asciiText),
+            ShareCardRenderer.GetMessageFontSize(emojiText));
+    }
 }

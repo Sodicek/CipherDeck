@@ -48,6 +48,7 @@ public static class ChallengeGenerator
             difficulty,
             plainText,
             encrypted,
+            cipher.Id,
             cipher.Name,
             key,
             CreateHint(cipher, key));

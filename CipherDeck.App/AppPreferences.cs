@@ -12,6 +12,8 @@ internal sealed class AppPreferences
 
     public bool DarkTheme { get; set; } = true;
 
+    public string LanguageCode { get; set; } = AppLanguage.Czech;
+
     public string? SelectedCipherName { get; set; }
 
     public string? SelectedCipherId { get; set; }

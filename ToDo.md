@@ -11,15 +11,22 @@ Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené 
 ### v0.10 — Bilingual Edition
 
 - [x] Přejmenovat hlavní formulář na `MainForm` a ověřit související odkazy.
+- [x] Zavést stabilní identifikátory šifer a migraci staré historie i nastavení.
+- [x] Přesunout názvy, popisy, klíče a validační chyby šifer do českých a anglických resources.
+- [x] Zavést validovanou a ukládanou jazykovou předvolbu s českým výchozím nastavením.
 - [ ] Přesunout texty rozhraní do lokalizačních souborů.
 - [ ] Doplnit češtinu a angličtinu včetně nápovědy, chyb a exportních kartiček.
 - [ ] Přidat přepínač jazyka a uložit volbu do nastavení.
-- [ ] Zachovat kompatibilitu historie při změně jazyka; nepoužívat přeložený název jako identifikátor šifry.
+- [x] Zachovat kompatibilitu historie při změně jazyka; nepoužívat přeložený název jako identifikátor šifry.
 - [ ] Ověřit úplnost překladů a správné chování přepínání jazyka.
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
 
 ### v0.11 — Release Candidate
 
+- [ ] Přesunout náročné operace mimo UI vlákno a rušit zastaralý živý náhled.
+- [ ] Oddělit platformně nezávislé Core testy od Windows UI a renderer testů.
+- [ ] Rozdělit koordinaci transformací, historie a souborů z `MainForm` do aplikačních služeb.
+- [ ] Aktualizovat testovací SDK a xUnit runner jako samostatnou tooling změnu.
 - [ ] Připravit Windows instalátor vedle portable ZIPu.
 - [ ] Ověřit instalaci, aktualizaci a odinstalaci v čistém prostředí.
 - [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
@@ -32,6 +39,8 @@ Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené 
 - [ ] Vydat ověřený instalátor a portable balíček se seznamem změn.
 
 Každý bod dokončovat samostatně na pracovní branchi a rozdělit do logických commitů podle [CONTRIBUTING.md](CONTRIBUTING.md). Níže je historický přehled dokončených funkcí a zbývajících kontrol.
+
+Podrobné nálezy a doporučené pořadí refaktoringu jsou v [code review pro v0.10](docs/code-review-v0.10.md).
 
 ## Vize
 
