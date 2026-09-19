@@ -6,14 +6,14 @@ using System.Text;
 
 namespace CipherDeck;
 
-public partial class Form1 : Form
+public partial class MainForm : Form
 {
     private readonly List<HistoryEntry> _history = [];
     private readonly System.Windows.Forms.Timer _previewTimer;
     private readonly AppPreferences _preferences;
     private bool _darkTheme;
 
-    public Form1()
+    public MainForm()
     {
         _preferences = AppPreferences.Load();
         _darkTheme = _preferences.DarkTheme;
@@ -393,7 +393,7 @@ public partial class Form1 : Form
         PerformTransform(addToHistory: false, showEmptyError: false);
     }
 
-    private void Form1_KeyDown(object? sender, KeyEventArgs e)
+    private void MainForm_KeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Control && e.KeyCode == Keys.Enter)
         {
@@ -416,7 +416,7 @@ public partial class Form1 : Form
 
     private void LoadApplicationIcon()
     {
-        using var stream = typeof(Form1).Assembly.GetManifestResourceStream("CipherDeck.AppIcon.ico");
+        using var stream = typeof(MainForm).Assembly.GetManifestResourceStream("CipherDeck.AppIcon.ico");
         if (stream is null)
             return;
 

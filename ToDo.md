@@ -10,7 +10,7 @@ Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené 
 
 ### v0.10 — Bilingual Edition
 
-- [ ] Přejmenovat hlavní formulář `Form1` na `MainForm` a ověřit související odkazy.
+- [x] Přejmenovat hlavní formulář na `MainForm` a ověřit související odkazy.
 - [ ] Přesunout texty rozhraní do lokalizačních souborů.
 - [ ] Doplnit češtinu a angličtinu včetně nápovědy, chyb a exportních kartiček.
 - [ ] Přidat přepínač jazyka a uložit volbu do nastavení.
@@ -72,7 +72,7 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 
 - [x] Převést projekt z .NET Framework 4.7.2 na aktuální podporovanou verzi .NET.
 - [x] Zapnout nullable reference types a analyzátory kódu.
-- [ ] Používat konzistentní anglické názvy tříd, metod a souborů.
+- [x] Používat konzistentní anglické názvy tříd, metod a souborů.
 - [x] Rozdělit projekt na vrstvy `UI`, `Core` a `Tests`.
 - [x] Odstranit nepoužívané importy, proměnné a prázdné metody.
 - [x] Přidat logo a ikonu aplikace.
