@@ -1,14 +1,15 @@
 using System.Text;
+using CipherDeck.Core.Localization;
 
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class VigenereCipher : ICipher
 {
     public string Id => CipherIds.Vigenere;
-    public string Name => "Vigenèrova šifra";
-    public string Description => "Posouvá písmena podle opakujícího se textového klíče. Používá latinská písmena A–Z.";
+    public string Name => CoreText.Get("VigenereName");
+    public string Description => CoreText.Get("VigenereDescription");
     public CipherKeyType KeyType => CipherKeyType.Text;
-    public string KeyLabel => "KLÍČ";
+    public string KeyLabel => CoreText.Get("VigenereKeyLabel");
     public int MinimumNumericKey => 0;
     public int MaximumNumericKey => 0;
     public int DefaultNumericKey => 0;
@@ -24,10 +25,10 @@ public sealed class VigenereCipher : ICipher
             .ToArray());
 
         if (normalizedKey.Length == 0)
-            throw new ArgumentException("Vigenèrova šifra vyžaduje textový klíč.", nameof(key));
+            throw new ArgumentException(CoreText.Get("VigenereMissingKey"), nameof(key));
 
         if (normalizedKey.Any(character => !IsAsciiLetter(character)))
-            throw new ArgumentException("Klíč může obsahovat pouze písmena A–Z a mezery.", nameof(key));
+            throw new ArgumentException(CoreText.Get("VigenereInvalidKey"), nameof(key));
 
         return normalizedKey
             .Select(character => char.ToUpperInvariant(character) - 'A')

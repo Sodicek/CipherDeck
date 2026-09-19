@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="ReverseName" xml:space="preserve"><value>Reverse</value></data>
+  <data name="ReverseDescription" xml:space="preserve"><value>Reverses the order of text elements while preserving spaces, punctuation, and Unicode characters.</value></data>
+  <data name="CaesarName" xml:space="preserve"><value>Caesar cipher</value></data>
+  <data name="CaesarDescription" xml:space="preserve"><value>Shifts letters A–Z by the selected amount and leaves all other characters unchanged.</value></data>
+  <data name="CaesarKeyLabel" xml:space="preserve"><value>SHIFT</value></data>
+  <data name="CaesarMissingKey" xml:space="preserve"><value>The Caesar cipher requires a numeric shift.</value></data>
+  <data name="AtbashName" xml:space="preserve"><value>Atbash</value></data>
+  <data name="AtbashDescription" xml:space="preserve"><value>Replaces A with Z, B with Y, and so on. The same operation encrypts and decrypts the text.</value></data>
+  <data name="VigenereName" xml:space="preserve"><value>Vigenère cipher</value></data>
+  <data name="VigenereDescription" xml:space="preserve"><value>Shifts letters using a repeating text key. It operates on Latin letters A–Z.</value></data>
+  <data name="VigenereKeyLabel" xml:space="preserve"><value>KEY</value></data>
+  <data name="VigenereMissingKey" xml:space="preserve"><value>The Vigenère cipher requires a text key.</value></data>
+  <data name="VigenereInvalidKey" xml:space="preserve"><value>The key may contain only letters A–Z and spaces.</value></data>
+  <data name="RailFenceName" xml:space="preserve"><value>Rail Fence</value></data>
+  <data name="RailFenceDescription" xml:space="preserve"><value>Writes the text in a zigzag across several rails, then reads it one rail at a time.</value></data>
+  <data name="RailFenceKeyLabel" xml:space="preserve"><value>RAILS</value></data>
+  <data name="RailFenceInvalidKey" xml:space="preserve"><value>The number of rails must be between 2 and 20.</value></data>
+  <data name="SkipName" xml:space="preserve"><value>Skip transposition</value></data>
+  <data name="SkipDescription" xml:space="preserve"><value>Reads every Nth character first, then appends the remaining columns. It works with any text.</value></data>
+  <data name="SkipKeyLabel" xml:space="preserve"><value>STEP</value></data>
+  <data name="SkipInvalidKey" xml:space="preserve"><value>The step must be between 2 and 20.</value></data>
+</root>

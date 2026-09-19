@@ -1,14 +1,15 @@
 using System.Text;
+using CipherDeck.Core.Localization;
 
 namespace CipherDeck.Core.Ciphers;
 
 public sealed class SkipCipher : ICipher
 {
     public string Id => CipherIds.Skip;
-    public string Name => "Přeskakování";
-    public string Description => "Přečte nejprve každý N-tý znak a potom doplní zbývající sloupce. Funguje s libovolným textem.";
+    public string Name => CoreText.Get("SkipName");
+    public string Description => CoreText.Get("SkipDescription");
     public CipherKeyType KeyType => CipherKeyType.Number;
-    public string KeyLabel => "KROK";
+    public string KeyLabel => CoreText.Get("SkipKeyLabel");
     public int MinimumNumericKey => 2;
     public int MaximumNumericKey => 20;
     public int DefaultNumericKey => 3;
@@ -42,7 +43,7 @@ public sealed class SkipCipher : ICipher
     private static int GetStep(CipherKey? key)
     {
         if (key?.Number is not { } step || step is < 2 or > 20)
-            throw new ArgumentException("Krok musí být mezi 2 a 20.", nameof(key));
+            throw new ArgumentException(CoreText.Get("SkipInvalidKey"), nameof(key));
         return step;
     }
 
