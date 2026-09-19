@@ -16,6 +16,7 @@ public partial class MainForm : Form
     public MainForm()
     {
         _preferences = AppPreferences.Load();
+        AppLanguage.Apply(_preferences.LanguageCode);
         _darkTheme = _preferences.DarkTheme;
         _previewTimer = new System.Windows.Forms.Timer { Interval = 280 };
 
