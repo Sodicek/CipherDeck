@@ -36,11 +36,13 @@ Encryption, frequency analysis, Learn Mode, and cipher detection now run outside
 
 Platform-independent cipher, analysis, challenge, detection, learning, localization, and cancellation tests now live in `CipherDeck.Core.Tests` targeting plain `net8.0`. Windows UI, renderer, persistence, and application-localization tests remain in `CipherDeck.Tests`. CI runs the Core suite independently on Linux and the full desktop solution on Windows.
 
+### Separate application services from the main form
+
+Transformation sessions, cancellation, history mutations, persistence coordination, and bounded UTF-8 imports now live in focused application services. `MainForm` presents their results and coordinates controls instead of implementing those workflows directly. Service-level tests cover successful transformations, validation failures, history limits and save failures, and text-file import boundaries.
+
 ## Follow-up work for v1.0.0-rc.1
 
-### Separate UI coordination from controls
-
-`MainForm` currently coordinates transformation, history, settings, import, export, analysis, detection, theming, and status messages. Extract application services for transformation sessions, history, and text-file I/O. Keep the form responsible for presenting state and handling controls.
+### Reuse secondary-form layout carefully
 
 Several secondary forms repeat layout and dialog-button setup. Small shared helpers can reduce duplication, but only after localization makes the common patterns clear.
 
@@ -57,6 +59,5 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 ## Recommended order
 
 1. Run keyboard, minimum-size, and DPI review in both languages.
-2. Extract application services from `MainForm`.
-3. Upgrade the test tooling.
-4. Prepare the v1.0.0-rc.1 installer and release automation.
+2. Upgrade the test tooling.
+3. Prepare the v1.0.0-rc.1 installer and release automation.

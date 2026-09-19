@@ -1,17 +1,16 @@
 using CipherDeck.Core;
 using CipherDeck.Core.Analysis;
 using CipherDeck.Core.Detection;
-using CipherDeck.Core.Learning;
-using System.Text;
 
 namespace CipherDeck;
 
 public partial class MainForm : Form
 {
-    private readonly List<HistoryEntry> _history = [];
     private readonly System.Windows.Forms.Timer _previewTimer;
     private readonly AppPreferences _preferences;
-    private readonly LatestOperationRunner _operations = new();
+    private readonly TransformationSessionService _transformationSession = new();
+    private readonly HistoryService _history = new();
+    private readonly TextFileService _textFiles = new();
     private bool _darkTheme;
     private bool _changingLanguage;
 
@@ -28,12 +27,11 @@ public partial class MainForm : Form
         foreach (var cipher in CipherCatalog.All)
             cipherSelector.Items.Add(cipher);
 
-        _history.AddRange(HistoryStore.Load().Take(30));
         _previewTimer.Tick += PreviewTimer_Tick;
         FormClosed += (_, _) =>
         {
             _previewTimer.Dispose();
-            _operations.Dispose();
+            _transformationSession.Dispose();
         };
         cipherSelector.SelectedIndex = FindSavedCipherIndex();
         encryptMode.Checked = true;
@@ -95,7 +93,7 @@ public partial class MainForm : Form
 
     private async Task<bool> PerformTransformAsync(bool addToHistory, bool showEmptyError)
     {
-        _operations.Cancel();
+        _transformationSession.Cancel();
         if (SelectedCipher is not { } cipher)
         {
             if (showEmptyError)
@@ -124,20 +122,8 @@ public partial class MainForm : Form
         if (addToHistory)
             SetWorking(AppText.Get("StatusWorking"));
 
-        var operation = await _operations.RunAsync(cancellationToken =>
-        {
-            try
-            {
-                var result = isEncryption
-                    ? cipher.Encrypt(input, key, cancellationToken)
-                    : cipher.Decrypt(input, key, cancellationToken);
-                return new TransformComputation(result, null);
-            }
-            catch (ArgumentException exception)
-            {
-                return new TransformComputation(null, exception.Message);
-            }
-        });
+        var operation = await _transformationSession.TransformAsync(
+            new TransformationRequest(cipher, input, key, isEncryption));
 
         if (!operation.IsCurrent || IsDisposed)
             return false;
@@ -149,7 +135,7 @@ public partial class MainForm : Form
             return false;
         }
 
-        var result = operation.Value.Result!;
+        var result = operation.Value.Output!;
         outputText.Text = result;
 
         if (addToHistory)
@@ -163,19 +149,15 @@ public partial class MainForm : Form
                 key,
                 cipher.Id);
 
-            if (!HistoryStore.CanStore(entry))
+            var historyResult = _history.Add(entry);
+            if (historyResult == HistoryAddResult.EntryTooLarge)
             {
                 SetWarning(AppText.Get("WarningHistoryTooLong"));
                 return true;
             }
 
-            _history.Insert(0, entry);
-
-            if (_history.Count > 30)
-                _history.RemoveAt(_history.Count - 1);
             UpdateHistoryButton();
-
-            if (!HistoryStore.Save(_history))
+            if (historyResult == HistoryAddResult.SaveFailed)
             {
                 SetWarning(AppText.Get("WarningHistorySave"));
                 return true;
@@ -235,7 +217,7 @@ public partial class MainForm : Form
     private void ClearButton_Click(object? sender, EventArgs e)
     {
         _previewTimer.Stop();
-        _operations.Cancel();
+        _transformationSession.Cancel();
         inputText.Clear();
         outputText.Clear();
         SetSuccess(AppText.Get("StatusCleared"));
@@ -244,13 +226,13 @@ public partial class MainForm : Form
 
     private void HistoryButton_Click(object? sender, EventArgs e)
     {
-        using var historyForm = new HistoryForm(_history, _darkTheme);
+        using var historyForm = new HistoryForm(_history.Entries, _darkTheme);
         var result = historyForm.ShowDialog(this);
         if (historyForm.ClearRequested)
         {
-            _history.Clear();
+            var historySaved = _history.Clear();
             UpdateHistoryButton();
-            if (HistoryStore.Save(_history))
+            if (historySaved)
                 SetSuccess(AppText.Get("StatusHistoryCleared"));
             else
                 SetError(AppText.Get("ErrorHistoryFile"));
@@ -262,7 +244,7 @@ public partial class MainForm : Form
 
         for (var index = 0; index < cipherSelector.Items.Count; index++)
         {
-            if (cipherSelector.Items[index] is ICipher cipher && cipher.Id == HistoryStore.ResolveCipher(entry)?.Id)
+            if (cipherSelector.Items[index] is ICipher cipher && cipher.Id == _history.ResolveCipher(entry)?.Id)
             {
                 cipherSelector.SelectedIndex = index;
                 break;
@@ -280,7 +262,7 @@ public partial class MainForm : Form
         SetSuccess(AppText.Get("StatusHistoryLoaded"));
     }
 
-    private void ImportButton_Click(object? sender, EventArgs e)
+    private async void ImportButton_Click(object? sender, EventArgs e)
     {
         using var dialog = new OpenFileDialog
         {
@@ -292,21 +274,33 @@ public partial class MainForm : Form
         if (dialog.ShowDialog(this) != DialogResult.OK)
             return;
 
+        importButton.Enabled = false;
         try
         {
-            if (new FileInfo(dialog.FileName).Length > 5 * 1024 * 1024)
+            var result = await _textFiles.ReadUtf8Async(dialog.FileName);
+            if (IsDisposed)
+                return;
+
+            if (result.Status == TextFileReadStatus.TooLarge)
             {
                 SetError(AppText.Get("ErrorImportTooLarge"));
                 return;
             }
 
-            inputText.Text = File.ReadAllText(dialog.FileName, Encoding.UTF8);
+            if (result.Status == TextFileReadStatus.Failed)
+            {
+                SetError(AppText.Get("ErrorImport"));
+                return;
+            }
+
+            inputText.Text = result.Text;
             SetSuccess(AppText.Format("StatusImported", Path.GetFileName(dialog.FileName)));
             inputText.Focus();
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        finally
         {
-            SetError(AppText.Get("ErrorImport"));
+            if (!IsDisposed)
+                importButton.Enabled = true;
         }
     }
 
@@ -347,8 +341,7 @@ public partial class MainForm : Form
         LatestOperationResult<IReadOnlyList<LetterFrequency>> operation;
         try
         {
-            operation = await _operations.RunAsync(cancellationToken =>
-                FrequencyAnalyzer.AnalyzeLetters(textToAnalyze, cancellationToken));
+            operation = await _transformationSession.AnalyzeAsync(textToAnalyze);
         }
         finally
         {
@@ -382,8 +375,7 @@ public partial class MainForm : Form
             var encrypt = encryptMode.Checked;
             var key = GetCurrentKey(cipher);
             SetWorking(AppText.Get("StatusExplaining"));
-            var operation = await _operations.RunAsync(cancellationToken =>
-                CipherExplainer.Explain(cipher, input, encrypt, key, cancellationToken));
+            var operation = await _transformationSession.ExplainAsync(cipher, input, encrypt, key);
             if (!operation.IsCurrent || IsDisposed)
                 return;
 
@@ -411,8 +403,7 @@ public partial class MainForm : Form
         LatestOperationResult<IReadOnlyList<CipherDetection>> operation;
         try
         {
-            operation = await _operations.RunAsync(cancellationToken =>
-                CipherDetector.Detect(textToDetect, cancellationToken));
+            operation = await _transformationSession.DetectAsync(textToDetect);
         }
         finally
         {
@@ -466,7 +457,7 @@ public partial class MainForm : Form
         var textKey = textKeyInput.Text;
 
         _previewTimer.Stop();
-        _operations.Cancel();
+        _transformationSession.Cancel();
         _preferences.LanguageCode = AppLanguage.Normalize(_preferences.LanguageCode) == AppLanguage.Czech
             ? AppLanguage.English
             : AppLanguage.Czech;
@@ -500,7 +491,7 @@ public partial class MainForm : Form
         else
         {
             _previewTimer.Stop();
-            _operations.Cancel();
+            _transformationSession.Cancel();
             SetReadyStatus();
         }
     }
@@ -516,7 +507,7 @@ public partial class MainForm : Form
     private void SchedulePreview()
     {
         _previewTimer.Stop();
-        _operations.Cancel();
+        _transformationSession.Cancel();
         if (!livePreview.Checked)
         {
             SetReadyStatus();
@@ -577,7 +568,7 @@ public partial class MainForm : Form
         return 0;
     }
 
-    private void UpdateHistoryButton() => historyButton.Text = AppText.Format("MainHistory", _history.Count);
+    private void UpdateHistoryButton() => historyButton.Text = AppText.Format("MainHistory", _history.Entries.Count);
 
     private void ApplyLocalization()
     {
@@ -713,5 +704,4 @@ public partial class MainForm : Form
             : AppText.Get("MainSelectCipher");
     }
 
-    private sealed record TransformComputation(string? Result, string? ErrorMessage);
 }
