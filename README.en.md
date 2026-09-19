@@ -99,7 +99,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmap
 
-Planned features include responsive processing for long texts, an installer package, and further accessibility improvements.
+The next milestone is `v1.0.0-rc.1`: an installer package, DPI and accessibility checks, cleaner architecture, and separated test suites. A verified stable `v1.0.0` will follow.
 
 The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 

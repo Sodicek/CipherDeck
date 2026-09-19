@@ -99,7 +99,7 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 ## Roadmapa
 
-Další plánované funkce zahrnují svižnější zpracování dlouhých textů, instalační balíček a další vylepšení přístupnosti.
+Další milník je `v1.0.0-rc.1`: instalační balíček, DPI a přístupnost, čistší architektura a oddělené testy. Po jeho ověření bude následovat stabilní `v1.0.0`.
 
 Podrobný plán je v [ToDo.md](ToDo.md).
 
