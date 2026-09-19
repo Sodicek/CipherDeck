@@ -2,7 +2,7 @@
 
 namespace CipherDeck;
 
-partial class Form1
+partial class MainForm
 {
     private System.ComponentModel.IContainer? components = null;
 
@@ -427,10 +427,10 @@ partial class Form1
         Font = new Font("Segoe UI", 9F);
         KeyPreview = true;
         MinimumSize = new Size(900, 640);
-        Name = "Form1";
+        Name = "MainForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "CipherDeck · v0.9.1";
-        KeyDown += Form1_KeyDown;
+        KeyDown += MainForm_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
         ResumeLayout(false);
