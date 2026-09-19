@@ -6,12 +6,20 @@ namespace CipherDeck.Core.Learning;
 
 public static class CipherExplainer
 {
-    public static CipherExplanation Explain(ICipher cipher, string input, bool encrypt, CipherKey? key = null)
+    public static CipherExplanation Explain(
+        ICipher cipher,
+        string input,
+        bool encrypt,
+        CipherKey? key = null,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(cipher);
         ArgumentNullException.ThrowIfNull(input);
 
-        var result = encrypt ? cipher.Encrypt(input, key) : cipher.Decrypt(input, key);
+        var result = encrypt
+            ? cipher.Encrypt(input, key, cancellationToken)
+            : cipher.Decrypt(input, key, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
         var steps = cipher switch
         {
             ReverseCipher => ExplainReverse(input, result),

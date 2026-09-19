@@ -18,29 +18,33 @@ public static class CipherDetector
         "TH", "HE", "IN", "AN", "RE", "ON", "AT", "ND", "ING"
     ];
 
-    public static IReadOnlyList<CipherDetection> Detect(string input)
+    public static IReadOnlyList<CipherDetection> Detect(string input, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(input);
+        cancellationToken.ThrowIfCancellationRequested();
         if (!input.EnumerateRunes().Any(Rune.IsLetter))
             return [];
 
         var candidates = new List<Candidate>();
-        var reverse = new ReverseCipher().Decrypt(input);
-        candidates.Add(new Candidate(CipherIds.Reverse, new ReverseCipher().Name, reverse, ScoreLanguage(reverse), CoreText.Get("DetectionReverseReason"), null));
+        var reverseCipher = new ReverseCipher();
+        var reverse = reverseCipher.Decrypt(input, null, cancellationToken);
+        candidates.Add(new Candidate(CipherIds.Reverse, reverseCipher.Name, reverse, ScoreLanguage(reverse, cancellationToken), CoreText.Get("DetectionReverseReason"), null));
 
-        var atbash = new AtbashCipher().Decrypt(input);
-        candidates.Add(new Candidate(CipherIds.Atbash, new AtbashCipher().Name, atbash, ScoreLanguage(atbash), CoreText.Get("DetectionAtbashReason"), null));
+        var atbashCipher = new AtbashCipher();
+        var atbash = atbashCipher.Decrypt(input, null, cancellationToken);
+        candidates.Add(new Candidate(CipherIds.Atbash, atbashCipher.Name, atbash, ScoreLanguage(atbash, cancellationToken), CoreText.Get("DetectionAtbashReason"), null));
 
         var caesar = new CaesarCipher();
         for (var shift = 1; shift <= 25; shift++)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             var key = new CipherKey(Number: shift);
-            var decoded = caesar.Decrypt(input, key);
+            var decoded = caesar.Decrypt(input, key, cancellationToken);
             candidates.Add(new Candidate(
                 CipherIds.Caesar,
                 CoreText.Format("DetectionCaesarName", shift),
                 decoded,
-                ScoreLanguage(decoded),
+                ScoreLanguage(decoded, cancellationToken),
                 CoreText.Format("DetectionCaesarReason", shift),
                 key));
         }
@@ -49,7 +53,7 @@ public static class CipherDetector
             null,
             CoreText.Get("DetectionTranspositionName"),
             input,
-            ScoreLanguage(input) * 0.85,
+            ScoreLanguage(input, cancellationToken) * 0.85,
             CoreText.Get("DetectionTranspositionReason"),
             null));
 
@@ -70,12 +74,21 @@ public static class CipherDetector
             .ToList();
     }
 
-    private static double ScoreLanguage(string text)
+    private static double ScoreLanguage(string text, CancellationToken cancellationToken)
     {
         var normalized = $" {RemoveDiacritics(text).ToLowerInvariant()} ";
         var upper = normalized.ToUpperInvariant();
-        var score = CommonWords.Sum(word => CountOccurrences(normalized, word) * 14d);
-        score += CommonFragments.Sum(fragment => CountOccurrences(upper, fragment) * 1.5d);
+        var score = 0d;
+        foreach (var word in CommonWords)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            score += CountOccurrences(normalized, word) * 14d;
+        }
+        foreach (var fragment in CommonFragments)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            score += CountOccurrences(upper, fragment) * 1.5d;
+        }
 
         var letters = upper.Count(character => character is >= 'A' and <= 'Z');
         var vowels = upper.Count(character => "AEIOUY".Contains(character));
