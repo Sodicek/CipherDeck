@@ -14,6 +14,8 @@ internal sealed class AppPreferences
 
     public string? SelectedCipherName { get; set; }
 
+    public string? SelectedCipherId { get; set; }
+
     public static AppPreferences Load()
     {
         return JsonFileStore.Load<AppPreferences>(SettingsPath, MaximumSettingsFileSizeBytes)

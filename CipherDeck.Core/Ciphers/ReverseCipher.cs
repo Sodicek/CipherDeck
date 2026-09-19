@@ -4,6 +4,7 @@ namespace CipherDeck.Core.Ciphers;
 
 public sealed class ReverseCipher : ICipher
 {
+    public string Id => CipherIds.Reverse;
     public string Name => "Pozpátku";
     public string Description => "Obrátí pořadí znaků. Mezery, interpunkce i Unicode znaky zůstanou zachované.";
     public CipherKeyType KeyType => CipherKeyType.None;

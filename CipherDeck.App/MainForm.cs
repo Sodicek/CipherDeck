@@ -60,8 +60,10 @@ public partial class MainForm : Form
         }
 
         statusLabel.Text = cipher is null ? "Vyber šifru." : $"Připraveno · {cipher.Name}";
-        if (cipher is not null && _preferences.SelectedCipherName != cipher.Name)
+        if (cipher is not null &&
+            (_preferences.SelectedCipherId != cipher.Id || _preferences.SelectedCipherName != cipher.Name))
         {
+            _preferences.SelectedCipherId = cipher.Id;
             _preferences.SelectedCipherName = cipher.Name;
             _preferences.Save();
         }
@@ -107,7 +109,8 @@ public partial class MainForm : Form
                     isEncryption,
                     inputText.Text,
                     result,
-                    key);
+                    key,
+                    cipher.Id);
 
                 if (!HistoryStore.CanStore(entry))
                 {
@@ -214,7 +217,7 @@ public partial class MainForm : Form
 
         for (var index = 0; index < cipherSelector.Items.Count; index++)
         {
-            if (cipherSelector.Items[index] is ICipher cipher && cipher.Name == entry.CipherName)
+            if (cipherSelector.Items[index] is ICipher cipher && cipher.Id == HistoryStore.ResolveCipher(entry)?.Id)
             {
                 cipherSelector.SelectedIndex = index;
                 break;
@@ -428,7 +431,9 @@ public partial class MainForm : Form
     {
         for (var index = 0; index < cipherSelector.Items.Count; index++)
         {
-            if (cipherSelector.Items[index] is ICipher cipher && cipher.Name == _preferences.SelectedCipherName)
+            if (cipherSelector.Items[index] is ICipher cipher &&
+                (cipher.Id == _preferences.SelectedCipherId ||
+                 string.IsNullOrEmpty(_preferences.SelectedCipherId) && cipher.Name == _preferences.SelectedCipherName))
                 return index;
         }
 

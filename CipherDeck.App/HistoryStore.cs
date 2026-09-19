@@ -1,3 +1,4 @@
+using CipherDeck.Core;
 using System.Text;
 
 namespace CipherDeck;
@@ -29,7 +30,7 @@ internal static class HistoryStore
     internal static bool CanStore(HistoryEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
-        if (string.IsNullOrWhiteSpace(entry.CipherName) || entry.Input is null || entry.Output is null)
+        if (ResolveCipher(entry) is null || entry.Input is null || entry.Output is null)
             return false;
 
         var inputSize = Encoding.UTF8.GetByteCount(entry.Input);
@@ -43,7 +44,11 @@ internal static class HistoryStore
         return entries
             .OfType<HistoryEntry>()
             .Where(CanStore)
+            .Select(entry => entry with { CipherId = ResolveCipher(entry)!.Id })
             .Take(30)
             .ToList();
     }
+
+    internal static ICipher? ResolveCipher(HistoryEntry entry) =>
+        CipherCatalog.FindById(entry.CipherId) ?? CipherCatalog.FindByName(entry.CipherName);
 }
