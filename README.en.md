@@ -94,7 +94,8 @@ dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
 
 - `CipherDeck.App` – CipherDeck's desktop UI,
 - `CipherDeck.Core` – cipher algorithms, independent of the UI,
-- `CipherDeck.Tests` – automated tests,
+- `CipherDeck.Core.Tests` – platform-independent algorithm tests,
+- `CipherDeck.Tests` – Windows UI, renderer, and persistence tests,
 - `ToDo.md` – roadmap for future versions.
 
 ## Roadmap
