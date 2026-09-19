@@ -4,6 +4,35 @@
 
 Moderní desktopová aplikace pro zkoušení, vysvětlování a porovnávání klasických šifer.
 
+## Aktuální stav a pořadí práce
+
+Vydaná verze: **v0.9.1**. Následující verze jsou plán, nikoliv dokončené vydání.
+
+### v0.10 — Bilingual Edition
+
+- [ ] Přejmenovat hlavní formulář `Form1` na `MainForm` a ověřit související odkazy.
+- [ ] Přesunout texty rozhraní do lokalizačních souborů.
+- [ ] Doplnit češtinu a angličtinu včetně nápovědy, chyb a exportních kartiček.
+- [ ] Přidat přepínač jazyka a uložit volbu do nastavení.
+- [ ] Zachovat kompatibilitu historie při změně jazyka; nepoužívat přeložený název jako identifikátor šifry.
+- [ ] Ověřit úplnost překladů a správné chování přepínání jazyka.
+- [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
+
+### v0.11 — Release Candidate
+
+- [ ] Připravit Windows instalátor vedle portable ZIPu.
+- [ ] Ověřit instalaci, aktualizaci a odinstalaci v čistém prostředí.
+- [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
+- [ ] Založit GitHub issues a milestones pro zbývající práci.
+
+### v1.0 — Stable Release
+
+- [ ] Uzavřít zjištěné chyby z předchozích kontrol.
+- [ ] Aktualizovat nápovědu, screenshoty a oba soubory README podle finálního rozhraní.
+- [ ] Vydat ověřený instalátor a portable balíček se seznamem změn.
+
+Každý bod dokončovat samostatně na pracovní branchi a rozdělit do logických commitů podle [CONTRIBUTING.md](CONTRIBUTING.md). Níže je historický přehled dokončených funkcí a zbývajících kontrol.
+
 ## Vize
 
 CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude mít vlastní přehlednou kartu, nastavení, krátké vysvětlení a okamžitý náhled výsledku. Aplikace bude vhodná pro výuku, hraní se šiframi i řešení jednoduchých šifrovacích úloh.
@@ -97,11 +126,12 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Přidat instrukce pro spuštění, sestavení a přispívání.
 - [x] Zvolit licenci, například MIT.
 - [x] Přidat šablony pro bug report a návrh nové funkce.
-- [ ] Používat issues, milestones a označené verze.
+- [x] Používat označené verze a GitHub Releases.
+- [ ] Používat issues a milestones pro plánování práce.
 - [x] Vytvořit první GitHub Release s přenosnou sestavou aplikace.
 - [x] Připravit lokální samostatný `win-x64` Release balíček pro budoucí GitHub Release.
 
-## Doporučené milníky
+## Historie milníků do v0.9.1
 
 ### v0.1 — Working Core
 
@@ -165,13 +195,9 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - CI kontroluje formátování a sestavení bez jediného varování.
 - Aktualizovaný testovací balíček xUnit a 94 automatických testů.
 
-### v1.0 — GitHub Release
-
-- Dokončené testy a automatické sestavení.
-- Česká a anglická lokalizace.
-- Logo, screenshoty, dokumentace a instalační balíček.
-
 ## Definition of Done pro každou šifru
+
+Tento opakovatelný checklist se používá při přidání nebo změně šifry; nezaškrtnutá pole neznamenají, že současné šifry nemají testy.
 
 - [ ] Šifrování i odšifrování funguje pro běžné i hraniční vstupy.
 - [ ] Parametry jsou validované a chyba uživateli řekne, co má opravit.
@@ -187,4 +213,4 @@ CipherDeck nemá být jen formulář se dvěma tlačítky. Každá šifra bude m
 - [x] Vytvořit `ICipher` a implementovat šifru Pozpátku.
 - [x] Napsat první automatické testy.
 - [x] Propojit algoritmus s novým přepínačem Zašifrovat/Odšifrovat.
-- [ ] Udělat první commit: `feat: establish CipherDeck core`.
+- [x] Založit historii projektu prvními commity.
