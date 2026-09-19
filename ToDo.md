@@ -22,7 +22,7 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 
 ### v0.11 — Release Candidate
 
-- [ ] Přesunout náročné operace mimo UI vlákno a rušit zastaralý živý náhled.
+- [x] Přesunout náročné operace mimo UI vlákno a rušit zastaralý živý náhled.
 - [ ] Oddělit platformně nezávislé Core testy od Windows UI a renderer testů.
 - [ ] Rozdělit koordinaci transformací, historie a souborů z `MainForm` do aplikačních služeb.
 - [ ] Aktualizovat testovací SDK a xUnit runner jako samostatnou tooling změnu.

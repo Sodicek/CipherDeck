@@ -28,11 +28,11 @@ All WinForms labels, messages, tooltips, help text, challenge text, detection ex
 
 Resource-completeness tests compare the actual Czech and English resource key sets, avoiding a manually maintained list that could drift.
 
-## Follow-up work for v0.11
-
 ### Keep long operations responsive
 
-Encryption, frequency analysis, Learn Mode, and especially the 25-pass Caesar detection run synchronously on the UI thread. A multi-megabyte imported file can freeze the window. Introduce cancellable background execution for expensive actions and cancel stale live-preview work when the input changes again.
+Encryption, frequency analysis, Learn Mode, and cipher detection now run outside the UI thread. Built-in ciphers and analysis services accept cancellation tokens, while a latest-operation runner cancels and discards obsolete live-preview work before it can overwrite a newer result.
+
+## Follow-up work for v0.11
 
 ### Separate UI coordination from controls
 
@@ -55,7 +55,6 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 ## Recommended order
 
 1. Run keyboard, minimum-size, and DPI review in both languages.
-2. Move expensive operations off the UI thread.
-3. Extract application services from `MainForm`.
-4. Split test boundaries and upgrade the test tooling.
-5. Prepare the v0.11 installer and release automation.
+2. Extract application services from `MainForm`.
+3. Split test boundaries and upgrade the test tooling.
+4. Prepare the v0.11 installer and release automation.
