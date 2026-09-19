@@ -10,7 +10,7 @@ internal sealed class AboutForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = "O aplikaci CipherDeck";
+        Text = AppText.Get("AboutTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(680, 560);
         MinimumSize = new Size(580, 460);
@@ -34,7 +34,7 @@ internal sealed class AboutForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 23F, FontStyle.Bold),
             ForeColor = text,
-            Text = "CipherDeck  v0.9.1"
+            Text = AppText.Format("AboutHeading", AppInfo.DisplayVersion)
         };
         var tagline = new Label
         {
@@ -42,7 +42,7 @@ internal sealed class AboutForm : Form
             Font = new Font("Segoe UI", 10F),
             ForeColor = secondary,
             Location = new Point(3, 45),
-            Text = "Classic ciphers. Modern interface."
+            Text = AppText.Get("Tagline")
         };
         var header = new Panel { Dock = DockStyle.Fill };
         header.Controls.Add(heading);
@@ -55,14 +55,14 @@ internal sealed class AboutForm : Form
             Dock = DockStyle.Fill,
             ForeColor = secondary,
             ReadOnly = true,
-            Text = HelpText
+            Text = AppText.Get("AboutHelp")
         };
 
-        var closeButton = UiStyles.CreateGridButton("Rozumím", palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton(AppText.Get("AboutClose"), palette, primary: true);
         closeButton.DialogResult = DialogResult.Cancel;
         closeButton.Click += (_, _) => Close();
 
-        var githubButton = UiStyles.CreateGridButton("Otevřít GitHub", palette);
+        var githubButton = UiStyles.CreateGridButton(AppText.Get("AboutGitHub"), palette);
         githubButton.Click += (_, _) => OpenGitHub();
 
         var buttons = new TableLayoutPanel
@@ -99,69 +99,11 @@ internal sealed class AboutForm : Form
         {
             MessageBox.Show(
                 this,
-                "Odkaz se nepodařilo otevřít. Repo najdeš na github.com/Sodicek/CipherDeck.",
+                AppText.Get("AboutGitHubError"),
                 "CipherDeck · GitHub",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
     }
 
-    private const string HelpText = """
-        JAK APLIKACI POUŽÍVAT
-
-        1. Vyber šifru a režim Zašifrovat nebo Odšifrovat.
-        2. Pokud je potřeba, nastav číselný nebo textový klíč.
-        3. Napiš text do levého pole. Živý náhled zobrazí výsledek automaticky.
-        4. Tlačítkem PROVÉST uložíš operaci také do historie.
-
-        PODPOROVANÉ ŠIFRY
-
-        • Pozpátku — obrátí pořadí znaků.
-        • Caesarova šifra — posouvá latinská písmena o zadaný počet míst.
-        • Atbash — zrcadlí latinskou abecedu.
-        • Vigenèrova šifra — používá opakující se textový klíč A–Z.
-        • Rail Fence — zapisuje text cikcak do několika řádků.
-        • Přeskakování — čte text po sloupcích se zvoleným krokem.
-
-        KLÁVESOVÁ ZKRATKA
-
-        Ctrl+Enter provede operaci a přidá ji do historie.
-        Ctrl+O importuje textový soubor.
-        Ctrl+S otevře exportní centrum pro TXT a obrázkové kartičky.
-
-        ANALÝZA ČETNOSTI
-
-        Tlačítko Analýza zobrazí graf a tabulku četnosti písmen. Pokud existuje
-        výstup, analyzuje se výstupní text; jinak se použije vstup. To se hodí
-        jako první vodítko při luštění jednoduchých substitučních šifer.
-
-        LEARN MODE
-
-        Tlačítko Vysvětlit rozloží aktuální operaci do názorných kroků. Šipkami
-        můžeš projít princip algoritmu, mezivýsledky i finální text. Kruhové
-        tlačítko vedle klíče vygeneruje vhodný náhodný klíč.
-
-        VÝZVY A ODHAD ŠIFRY
-
-        Ve Výzvách můžeš luštit náhodné zprávy ve třech obtížnostech. Odhad šifry
-        vyzkouší obrácení textu, Atbash a všech 25 Caesarových posunů. Výsledek je
-        pouze jazyková heuristika, proto zobrazené procento není zárukou správnosti.
-
-        EXPORTNÍ CENTRUM
-
-        Výsledek můžeš dál uložit jako obyčejný TXT nebo jako sdílitelnou PNG
-        kartičku v rozměru 1200 × 630. Před exportem lze upravit nadpis a vybrat
-        fialový, půlnoční nebo světlý vzhled. Obrázek jde také rovnou zkopírovat.
-
-        SOUBORY A HISTORIE
-
-        Textové soubory se načítají a ukládají v UTF-8. Historie obsahuje nejvýše
-        30 posledních ručně provedených operací a zůstane dostupná i po restartu.
-        Kdykoliv ji můžeš trvale vymazat v okně Historie.
-
-        BEZPEČNOSTNÍ UPOZORNĚNÍ
-
-        Klasické šifry nejsou bezpečné pro ochranu hesel ani citlivých dat.
-        CipherDeck je vzdělávací a zábavní aplikace.
-        """;
 }

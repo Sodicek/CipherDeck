@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Tagline" xml:space="preserve"><value>Classic ciphers. Modern interface.</value></data>
+  <data name="Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Done" xml:space="preserve"><value>Done</value></data>
+  <data name="Next" xml:space="preserve"><value>Next →</value></data>
+  <data name="Previous" xml:space="preserve"><value>← Previous</value></data>
+  <data name="TextFilesFilter" xml:space="preserve"><value>Text files (*.txt)|*.txt|All files (*.*)|*.*</value></data>
+  <data name="ClipboardBusy" xml:space="preserve"><value>The clipboard is busy. Please try again.</value></data>
+  <data name="MainWindowTitle" xml:space="preserve"><value>CipherDeck · {0}</value></data>
+  <data name="MainChallenges" xml:space="preserve"><value>Challenges</value></data>
+  <data name="MainHistory" xml:space="preserve"><value>History ({0})</value></data>
+  <data name="MainAnalysis" xml:space="preserve"><value>Analysis</value></data>
+  <data name="MainHelp" xml:space="preserve"><value>Help</value></data>
+  <data name="MainThemeLight" xml:space="preserve"><value>☀  Light</value></data>
+  <data name="MainThemeDark" xml:space="preserve"><value>☾  Dark</value></data>
+  <data name="MainLanguageEnglish" xml:space="preserve"><value>EN</value></data>
+  <data name="MainLanguageCzech" xml:space="preserve"><value>CZ</value></data>
+  <data name="MainCipher" xml:space="preserve"><value>CIPHER</value></data>
+  <data name="MainEncrypt" xml:space="preserve"><value>Encrypt</value></data>
+  <data name="MainDecrypt" xml:space="preserve"><value>Decrypt</value></data>
+  <data name="MainInput" xml:space="preserve"><value>  INPUT  </value></data>
+  <data name="MainOutput" xml:space="preserve"><value>  OUTPUT  </value></data>
+  <data name="MainImport" xml:space="preserve"><value>Import · Ctrl+O</value></data>
+  <data name="MainExport" xml:space="preserve"><value>Export · Ctrl+S</value></data>
+  <data name="MainTransform" xml:space="preserve"><value>Run  ·  Ctrl+Enter</value></data>
+  <data name="MainSwap" xml:space="preserve"><value>⇄  Swap</value></data>
+  <data name="MainCopy" xml:space="preserve"><value>Copy</value></data>
+  <data name="MainClear" xml:space="preserve"><value>Clear</value></data>
+  <data name="MainExplain" xml:space="preserve"><value>How it works</value></data>
+  <data name="MainDetect" xml:space="preserve"><value>Detect cipher</value></data>
+  <data name="MainLivePreview" xml:space="preserve"><value>Live preview</value></data>
+  <data name="MainReady" xml:space="preserve"><value>Ready</value></data>
+  <data name="MainSelectCipher" xml:space="preserve"><value>Select a cipher first.</value></data>
+  <data name="MainReadyCipher" xml:space="preserve"><value>Ready · {0}</value></data>
+  <data name="MainGenerateKey" xml:space="preserve"><value>Generate a random key</value></data>
+  <data name="MainCharacters" xml:space="preserve"><value>{0:N0} characters</value></data>
+  <data name="TipChallenges" xml:space="preserve"><value>Open cipher challenges in three difficulty levels.</value></data>
+  <data name="TipHistory" xml:space="preserve"><value>Show the last 30 completed operations.</value></data>
+  <data name="TipAnalysis" xml:space="preserve"><value>Analyze letter frequency in the input or output.</value></data>
+  <data name="TipHelp" xml:space="preserve"><value>Open help and application information.</value></data>
+  <data name="TipTheme" xml:space="preserve"><value>Switch between light and dark themes.</value></data>
+  <data name="TipLanguage" xml:space="preserve"><value>Přepnout rozhraní do češtiny.</value></data>
+  <data name="TipTransform" xml:space="preserve"><value>Run the selected operation and save it to history (Ctrl+Enter).</value></data>
+  <data name="TipSwap" xml:space="preserve"><value>Move the output back to the input.</value></data>
+  <data name="TipCopy" xml:space="preserve"><value>Copy the output to the clipboard.</value></data>
+  <data name="TipClear" xml:space="preserve"><value>Clear the input and output.</value></data>
+  <data name="TipImport" xml:space="preserve"><value>Import a UTF-8 text file (Ctrl+O).</value></data>
+  <data name="TipExport" xml:space="preserve"><value>Open TXT and shareable PNG export (Ctrl+S).</value></data>
+  <data name="TipExplain" xml:space="preserve"><value>Show the current cipher operation step by step.</value></data>
+  <data name="TipDetect" xml:space="preserve"><value>Estimate which simple cipher was used.</value></data>
+  <data name="TipLivePreview" xml:space="preserve"><value>Recalculate the result shortly after the input changes.</value></data>
+  <data name="ErrorChooseCipher" xml:space="preserve"><value>Select a cipher first.</value></data>
+  <data name="ErrorEnterText" xml:space="preserve"><value>Enter or paste the text you want to process.</value></data>
+  <data name="WarningHistoryTooLong" xml:space="preserve"><value>The operation finished, but the result is too long for history.</value></data>
+  <data name="WarningHistorySave" xml:space="preserve"><value>The operation finished, but history could not be saved.</value></data>
+  <data name="StatusEncrypted" xml:space="preserve"><value>Encrypted with: {0}</value></data>
+  <data name="StatusDecrypted" xml:space="preserve"><value>Decrypted with: {0}</value></data>
+  <data name="StatusLivePreview" xml:space="preserve"><value>Live preview · {0}</value></data>
+  <data name="ErrorOutputEmpty" xml:space="preserve"><value>The output is empty.</value></data>
+  <data name="StatusSwapped" xml:space="preserve"><value>The output was moved back to the input.</value></data>
+  <data name="ErrorNothingToCopy" xml:space="preserve"><value>There is nothing to copy.</value></data>
+  <data name="StatusCopied" xml:space="preserve"><value>The result was copied to the clipboard.</value></data>
+  <data name="StatusCleared" xml:space="preserve"><value>The text fields were cleared.</value></data>
+  <data name="StatusHistoryCleared" xml:space="preserve"><value>History was cleared.</value></data>
+  <data name="ErrorHistoryFile" xml:space="preserve"><value>History is clear for this session, but its file could not be updated.</value></data>
+  <data name="StatusHistoryLoaded" xml:space="preserve"><value>The operation was loaded from history.</value></data>
+  <data name="ImportTitle" xml:space="preserve"><value>Import text into CipherDeck</value></data>
+  <data name="ErrorImportTooLarge" xml:space="preserve"><value>The file is too large. The import limit is 5 MB.</value></data>
+  <data name="StatusImported" xml:space="preserve"><value>Imported: {0}</value></data>
+  <data name="ErrorImport" xml:space="preserve"><value>The file could not be loaded.</value></data>
+  <data name="ErrorNothingToExport" xml:space="preserve"><value>There is nothing to export.</value></data>
+  <data name="OperationEncrypted" xml:space="preserve"><value>Encrypted</value></data>
+  <data name="OperationDecrypted" xml:space="preserve"><value>Decrypted</value></data>
+  <data name="OperationInput" xml:space="preserve"><value>Input text</value></data>
+  <data name="ShareEncryptedTitle" xml:space="preserve"><value>Encrypted message</value></data>
+  <data name="ShareDecryptedTitle" xml:space="preserve"><value>Decrypted message</value></data>
+  <data name="ShareInputTitle" xml:space="preserve"><value>Message from CipherDeck</value></data>
+  <data name="ErrorAnalysisNeedsLetters" xml:space="preserve"><value>Analysis needs text containing at least one letter.</value></data>
+  <data name="ErrorDetectionNeedsLetters" xml:space="preserve"><value>Cipher detection needs text containing at least one letter.</value></data>
+  <data name="StatusDetectionUsed" xml:space="preserve"><value>Suggestion used: {0} · confidence {1:P0}</value></data>
+  <data name="StatusKeyGenerated" xml:space="preserve"><value>Generated a new key for: {0}</value></data>
+  <data name="StatusDarkTheme" xml:space="preserve"><value>Dark theme enabled.</value></data>
+  <data name="StatusLightTheme" xml:space="preserve"><value>Light theme enabled.</value></data>
+  <data name="StatusLanguageChanged" xml:space="preserve"><value>Interface language changed to English.</value></data>
+  <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Frequency analysis</value></data>
+  <data name="AnalysisHeading" xml:space="preserve"><value>Letter frequency</value></data>
+  <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} letters · {1:N0} distinct characters · chart shows the top 12</value></data>
+  <data name="AnalysisLetter" xml:space="preserve"><value>Letter</value></data>
+  <data name="AnalysisCount" xml:space="preserve"><value>Count</value></data>
+  <data name="AnalysisShare" xml:space="preserve"><value>Share</value></data>
+  <data name="DetectionTitle" xml:space="preserve"><value>CipherDeck · Cipher detection</value></data>
+  <data name="DetectionHeading" xml:space="preserve"><value>Likely cipher type</value></data>
+  <data name="DetectionDisclaimer" xml:space="preserve"><value>A heuristic estimate for Reverse, Atbash, and Caesar — not a guaranteed result.</value></data>
+  <data name="DetectionUse" xml:space="preserve"><value>Use suggestion</value></data>
+  <data name="ExplanationTitle" xml:space="preserve"><value>CipherDeck · How {0} works</value></data>
+  <data name="ExplanationStep" xml:space="preserve"><value>STEP {0}/{1}</value></data>
+  <data name="HistoryTitle" xml:space="preserve"><value>CipherDeck · History</value></data>
+  <data name="HistoryHeading" xml:space="preserve"><value>Operation history</value></data>
+  <data name="HistoryUse" xml:space="preserve"><value>Load operation</value></data>
+  <data name="HistoryClear" xml:space="preserve"><value>Clear history</value></data>
+  <data name="HistoryEmpty" xml:space="preserve"><value>History is empty. An operation is added when you press RUN.</value></data>
+  <data name="HistoryInput" xml:space="preserve"><value>INPUT</value></data>
+  <data name="HistoryOutput" xml:space="preserve"><value>OUTPUT</value></data>
+  <data name="HistoryClearQuestion" xml:space="preserve"><value>Permanently clear the entire operation history?</value></data>
+  <data name="HistoryDisplay" xml:space="preserve"><value>{0:HH:mm:ss}  ·  {1}  ·  {2}</value></data>
+  <data name="HistoryEncryption" xml:space="preserve"><value>encryption</value></data>
+  <data name="HistoryDecryption" xml:space="preserve"><value>decryption</value></data>
+  <data name="ChallengeTitle" xml:space="preserve"><value>CipherDeck · Challenges</value></data>
+  <data name="ChallengeHeading" xml:space="preserve"><value>Crack the message</value></data>
+  <data name="ChallengeEasy" xml:space="preserve"><value>Easy</value></data>
+  <data name="ChallengeMedium" xml:space="preserve"><value>Medium</value></data>
+  <data name="ChallengeHard" xml:space="preserve"><value>Hard</value></data>
+  <data name="ChallengeCipherText" xml:space="preserve"><value>ENCRYPTED MESSAGE</value></data>
+  <data name="ChallengeAnswer" xml:space="preserve"><value>YOUR DECRYPTED TEXT</value></data>
+  <data name="ChallengeHintHidden" xml:space="preserve"><value>The hint is hidden.</value></data>
+  <data name="ChallengeTry" xml:space="preserve"><value>Try to find the original message.</value></data>
+  <data name="ChallengeCheck" xml:space="preserve"><value>Check answer</value></data>
+  <data name="ChallengeCheckAccessible" xml:space="preserve"><value>Check the answer. Keyboard shortcut Ctrl+Enter.</value></data>
+  <data name="ChallengeHint" xml:space="preserve"><value>Hint</value></data>
+  <data name="ChallengeReveal" xml:space="preserve"><value>Reveal</value></data>
+  <data name="ChallengeNew" xml:space="preserve"><value>New challenge</value></data>
+  <data name="ChallengeCorrect" xml:space="preserve"><value>Correct! Challenge solved.</value></data>
+  <data name="ChallengeIncorrect" xml:space="preserve"><value>Not yet. Check the order and each letter.</value></data>
+  <data name="ChallengeHintShown" xml:space="preserve"><value>HINT · {0}</value></data>
+  <data name="ChallengeNoKey" xml:space="preserve"><value>no key</value></data>
+  <data name="ChallengeRevealStatus" xml:space="preserve"><value>Cipher: {0} · key: {1}</value></data>
+  <data name="ExportTitle" xml:space="preserve"><value>CipherDeck · Export center</value></data>
+  <data name="ExportHeading" xml:space="preserve"><value>Export result</value></data>
+  <data name="ExportSummary" xml:space="preserve"><value>Save text, create a PNG card, or copy the image directly to the clipboard.</value></data>
+  <data name="ExportName" xml:space="preserve"><value>TITLE</value></data>
+  <data name="ExportStyle" xml:space="preserve"><value>STYLE</value></data>
+  <data name="ExportViolet" xml:space="preserve"><value>Violet</value></data>
+  <data name="ExportMidnight" xml:space="preserve"><value>Midnight</value></data>
+  <data name="ExportPaper" xml:space="preserve"><value>Light</value></data>
+  <data name="ExportSaveText" xml:space="preserve"><value>Save TXT</value></data>
+  <data name="ExportCopyImage" xml:space="preserve"><value>Copy image</value></data>
+  <data name="ExportSaveImage" xml:space="preserve"><value>Save PNG</value></data>
+  <data name="ExportSaveTextTitle" xml:space="preserve"><value>Save text from CipherDeck</value></data>
+  <data name="ExportTextSaved" xml:space="preserve"><value>TXT saved: {0}</value></data>
+  <data name="ExportTextError" xml:space="preserve"><value>The text file could not be saved.</value></data>
+  <data name="ExportPngFilter" xml:space="preserve"><value>PNG image (*.png)|*.png</value></data>
+  <data name="ExportSaveImageTitle" xml:space="preserve"><value>Save shareable card</value></data>
+  <data name="ExportImageSaved" xml:space="preserve"><value>PNG saved: {0}</value></data>
+  <data name="ExportImageError" xml:space="preserve"><value>The image could not be saved.</value></data>
+  <data name="ExportImageCopied" xml:space="preserve"><value>The card was copied to the clipboard.</value></data>
+  <data name="ShareTagline" xml:space="preserve"><value>CLASSIC CIPHERS · MODERN INTERFACE</value></data>
+  <data name="ShareBadge" xml:space="preserve"><value>SHARE CARD</value></data>
+  <data name="ShareNoCipher" xml:space="preserve"><value>No cipher selected</value></data>
+  <data name="ShareFooter" xml:space="preserve"><value>Created in CipherDeck · classic ciphers are for learning and fun</value></data>
+  <data name="ShareDefaultTitle" xml:space="preserve"><value>Encrypted message</value></data>
+  <data name="AboutTitle" xml:space="preserve"><value>About CipherDeck</value></data>
+  <data name="AboutHeading" xml:space="preserve"><value>CipherDeck  {0}</value></data>
+  <data name="AboutClose" xml:space="preserve"><value>Got it</value></data>
+  <data name="AboutGitHub" xml:space="preserve"><value>Open GitHub</value></data>
+  <data name="AboutGitHubError" xml:space="preserve"><value>The link could not be opened. Find the repository at github.com/Sodicek/CipherDeck.</value></data>
+  <data name="AboutHelp" xml:space="preserve"><value>HOW TO USE THE APP
+
+1. Choose a cipher and Encrypt or Decrypt mode.
+2. Set a numeric or text key when required.
+3. Enter text in the left field. Live preview shows the result automatically.
+4. Press RUN to save the operation to history as well.
+
+SUPPORTED CIPHERS
+
+• Reverse — reverses the order of characters.
+• Caesar cipher — shifts Latin letters by a selected amount.
+• Atbash — mirrors the Latin alphabet.
+• Vigenère cipher — uses a repeating A–Z text key.
+• Rail Fence — writes text in a zigzag across several rails.
+• Skip transposition — reads text by columns using the selected step.
+
+KEYBOARD SHORTCUTS
+
+Ctrl+Enter runs the operation and adds it to history.
+Ctrl+O imports a text file.
+Ctrl+S opens the export center for TXT and image cards.
+
+MORE TOOLS
+
+Analysis shows letter frequency. How it works breaks the current operation into visual steps. Challenges offers random messages in three difficulty levels, while Detect cipher tries simple language heuristics.
+
+FILES AND HISTORY
+
+Text files use UTF-8. History keeps up to 30 recent manually run operations and remains available after restart.
+
+SECURITY NOTICE
+
+Classic ciphers are not safe for protecting passwords or sensitive data. CipherDeck is an educational and entertainment app.</value></data>
+</root>

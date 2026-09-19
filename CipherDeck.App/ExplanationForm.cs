@@ -22,7 +22,7 @@ internal sealed class ExplanationForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = $"CipherDeck · Jak funguje {explanation.CipherName}";
+        Text = AppText.Format("ExplanationTitle", explanation.CipherName);
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(780, 570);
         MinimumSize = new Size(650, 500);
@@ -109,9 +109,9 @@ internal sealed class ExplanationForm : Form
         };
         for (var column = 0; column < 3; column++)
             buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 3F));
-        _nextButton = UiStyles.CreateGridButton("Další →", palette, primary: true);
-        _previousButton = UiStyles.CreateGridButton("← Předchozí", palette);
-        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
+        _nextButton = UiStyles.CreateGridButton(AppText.Get("Next"), palette, primary: true);
+        _previousButton = UiStyles.CreateGridButton(AppText.Get("Previous"), palette);
+        var closeButton = UiStyles.CreateGridButton(AppText.Get("Close"), palette);
         closeButton.DialogResult = DialogResult.Cancel;
         _nextButton.Click += (_, _) => AdvanceOrClose();
         _previousButton.Click += (_, _) => MoveStep(-1);
@@ -153,12 +153,12 @@ internal sealed class ExplanationForm : Form
     private void ShowCurrentStep()
     {
         var step = _explanation.Steps[_currentStep];
-        _stepCounter.Text = $"KROK {_currentStep + 1}/{_explanation.Steps.Count}";
+        _stepCounter.Text = AppText.Format("ExplanationStep", _currentStep + 1, _explanation.Steps.Count);
         _stepTitle.Text = step.Title;
         _stepDetail.Text = step.Detail;
         _snapshot.Text = step.Snapshot;
         _previousButton.Enabled = _currentStep > 0;
-        _nextButton.Text = _currentStep == _explanation.Steps.Count - 1 ? "Hotovo" : "Další →";
+        _nextButton.Text = AppText.Get(_currentStep == _explanation.Steps.Count - 1 ? "Done" : "Next");
     }
 
 }

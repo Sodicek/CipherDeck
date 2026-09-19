@@ -33,6 +33,7 @@ partial class MainForm
         analysisButton = new SmoothButton();
         helpButton = new SmoothButton();
         themeButton = new SmoothButton();
+        languageButton = new SmoothButton();
         optionsPanel = new RoundedTableLayoutPanel();
         cipherLabel = new Label();
         cipherSelector = new ComboBox();
@@ -104,41 +105,46 @@ partial class MainForm
         subtitleLabel.Font = new Font("Segoe UI", 10.5F);
         subtitleLabel.ForeColor = textSecondary;
         subtitleLabel.Location = new Point(4, 51);
-        subtitleLabel.Text = "Classic ciphers. Modern interface.";
+        subtitleLabel.Text = AppText.Get("Tagline");
 
-        headerActionsPanel.ColumnCount = 5;
-        for (var column = 0; column < 5; column++)
-            headerActionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        headerActionsPanel.ColumnCount = 6;
+        for (var column = 0; column < 6; column++)
+            headerActionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 6F));
         headerActionsPanel.Controls.Add(challengeButton, 0, 0);
         headerActionsPanel.Controls.Add(historyButton, 1, 0);
         headerActionsPanel.Controls.Add(analysisButton, 2, 0);
         headerActionsPanel.Controls.Add(helpButton, 3, 0);
         headerActionsPanel.Controls.Add(themeButton, 4, 0);
+        headerActionsPanel.Controls.Add(languageButton, 5, 0);
         headerActionsPanel.Dock = DockStyle.Right;
         headerActionsPanel.Padding = new Padding(0, 18, 0, 18);
         headerActionsPanel.RowCount = 1;
         headerActionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         headerActionsPanel.Width = 580;
 
-        ConfigureGridButton(challengeButton, "Výzvy", palette);
+        ConfigureGridButton(challengeButton, AppText.Get("MainChallenges"), palette);
         challengeButton.TabIndex = 0;
         challengeButton.Click += ChallengeButton_Click;
 
-        ConfigureGridButton(historyButton, "Historie (0)", palette);
+        ConfigureGridButton(historyButton, AppText.Format("MainHistory", 0), palette);
         historyButton.TabIndex = 1;
         historyButton.Click += HistoryButton_Click;
 
-        ConfigureGridButton(analysisButton, "Analýza", palette);
+        ConfigureGridButton(analysisButton, AppText.Get("MainAnalysis"), palette);
         analysisButton.TabIndex = 2;
         analysisButton.Click += AnalysisButton_Click;
 
-        ConfigureGridButton(helpButton, "Nápověda", palette);
+        ConfigureGridButton(helpButton, AppText.Get("MainHelp"), palette);
         helpButton.TabIndex = 3;
         helpButton.Click += HelpButton_Click;
 
-        ConfigureGridButton(themeButton, "☀  Světlý", palette);
+        ConfigureGridButton(themeButton, AppText.Get("MainThemeLight"), palette);
         themeButton.TabIndex = 4;
         themeButton.Click += ThemeButton_Click;
+
+        ConfigureGridButton(languageButton, AppText.Get("MainLanguageEnglish"), palette);
+        languageButton.TabIndex = 5;
+        languageButton.Click += LanguageButton_Click;
 
         optionsPanel.BackColor = panelBackground;
         optionsPanel.BorderColor = palette.Border;
@@ -166,7 +172,7 @@ partial class MainForm
         cipherLabel.AutoSize = true;
         cipherLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         cipherLabel.ForeColor = textPrimary;
-        cipherLabel.Text = "ŠIFRA";
+        cipherLabel.Text = AppText.Get("MainCipher");
 
         cipherSelector.Anchor = AnchorStyles.Left | AnchorStyles.Right;
         cipherSelector.BackColor = inputBackground;
@@ -191,7 +197,7 @@ partial class MainForm
         encryptMode.Font = new Font("Segoe UI", 10.5F);
         encryptMode.ForeColor = textPrimary;
         encryptMode.Margin = new Padding(0, 7, 18, 0);
-        encryptMode.Text = "Zašifrovat";
+        encryptMode.Text = AppText.Get("MainEncrypt");
         encryptMode.TabIndex = 0;
         encryptMode.CheckedChanged += PreviewSettingChanged;
 
@@ -199,7 +205,7 @@ partial class MainForm
         decryptMode.Font = new Font("Segoe UI", 10.5F);
         decryptMode.ForeColor = textPrimary;
         decryptMode.Margin = new Padding(0, 7, 0, 0);
-        decryptMode.Text = "Odšifrovat";
+        decryptMode.Text = AppText.Get("MainDecrypt");
         decryptMode.TabIndex = 1;
         decryptMode.CheckedChanged += PreviewSettingChanged;
 
@@ -232,7 +238,7 @@ partial class MainForm
         ConfigureButton(randomNumericKeyButton, "⟳", 34, palette);
         randomNumericKeyButton.Height = 29;
         randomNumericKeyButton.Margin = new Padding(7, 3, 0, 0);
-        randomNumericKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomNumericKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
         randomNumericKeyButton.TabIndex = 1;
         randomNumericKeyButton.Click += GenerateKeyButton_Click;
 
@@ -264,7 +270,7 @@ partial class MainForm
         ConfigureButton(randomTextKeyButton, "⟳", 34, palette);
         randomTextKeyButton.Height = 29;
         randomTextKeyButton.Margin = new Padding(7, 3, 0, 0);
-        randomTextKeyButton.AccessibleName = "Vygenerovat náhodný klíč";
+        randomTextKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
         randomTextKeyButton.TabIndex = 1;
         randomTextKeyButton.Click += GenerateKeyButton_Click;
 
@@ -293,7 +299,7 @@ partial class MainForm
         inputGroup.ForeColor = textPrimary;
         inputGroup.Margin = new Padding(0, 0, 10, 0);
         inputGroup.Padding = new Padding(12, 10, 12, 12);
-        inputGroup.Text = "  VSTUP  ";
+        inputGroup.Text = AppText.Get("MainInput");
         inputGroup.TabIndex = 0;
         inputGroup.TabStop = false;
 
@@ -314,7 +320,7 @@ partial class MainForm
         outputGroup.ForeColor = textPrimary;
         outputGroup.Margin = new Padding(10, 0, 0, 0);
         outputGroup.Padding = new Padding(12, 10, 12, 12);
-        outputGroup.Text = "  VÝSTUP  ";
+        outputGroup.Text = AppText.Get("MainOutput");
         outputGroup.TabIndex = 1;
         outputGroup.TabStop = false;
 
@@ -344,28 +350,28 @@ partial class MainForm
         actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
         actionsPanel.TabIndex = 2;
 
-        ConfigureGridButton(importButton, "Načíst · Ctrl+O", palette);
+        ConfigureGridButton(importButton, AppText.Get("MainImport"), palette);
         importButton.TabIndex = 4;
         importButton.Click += ImportButton_Click;
-        ConfigureGridButton(exportButton, "Exportovat · Ctrl+S", palette);
+        ConfigureGridButton(exportButton, AppText.Get("MainExport"), palette);
         exportButton.TabIndex = 5;
         exportButton.Click += ExportButton_Click;
-        ConfigureGridButton(transformButton, "Provést  ·  Ctrl+Enter", palette, primary: true);
+        ConfigureGridButton(transformButton, AppText.Get("MainTransform"), palette, primary: true);
         transformButton.TabIndex = 0;
         transformButton.Click += TransformButton_Click;
-        ConfigureGridButton(swapButton, "⇄  Prohodit", palette);
+        ConfigureGridButton(swapButton, AppText.Get("MainSwap"), palette);
         swapButton.TabIndex = 1;
         swapButton.Click += SwapButton_Click;
-        ConfigureGridButton(copyButton, "Kopírovat", palette);
+        ConfigureGridButton(copyButton, AppText.Get("MainCopy"), palette);
         copyButton.TabIndex = 2;
         copyButton.Click += CopyButton_Click;
-        ConfigureGridButton(clearButton, "Vymazat", palette);
+        ConfigureGridButton(clearButton, AppText.Get("MainClear"), palette);
         clearButton.TabIndex = 3;
         clearButton.Click += ClearButton_Click;
-        ConfigureGridButton(explainButton, "Jak to funguje", palette);
+        ConfigureGridButton(explainButton, AppText.Get("MainExplain"), palette);
         explainButton.TabIndex = 6;
         explainButton.Click += ExplainButton_Click;
-        ConfigureGridButton(detectButton, "Odhad šifry", palette);
+        ConfigureGridButton(detectButton, AppText.Get("MainDetect"), palette);
         detectButton.TabIndex = 7;
         detectButton.Click += DetectButton_Click;
 
@@ -376,7 +382,7 @@ partial class MainForm
         livePreview.ForeColor = textPrimary;
         livePreview.Anchor = AnchorStyles.Right;
         livePreview.Margin = new Padding(0, 0, 28, 0);
-        livePreview.Text = "Živý náhled";
+        livePreview.Text = AppText.Get("MainLivePreview");
         livePreview.TabIndex = 0;
         livePreview.CheckedChanged += LivePreview_CheckedChanged;
 
@@ -393,26 +399,13 @@ partial class MainForm
         toolTip.AutoPopDelay = 8000;
         toolTip.InitialDelay = 450;
         toolTip.ReshowDelay = 100;
-        toolTip.SetToolTip(challengeButton, "Otevřít šifrovací výzvy ve třech obtížnostech.");
-        toolTip.SetToolTip(historyButton, "Zobrazit posledních 30 provedených operací.");
-        toolTip.SetToolTip(analysisButton, "Analyzovat četnost písmen ve vstupu nebo výstupu.");
-        toolTip.SetToolTip(helpButton, "Otevřít nápovědu a informace o aplikaci.");
-        toolTip.SetToolTip(themeButton, "Přepnout světlý a tmavý motiv.");
-        toolTip.SetToolTip(transformButton, "Provést vybranou operaci a uložit ji do historie (Ctrl+Enter).");
-        toolTip.SetToolTip(swapButton, "Přesunout výstup zpět do vstupu.");
-        toolTip.SetToolTip(copyButton, "Zkopírovat výstup do schránky.");
-        toolTip.SetToolTip(clearButton, "Vymazat vstup i výstup.");
-        toolTip.SetToolTip(importButton, "Načíst textový soubor v UTF-8 (Ctrl+O).");
-        toolTip.SetToolTip(exportButton, "Otevřít export TXT a sdílitelných PNG kartiček (Ctrl+S).");
-        toolTip.SetToolTip(explainButton, "Ukázat aktuální šifrování krok za krokem.");
-        toolTip.SetToolTip(detectButton, "Odhadnout použitou jednoduchou šifru.");
-        toolTip.SetToolTip(livePreview, "Automaticky přepočítá výsledek krátce po změně vstupu.");
+        ApplyToolTips();
 
         statusLabel.Anchor = AnchorStyles.Left;
         statusLabel.AutoSize = true;
         statusLabel.Font = new Font("Segoe UI", 9.5F);
         statusLabel.ForeColor = Color.FromArgb(134, 239, 172);
-        statusLabel.Text = "Připraveno";
+        statusLabel.Text = AppText.Get("MainReady");
 
         characterCount.Anchor = AnchorStyles.Right;
         characterCount.AutoSize = true;
@@ -429,7 +422,7 @@ partial class MainForm
         MinimumSize = new Size(900, 640);
         Name = "MainForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "CipherDeck · v0.9.1";
+        Text = AppText.Format("MainWindowTitle", AppInfo.DisplayVersion);
         KeyDown += MainForm_KeyDown;
 
         ((System.ComponentModel.ISupportInitialize)shiftValue).EndInit();
@@ -456,6 +449,7 @@ partial class MainForm
     private Button analysisButton = null!;
     private Button helpButton = null!;
     private Button themeButton = null!;
+    private Button languageButton = null!;
     private RoundedTableLayoutPanel optionsPanel = null!;
     private Label cipherLabel = null!;
     private ComboBox cipherSelector = null!;

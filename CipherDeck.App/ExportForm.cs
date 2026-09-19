@@ -20,7 +20,7 @@ internal sealed class ExportForm : Form
         _darkTheme = darkTheme;
         var palette = UiTheme.GetPalette(darkTheme);
 
-        Text = "CipherDeck · Exportní centrum";
+        Text = AppText.Get("ExportTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(900, 720);
         MinimumSize = new Size(760, 620);
@@ -47,13 +47,13 @@ internal sealed class ExportForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 20F, FontStyle.Bold),
             ForeColor = palette.Text,
-            Text = "Exportovat výsledek"
+            Text = AppText.Get("ExportHeading")
         };
         var summary = new Label
         {
             AutoSize = true,
             ForeColor = palette.Muted,
-            Text = "Ulož text, vytvoř PNG kartičku nebo zkopíruj obrázek rovnou do schránky."
+            Text = AppText.Get("ExportSummary")
         };
 
         var settings = new TableLayoutPanel
@@ -68,7 +68,7 @@ internal sealed class ExportForm : Form
         settings.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 64));
         settings.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180));
 
-        var titleLabel = CreateSettingsLabel("NÁZEV", palette.Text);
+        var titleLabel = CreateSettingsLabel(AppText.Get("ExportName"), palette.Text);
         _titleInput = new TextBox
         {
             Anchor = AnchorStyles.Left | AnchorStyles.Right,
@@ -80,7 +80,7 @@ internal sealed class ExportForm : Form
             MaxLength = 48,
             Text = data.Title
         };
-        var styleLabel = CreateSettingsLabel("VZHLED", palette.Text);
+        var styleLabel = CreateSettingsLabel(AppText.Get("ExportStyle"), palette.Text);
         _styleSelector = new ComboBox
         {
             Anchor = AnchorStyles.Left | AnchorStyles.Right,
@@ -91,9 +91,9 @@ internal sealed class ExportForm : Form
             Margin = new Padding(0, 7, 0, 7)
         };
         _styleSelector.Items.AddRange([
-            new StyleOption("Fialová", ShareCardStyle.Violet),
-            new StyleOption("Půlnoční", ShareCardStyle.Midnight),
-            new StyleOption("Světlá", ShareCardStyle.Paper)
+            new StyleOption(AppText.Get("ExportViolet"), ShareCardStyle.Violet),
+            new StyleOption(AppText.Get("ExportMidnight"), ShareCardStyle.Midnight),
+            new StyleOption(AppText.Get("ExportPaper"), ShareCardStyle.Paper)
         ]);
         settings.Controls.Add(titleLabel, 0, 0);
         settings.Controls.Add(_titleInput, 1, 0);
@@ -139,10 +139,10 @@ internal sealed class ExportForm : Form
         for (var column = 0; column < 4; column++)
             buttons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
 
-        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
-        var saveTextButton = UiStyles.CreateGridButton("Uložit TXT", palette);
-        var copyImageButton = UiStyles.CreateGridButton("Kopírovat obrázek", palette);
-        var saveImageButton = UiStyles.CreateGridButton("Uložit PNG", palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton(AppText.Get("Close"), palette);
+        var saveTextButton = UiStyles.CreateGridButton(AppText.Get("ExportSaveText"), palette);
+        var copyImageButton = UiStyles.CreateGridButton(AppText.Get("ExportCopyImage"), palette);
+        var saveImageButton = UiStyles.CreateGridButton(AppText.Get("ExportSaveImage"), palette, primary: true);
         closeButton.DialogResult = DialogResult.Cancel;
         closeButton.Click += (_, _) => Close();
         saveTextButton.Click += (_, _) => SaveText();
@@ -190,8 +190,8 @@ internal sealed class ExportForm : Form
             AddExtension = true,
             DefaultExt = "txt",
             FileName = "cipherdeck-output.txt",
-            Filter = "Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*",
-            Title = "Uložit text z CipherDecku"
+            Filter = AppText.Get("TextFilesFilter"),
+            Title = AppText.Get("ExportSaveTextTitle")
         };
         if (dialog.ShowDialog(this) != DialogResult.OK)
             return;
@@ -199,11 +199,11 @@ internal sealed class ExportForm : Form
         try
         {
             File.WriteAllText(dialog.FileName, _baseData.Text, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
-            SetSuccess($"TXT uloženo: {Path.GetFileName(dialog.FileName)}");
+            SetSuccess(AppText.Format("ExportTextSaved", Path.GetFileName(dialog.FileName)));
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
-            SetError("Textový soubor se nepodařilo uložit.");
+            SetError(AppText.Get("ExportTextError"));
         }
     }
 
@@ -217,8 +217,8 @@ internal sealed class ExportForm : Form
             AddExtension = true,
             DefaultExt = "png",
             FileName = "cipherdeck-card.png",
-            Filter = "PNG obrázek (*.png)|*.png",
-            Title = "Uložit sdílitelnou kartičku"
+            Filter = AppText.Get("ExportPngFilter"),
+            Title = AppText.Get("ExportSaveImageTitle")
         };
         if (dialog.ShowDialog(this) != DialogResult.OK)
             return;
@@ -226,11 +226,11 @@ internal sealed class ExportForm : Form
         try
         {
             _cardImage.Save(dialog.FileName, ImageFormat.Png);
-            SetSuccess($"PNG uloženo: {Path.GetFileName(dialog.FileName)}");
+            SetSuccess(AppText.Format("ExportImageSaved", Path.GetFileName(dialog.FileName)));
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or ExternalException)
         {
-            SetError("Obrázek se nepodařilo uložit.");
+            SetError(AppText.Get("ExportImageError"));
         }
     }
 
@@ -242,11 +242,11 @@ internal sealed class ExportForm : Form
         try
         {
             Clipboard.SetImage(_cardImage);
-            SetSuccess("Kartička je zkopírovaná ve schránce.");
+            SetSuccess(AppText.Get("ExportImageCopied"));
         }
         catch (ExternalException)
         {
-            SetError("Schránka je právě zaneprázdněná. Zkus to znovu.");
+            SetError(AppText.Get("ClipboardBusy"));
         }
     }
 

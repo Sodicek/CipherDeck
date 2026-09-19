@@ -13,7 +13,9 @@ internal static class AppLanguage
     public static void Apply(string? languageCode)
     {
         var culture = CultureInfo.GetCultureInfo(Normalize(languageCode));
+        CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
+        CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
     }
 }

@@ -18,7 +18,7 @@ internal sealed class HistoryForm : Form
         var text = palette.Text;
         var secondary = palette.Muted;
 
-        Text = "CipherDeck · Historie";
+        Text = AppText.Get("HistoryTitle");
         StartPosition = FormStartPosition.CenterParent;
         ClientSize = new Size(760, 500);
         MinimumSize = new Size(620, 420);
@@ -43,7 +43,7 @@ internal sealed class HistoryForm : Form
             AutoSize = true,
             Font = new Font("Segoe UI", 20F, FontStyle.Bold),
             ForeColor = text,
-            Text = "Historie operací"
+            Text = AppText.Get("HistoryHeading")
         };
 
         _historyList = new ListBox
@@ -80,9 +80,9 @@ internal sealed class HistoryForm : Form
         };
         for (var column = 0; column < 3; column++)
             buttonPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 3F));
-        var useButton = UiStyles.CreateGridButton("Načíst operaci", palette, primary: true);
-        var closeButton = UiStyles.CreateGridButton("Zavřít", palette);
-        var clearButton = UiStyles.CreateGridButton("Vymazat historii", palette);
+        var useButton = UiStyles.CreateGridButton(AppText.Get("HistoryUse"), palette, primary: true);
+        var closeButton = UiStyles.CreateGridButton(AppText.Get("Close"), palette);
+        var clearButton = UiStyles.CreateGridButton(AppText.Get("HistoryClear"), palette);
         closeButton.DialogResult = DialogResult.Cancel;
         useButton.Click += (_, _) => SelectAndClose();
         closeButton.Click += (_, _) => Close();
@@ -101,7 +101,7 @@ internal sealed class HistoryForm : Form
 
         if (entries.Count == 0)
         {
-            _preview.Text = "Historie je zatím prázdná. Operace se přidá po stisknutí tlačítka PROVÉST.";
+            _preview.Text = AppText.Get("HistoryEmpty");
             useButton.Enabled = false;
             clearButton.Enabled = false;
         }
@@ -116,8 +116,8 @@ internal sealed class HistoryForm : Form
         if (_historyList.SelectedItem is not HistoryEntry entry)
             return;
 
-        _preview.Text = $"VSTUP{Environment.NewLine}{entry.Input}{Environment.NewLine}{Environment.NewLine}" +
-                        $"VÝSTUP{Environment.NewLine}{entry.Output}";
+        _preview.Text = $"{AppText.Get("HistoryInput")}{Environment.NewLine}{entry.Input}{Environment.NewLine}{Environment.NewLine}" +
+                        $"{AppText.Get("HistoryOutput")}{Environment.NewLine}{entry.Output}";
     }
 
     private void SelectAndClose()
@@ -134,8 +134,8 @@ internal sealed class HistoryForm : Form
     {
         var answer = MessageBox.Show(
             this,
-            "Opravdu chceš trvale vymazat celou historii operací?",
-            "Vymazat historii",
+            AppText.Get("HistoryClearQuestion"),
+            AppText.Get("HistoryClear"),
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning);
 
