@@ -46,7 +46,7 @@ CipherDeck is a modern desktop app for trying out and understanding classic ciph
 - polished cards, spacing, and color contrast in both light and dark themes,
 - a precise grid of equally sized buttons without irregular wrapping,
 - logical keyboard navigation, initial input focus, and control tooltips,
-- keyboard shortcuts `Ctrl+Enter`, `Ctrl+O`, and `Ctrl+S`.
+- keyboard shortcuts `Ctrl+Enter`, `Ctrl+O`, and `Ctrl+S`,
 - resilient atomic history and preference storage that cannot leave a half-written file,
 - safe handling of a busy clipboard, an unavailable browser, and oversized history entries,
 - Unicode-safe truncation of long share-card messages.
@@ -104,6 +104,8 @@ The detailed plan lives in [ToDo.md](ToDo.md) (in Czech).
 ## Contributing
 
 Suggestions and fixes are welcome. Before sending a pull request:
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for branch, commit, verification, and release conventions.
 
 1. run `dotnet test CipherDeck.sln` and make sure every test passes,
 2. for a new cipher, implement the `ICipher` interface and add automated tests for it,

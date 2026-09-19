@@ -46,7 +46,7 @@ CipherDeck je moderní desktopová aplikace pro zkoušení a pochopení klasick�
 - uhlazené karty, rozestupy a barevné kontrasty ve světlém i tmavém motivu,
 - přesnou mřížku stejně velkých tlačítek bez nepravidelného zalamování,
 - logické pořadí klávesnice, výchozí fokus na vstupu a popisky ovládacích prvků,
-- klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`.
+- klávesové zkratky `Ctrl+Enter`, `Ctrl+O` a `Ctrl+S`,
 - odolné atomické ukládání historie a nastavení bez rizika napůl zapsaného souboru,
 - bezpečné chování při obsazené schránce, nedostupném prohlížeči a příliš velké historii,
 - Unicode-safe zkracování dlouhých textů na sdílených kartičkách.
@@ -104,6 +104,8 @@ Podrobný plán je v [ToDo.md](ToDo.md).
 ## Přispívání
 
 Návrhy a opravy jsou vítány. Před posláním pull requestu:
+
+Pravidla pro branche, commity, kontroly a vydávání najdeš v [CONTRIBUTING.md](CONTRIBUTING.md).
 
 1. spusť `dotnet test CipherDeck.sln` a ověř, že všechny testy prochází,
 2. u nové šifry dodrž rozhraní `ICipher` a přidej k ní automatické testy,
