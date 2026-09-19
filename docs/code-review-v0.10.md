@@ -40,6 +40,10 @@ Platform-independent cipher, analysis, challenge, detection, learning, localizat
 
 Transformation sessions, cancellation, history mutations, persistence coordination, and bounded UTF-8 imports now live in focused application services. `MainForm` presents their results and coordinates controls instead of implementing those workflows directly. Service-level tests cover successful transformations, validation failures, history limits and save failures, and text-file import boundaries.
 
+### Update test tooling
+
+Both test projects now use Microsoft.NET.Test.Sdk 18.10.1 and xunit.runner.visualstudio 4.0.0 while retaining the xUnit v2 framework. The full suite was verified with the same .NET 8 SDK used by CI, and the dependency audit reports no outdated or known vulnerable packages.
+
 ## Follow-up work for v1.0.0-rc.1
 
 ### Reuse secondary-form layout carefully
@@ -50,14 +54,12 @@ Several secondary forms repeat layout and dialog-button setup. Small shared help
 
 Add a small automated UI smoke suite for startup, language switching, keyboard navigation, and minimum-size layouts. Continue manual DPI checks at 100%, 125%, 150%, and 200% until those scenarios are reliable in automation.
 
-### Maintenance and release work
+### Release work
 
-- Upgrade the test SDK and xUnit runner in a dedicated tooling change because their latest releases are major-version migrations.
 - Add repeatable installer creation and installation/update/uninstallation checks for v1.0.0-rc.1.
 - Automate release packaging, checksums, and release-note publication for the v1 release-candidate flow.
 
 ## Recommended order
 
 1. Run keyboard, minimum-size, and DPI review in both languages.
-2. Upgrade the test tooling.
-3. Prepare the v1.0.0-rc.1 installer and release automation.
+2. Prepare the v1.0.0-rc.1 installer and release automation.
