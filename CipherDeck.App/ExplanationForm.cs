@@ -90,6 +90,7 @@ internal sealed class ExplanationForm : Form
         };
         _snapshot = new RichTextBox
         {
+            AccessibleName = AppText.Get("ExplanationSnapshot"),
             BackColor = input,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,

@@ -90,7 +90,7 @@ partial class MainForm
         mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
 
         headerPanel.Dock = DockStyle.Fill;
-        headerPanel.TabIndex = 4;
+        headerPanel.TabIndex = 0;
         headerPanel.Controls.Add(titleLabel);
         headerPanel.Controls.Add(subtitleLabel);
         headerPanel.Controls.Add(headerActionsPanel);
@@ -166,7 +166,7 @@ partial class MainForm
         optionsPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
         optionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         optionsPanel.SetColumnSpan(cipherDescription, 4);
-        optionsPanel.TabIndex = 0;
+        optionsPanel.TabIndex = 1;
 
         cipherLabel.Anchor = AnchorStyles.Left;
         cipherLabel.AutoSize = true;
@@ -289,7 +289,7 @@ partial class MainForm
         editorLayout.Dock = DockStyle.Fill;
         editorLayout.RowCount = 1;
         editorLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        editorLayout.TabIndex = 1;
+        editorLayout.TabIndex = 2;
 
         inputGroup.Controls.Add(inputText);
         inputGroup.BackColor = inputBackground;
@@ -303,7 +303,7 @@ partial class MainForm
         inputGroup.TabIndex = 0;
         inputGroup.TabStop = false;
 
-        inputText.AcceptsTab = true;
+        inputText.AcceptsTab = false;
         inputText.BackColor = inputBackground;
         inputText.BorderStyle = BorderStyle.None;
         inputText.Dock = DockStyle.Fill;
@@ -330,7 +330,8 @@ partial class MainForm
         outputText.Font = new Font("Segoe UI", 12F);
         outputText.ForeColor = Color.FromArgb(196, 181, 253);
         outputText.ReadOnly = true;
-        outputText.TabStop = false;
+        outputText.TabIndex = 0;
+        outputText.TabStop = true;
 
         actionsPanel.ColumnCount = 4;
         for (var column = 0; column < 4; column++)
@@ -348,7 +349,7 @@ partial class MainForm
         actionsPanel.RowCount = 2;
         actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
         actionsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        actionsPanel.TabIndex = 2;
+        actionsPanel.TabIndex = 3;
 
         ConfigureGridButton(importButton, AppText.Get("MainImport"), palette);
         importButton.TabIndex = 4;
@@ -394,7 +395,7 @@ partial class MainForm
         footerPanel.Controls.Add(livePreview, 1, 0);
         footerPanel.Controls.Add(characterCount, 2, 0);
         footerPanel.Dock = DockStyle.Fill;
-        footerPanel.TabIndex = 3;
+        footerPanel.TabIndex = 4;
 
         toolTip.AutoPopDelay = 8000;
         toolTip.InitialDelay = 450;

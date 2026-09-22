@@ -58,6 +58,7 @@ internal sealed class DetectionForm : Form
         };
         _results = new ListBox
         {
+            AccessibleName = AppText.Get("DetectionResults"),
             BackColor = content,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
@@ -77,6 +78,7 @@ internal sealed class DetectionForm : Form
         };
         _preview = new RichTextBox
         {
+            AccessibleName = AppText.Get("DetectionPreview"),
             BackColor = content,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,

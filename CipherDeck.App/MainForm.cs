@@ -51,6 +51,7 @@ public partial class MainForm : Form
         if (cipher?.KeyType == CipherKeyType.Number)
         {
             keyLabel.Text = cipher.KeyLabel;
+            shiftValue.AccessibleName = cipher.KeyLabel;
             shiftValue.Minimum = cipher.MinimumNumericKey;
             shiftValue.Maximum = cipher.MaximumNumericKey;
             if (!_changingLanguage)
@@ -60,6 +61,7 @@ public partial class MainForm : Form
         if (cipher?.KeyType == CipherKeyType.Text)
         {
             textKeyLabel.Text = cipher.KeyLabel;
+            textKeyInput.AccessibleName = cipher.KeyLabel;
             if (!_changingLanguage)
                 textKeyInput.Text = cipher.DefaultTextKey;
         }
@@ -578,10 +580,13 @@ public partial class MainForm : Form
         analysisButton.Text = AppText.Get("MainAnalysis");
         helpButton.Text = AppText.Get("MainHelp");
         cipherLabel.Text = AppText.Get("MainCipher");
+        cipherSelector.AccessibleName = cipherLabel.Text;
         encryptMode.Text = AppText.Get("MainEncrypt");
         decryptMode.Text = AppText.Get("MainDecrypt");
         inputGroup.Text = AppText.Get("MainInput");
         outputGroup.Text = AppText.Get("MainOutput");
+        inputText.AccessibleName = inputGroup.Text.Trim();
+        outputText.AccessibleName = outputGroup.Text.Trim();
         importButton.Text = AppText.Get("MainImport");
         exportButton.Text = AppText.Get("MainExport");
         transformButton.Text = AppText.Get("MainTransform");
@@ -593,14 +598,22 @@ public partial class MainForm : Form
         livePreview.Text = AppText.Get("MainLivePreview");
         randomNumericKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
         randomTextKeyButton.AccessibleName = AppText.Get("MainGenerateKey");
+        themeButton.AccessibleName = AppText.Get("TipTheme");
+        languageButton.AccessibleName = AppText.Get("TipLanguage");
         languageButton.Text = AppLanguage.Normalize(_preferences.LanguageCode) == AppLanguage.Czech
             ? AppText.Get("MainLanguageEnglish")
             : AppText.Get("MainLanguageCzech");
         cipherDescription.Text = SelectedCipher?.Description ?? string.Empty;
         if (SelectedCipher is { KeyType: CipherKeyType.Number } numericCipher)
+        {
             keyLabel.Text = numericCipher.KeyLabel;
+            shiftValue.AccessibleName = numericCipher.KeyLabel;
+        }
         if (SelectedCipher is { KeyType: CipherKeyType.Text } textCipher)
+        {
             textKeyLabel.Text = textCipher.KeyLabel;
+            textKeyInput.AccessibleName = textCipher.KeyLabel;
+        }
         UpdateHistoryButton();
         UpdateCharacterCount();
         ApplyToolTips();

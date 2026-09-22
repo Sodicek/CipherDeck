@@ -48,6 +48,7 @@ internal sealed class HistoryForm : Form
 
         _historyList = new ListBox
         {
+            AccessibleName = heading.Text,
             BackColor = input,
             BorderStyle = BorderStyle.None,
             DisplayMember = nameof(HistoryEntry.DisplayText),
@@ -61,6 +62,7 @@ internal sealed class HistoryForm : Form
 
         _preview = new TextBox
         {
+            AccessibleName = AppText.Get("HistoryPreview"),
             BackColor = panel,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,

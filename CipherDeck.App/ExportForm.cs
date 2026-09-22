@@ -71,6 +71,7 @@ internal sealed class ExportForm : Form
         var titleLabel = CreateSettingsLabel(AppText.Get("ExportName"), palette.Text);
         _titleInput = new TextBox
         {
+            AccessibleName = titleLabel.Text,
             Anchor = AnchorStyles.Left | AnchorStyles.Right,
             BackColor = palette.Content,
             BorderStyle = BorderStyle.FixedSingle,
@@ -83,6 +84,7 @@ internal sealed class ExportForm : Form
         var styleLabel = CreateSettingsLabel(AppText.Get("ExportStyle"), palette.Text);
         _styleSelector = new ComboBox
         {
+            AccessibleName = styleLabel.Text,
             Anchor = AnchorStyles.Left | AnchorStyles.Right,
             BackColor = palette.Content,
             DropDownStyle = ComboBoxStyle.DropDownList,
@@ -114,6 +116,7 @@ internal sealed class ExportForm : Form
         previewHost.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         _preview = new PictureBox
         {
+            AccessibleName = AppText.Get("ExportPreview"),
             BackColor = palette.Content,
             Dock = DockStyle.Fill,
             SizeMode = PictureBoxSizeMode.Zoom,

@@ -93,18 +93,24 @@
   <data name="StatusDetecting" xml:space="preserve"><value>Looking for the most likely cipher…</value></data>
   <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Frequency analysis</value></data>
   <data name="AnalysisHeading" xml:space="preserve"><value>Letter frequency</value></data>
+  <data name="AnalysisChart" xml:space="preserve"><value>Letter frequency chart</value></data>
+  <data name="AnalysisTable" xml:space="preserve"><value>Letter frequency table</value></data>
   <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} letters · {1:N0} distinct characters · chart shows the top 12</value></data>
   <data name="AnalysisLetter" xml:space="preserve"><value>Letter</value></data>
   <data name="AnalysisCount" xml:space="preserve"><value>Count</value></data>
   <data name="AnalysisShare" xml:space="preserve"><value>Share</value></data>
   <data name="DetectionTitle" xml:space="preserve"><value>CipherDeck · Cipher detection</value></data>
   <data name="DetectionHeading" xml:space="preserve"><value>Likely cipher type</value></data>
+  <data name="DetectionResults" xml:space="preserve"><value>Cipher suggestions</value></data>
+  <data name="DetectionPreview" xml:space="preserve"><value>Decoded text preview</value></data>
   <data name="DetectionDisclaimer" xml:space="preserve"><value>A heuristic estimate for Reverse, Atbash, and Caesar — not a guaranteed result.</value></data>
   <data name="DetectionUse" xml:space="preserve"><value>Use suggestion</value></data>
   <data name="ExplanationTitle" xml:space="preserve"><value>CipherDeck · How {0} works</value></data>
   <data name="ExplanationStep" xml:space="preserve"><value>STEP {0}/{1}</value></data>
+  <data name="ExplanationSnapshot" xml:space="preserve"><value>Current step example</value></data>
   <data name="HistoryTitle" xml:space="preserve"><value>CipherDeck · History</value></data>
   <data name="HistoryHeading" xml:space="preserve"><value>Operation history</value></data>
+  <data name="HistoryPreview" xml:space="preserve"><value>Selected operation preview</value></data>
   <data name="HistoryUse" xml:space="preserve"><value>Load operation</value></data>
   <data name="HistoryClear" xml:space="preserve"><value>Clear history</value></data>
   <data name="HistoryEmpty" xml:space="preserve"><value>History is empty. An operation is added when you press RUN.</value></data>
@@ -116,6 +122,7 @@
   <data name="HistoryDecryption" xml:space="preserve"><value>decryption</value></data>
   <data name="ChallengeTitle" xml:space="preserve"><value>CipherDeck · Challenges</value></data>
   <data name="ChallengeHeading" xml:space="preserve"><value>Crack the message</value></data>
+  <data name="ChallengeDifficulty" xml:space="preserve"><value>Challenge difficulty</value></data>
   <data name="ChallengeEasy" xml:space="preserve"><value>Easy</value></data>
   <data name="ChallengeMedium" xml:space="preserve"><value>Medium</value></data>
   <data name="ChallengeHard" xml:space="preserve"><value>Hard</value></data>
@@ -135,6 +142,7 @@
   <data name="ChallengeRevealStatus" xml:space="preserve"><value>Cipher: {0} · key: {1}</value></data>
   <data name="ExportTitle" xml:space="preserve"><value>CipherDeck · Export center</value></data>
   <data name="ExportHeading" xml:space="preserve"><value>Export result</value></data>
+  <data name="ExportPreview" xml:space="preserve"><value>Export card preview</value></data>
   <data name="ExportSummary" xml:space="preserve"><value>Save text, create a PNG card, or copy the image directly to the clipboard.</value></data>
   <data name="ExportName" xml:space="preserve"><value>TITLE</value></data>
   <data name="ExportStyle" xml:space="preserve"><value>STYLE</value></data>
@@ -158,6 +166,7 @@
   <data name="ShareFooter" xml:space="preserve"><value>Created in CipherDeck · classic ciphers are for learning and fun</value></data>
   <data name="ShareDefaultTitle" xml:space="preserve"><value>Encrypted message</value></data>
   <data name="AboutTitle" xml:space="preserve"><value>About CipherDeck</value></data>
+  <data name="AboutHelpLabel" xml:space="preserve"><value>Application help</value></data>
   <data name="AboutHeading" xml:space="preserve"><value>CipherDeck  {0}</value></data>
   <data name="AboutClose" xml:space="preserve"><value>Got it</value></data>
   <data name="AboutGitHub" xml:space="preserve"><value>Open GitHub</value></data>

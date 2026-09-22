@@ -50,6 +50,7 @@ internal sealed class AboutForm : Form
 
         var help = new RichTextBox
         {
+            AccessibleName = AppText.Get("AboutHelpLabel"),
             BackColor = panel,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
