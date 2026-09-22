@@ -27,7 +27,7 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [x] Rozdělit koordinaci transformací, historie a souborů z `MainForm` do aplikačních služeb.
 - [x] Aktualizovat testovací SDK a xUnit runner jako samostatnou tooling změnu.
 - [x] Připravit Windows instalátor vedle portable ZIPu.
-- [ ] Ověřit instalaci, aktualizaci a odinstalaci v čistém prostředí.
+- [x] Ověřit instalaci, aktualizaci a odinstalaci na čistém Windows CI runneru.
 - [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
 - [ ] Založit GitHub issues a milestones pro zbývající práci.
@@ -39,6 +39,8 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [ ] Vydat ověřený instalátor a portable balíček se seznamem změn.
 
 Plán vydání: dokončit celý RC checklist, publikovat `v1.0.0-rc.1` jako předběžnou verzi, ověřit instalátor a oba distribuční balíčky v čistém prostředí a teprve potom označit stejný ověřený stav jako stabilní `v1.0.0`. Další funkční vývoj bude pokračovat jako `v1.1.0`.
+
+Instalační CI test používá čerstvý Windows runner bez CipherDecku, ale s předinstalovaným .NET SDK. Před stabilním vydáním ještě ručně ověřit spuštění na Windows bez .NET runtime; portable i MSI obsahují self-contained aplikaci.
 
 Každý bod dokončovat samostatně na pracovní branchi a rozdělit do logických commitů podle [CONTRIBUTING.md](CONTRIBUTING.md). Níže je historický přehled dokončených funkcí a zbývajících kontrol.
 
