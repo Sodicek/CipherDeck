@@ -56,6 +56,10 @@ An isolated Windows CI job installs the baseline MSI, upgrades to the release-ca
 
 The main editor now lets Tab leave the input and reach the read-only output, so keyboard users can select and copy results. Main-window Tab order follows the visible header, settings, editors, actions, and footer. Challenge difficulty can be changed with arrow keys without focus jumping to the answer. Every secondary window has names for text fields, lists, and previews; icon-only and language/theme controls have descriptive names in both languages. Windows tests construct all secondary forms in both themes and languages and verify interactive names, keyboard reachability of text fields, dialog buttons, and normal-text color contrast.
 
+### Keep layouts within simulated DPI bounds
+
+Every secondary form now uses DPI autoscaling and a width-constrained main layout column. History and help dialogs have enough height for their button rows. A Windows regression test opens all eight windows off-screen, in Czech and English, at normal and minimum sizes, and simulates 100%, 125%, 150%, and 200% scaling. It checks whether visible controls remain inside their parents and whether labels and buttons have enough measured space for their text. The main form uses injected in-memory settings and history in this test, leaving real user data untouched. Actual monitor-DPI visual checks are still required.
+
 ## Follow-up work for v1.0.0-rc.1
 
 ### Reuse secondary-form layout carefully
@@ -64,7 +68,7 @@ Several secondary forms repeat layout and dialog-button setup. Small shared help
 
 ### Expand UI verification
 
-Add an automated UI smoke suite for startup, language switching, and minimum-size layouts. The structural accessibility tests do not replace a manual screen-reader pass. Continue manual DPI checks at 100%, 125%, 150%, and 200% until those scenarios are reliable in automation.
+Add an automated UI smoke suite for startup and language switching. The structural accessibility tests do not replace a manual screen-reader pass. The simulated layout checks do not replace visual checks on Windows monitors configured to 100%, 125%, 150%, and 200% DPI.
 
 ### Release work
 

@@ -30,6 +30,8 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [x] Ověřit instalaci, aktualizaci a odinstalaci na čistém Windows CI runneru.
 - [x] Dokončit kontrolu klávesnice a přístupnosti všech oken.
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
+  - [x] Automatická simulace škálování všech osmi oken, obou jazyků a obou velikostí; kontrola přetékání prvků i textů.
+  - [ ] Ruční vizuální kontrola na Windows při skutečných hodnotách DPI.
 - [ ] Založit GitHub issues a milestones pro zbývající práci.
 
 ### v1.0.0 — Stable Release
