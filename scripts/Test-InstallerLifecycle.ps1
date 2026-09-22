@@ -25,7 +25,7 @@ function Get-ProductCode([string] $MsiPath) {
     $database = $installer.OpenDatabase($MsiPath, 0)
     $view = $database.OpenView("SELECT ``Value`` FROM ``Property`` WHERE ``Property`` = 'ProductCode'")
     try {
-        $view.Execute()
+        $null = $view.Execute()
         $record = $view.Fetch()
         if ($null -eq $record) {
             throw "No ProductCode was found in '$MsiPath'."
@@ -33,7 +33,7 @@ function Get-ProductCode([string] $MsiPath) {
         return [string] $record.StringData(1)
     }
     finally {
-        $view.Close()
+        $null = $view.Close()
     }
 }
 
