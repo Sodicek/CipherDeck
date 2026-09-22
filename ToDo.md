@@ -28,7 +28,7 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [x] Aktualizovat testovací SDK a xUnit runner jako samostatnou tooling změnu.
 - [x] Připravit Windows instalátor vedle portable ZIPu.
 - [x] Ověřit instalaci, aktualizaci a odinstalaci na čistém Windows CI runneru.
-- [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
+- [x] Dokončit kontrolu klávesnice a přístupnosti všech oken.
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
 - [ ] Založit GitHub issues a milestones pro zbývající práci.
 
