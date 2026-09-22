@@ -29,6 +29,7 @@ internal sealed class AnalysisForm : Form
             Padding = new Padding(24),
             RowCount = 5
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32));
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 58));
@@ -101,5 +102,6 @@ internal sealed class AnalysisForm : Form
         Controls.Add(layout);
         AcceptButton = closeButton;
         CancelButton = closeButton;
+        UiStyles.EnableDpiScaling(this);
     }
 }

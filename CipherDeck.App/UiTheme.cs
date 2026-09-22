@@ -55,6 +55,12 @@ internal static class UiTheme
 
 internal static class UiStyles
 {
+    public static void EnableDpiScaling(Form form)
+    {
+        form.AutoScaleDimensions = new SizeF(96F, 96F);
+        form.AutoScaleMode = AutoScaleMode.Dpi;
+    }
+
     public static SmoothButton CreateButton(string text, int width, UiPalette palette, bool primary = false) =>
         ConfigureButton(new SmoothButton(), text, width, palette, primary);
 

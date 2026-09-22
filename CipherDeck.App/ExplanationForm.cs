@@ -37,6 +37,7 @@ internal sealed class ExplanationForm : Form
             Padding = new Padding(26),
             RowCount = 6
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 34));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52));
@@ -132,6 +133,7 @@ internal sealed class ExplanationForm : Form
         CancelButton = closeButton;
 
         ShowCurrentStep();
+        UiStyles.EnableDpiScaling(this);
     }
 
     private void MoveStep(int direction)
