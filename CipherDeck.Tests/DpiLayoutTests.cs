@@ -22,6 +22,15 @@ public sealed class DpiLayoutTests
             RunOnSta(() =>
             {
                 CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(cultureName);
+                using var host = new Form
+                {
+                    ClientSize = new Size(100, 100),
+                    Location = new Point(-10000, -10000),
+                    Opacity = 0,
+                    ShowInTaskbar = false,
+                    StartPosition = FormStartPosition.Manual
+                };
+                host.Show();
                 foreach (var scale in new[] { 1F, 1.25F, 1.5F, 2F })
                 {
                     foreach (var minimumSize in new[] { false, true })
@@ -31,9 +40,8 @@ public sealed class DpiLayoutTests
                             using (form)
                             {
                                 form.ShowInTaskbar = false;
-                                form.StartPosition = FormStartPosition.Manual;
-                                form.Location = new Point(-10000, -10000);
-                                form.Opacity = 0;
+                                form.TopLevel = false;
+                                host.Controls.Add(form);
                                 Assert.Equal(AutoScaleMode.Dpi, form.AutoScaleMode);
                                 var baseWidth = form.ClientSize.Width;
                                 var currentDpi = form.CurrentAutoScaleDimensions;
@@ -69,10 +77,12 @@ public sealed class DpiLayoutTests
                                         $"Text clipped vertically: {context}; text={textSize.Height}, control={control.ClientSize.Height}");
                                 }
                                 form.Close();
+                                host.Controls.Remove(form);
                             }
                         }
                     }
                 }
+                host.Close();
             });
         }
         finally
