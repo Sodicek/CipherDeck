@@ -31,6 +31,7 @@ public sealed class DpiLayoutTests
                     StartPosition = FormStartPosition.Manual
                 };
                 host.Show();
+
                 foreach (var scale in new[] { 1F, 1.25F, 1.5F, 2F })
                 {
                     foreach (var minimumSize in new[] { false, true })
@@ -39,29 +40,39 @@ public sealed class DpiLayoutTests
                         {
                             using (form)
                             {
-                                form.ShowInTaskbar = false;
-                                form.TopLevel = false;
-                                host.Controls.Add(form);
                                 Assert.Equal(AutoScaleMode.Dpi, form.AutoScaleMode);
-                                var baseWidth = form.ClientSize.Width;
-                                var currentDpi = form.CurrentAutoScaleDimensions;
-                                form.AutoScaleDimensions = new SizeF(currentDpi.Width / scale, currentDpi.Height / scale);
-                                Assert.True(form.ClientSize.Width >= baseWidth * scale - 8,
-                                    $"AutoScale did not resize {form.GetType().Name} at {scale:P0}: {baseWidth} -> {form.ClientSize.Width}");
-                                form.Show();
-                                if (minimumSize)
-                                    form.Size = form.MinimumSize;
-                                Application.DoEvents();
-                                form.PerformLayout();
+                                var root = Assert.Single(form.Controls.Cast<Control>());
+                                var targetSize = Scale(GetDesignClientSize(form, minimumSize), scale);
+                                var originalFonts = new[] { root }.Concat(Descendants(root))
+                                    .ToDictionary(control => control, control => control.Font);
+                                var heading = Descendants(root).OfType<Label>().First();
+                                var originalFontSize = heading.Font.Size;
 
-                                foreach (var control in Descendants(form))
+                                form.Controls.Remove(root);
+                                root.Dock = DockStyle.None;
+                                root.Scale(new SizeF(scale, scale));
+                                foreach (var (control, font) in originalFonts)
+                                    control.Font = new Font(font.FontFamily, font.Size * scale, font.Style, font.Unit);
+                                Assert.True(heading.Font.Size >= originalFontSize * scale - 0.1F,
+                                    $"Control fonts did not scale in {form.GetType().Name} at {scale:P0}");
+
+                                using var canvas = new Panel { ClientSize = targetSize, Font = form.Font };
+                                host.Controls.Add(canvas);
+                                root.Dock = DockStyle.Fill;
+                                canvas.Controls.Add(root);
+                                canvas.PerformLayout();
+                                root.PerformLayout();
+                                Application.DoEvents();
+
+                                Assert.Equal(targetSize, root.ClientSize);
+                                foreach (var control in Descendants(root))
                                 {
                                     if (!control.Visible)
                                         continue;
 
                                     var context = $"{form.GetType().Name}, {cultureName}, {scale:P0}, minimum={minimumSize}, {control.GetType().Name}: {control.Text}";
                                     Assert.True(control.Right <= control.Parent!.ClientSize.Width + 2,
-                                        $"Right edge outside parent: {context}; bounds={control.Bounds}, parent={control.Parent.ClientSize}, form={form.Size}");
+                                        $"Right edge outside parent: {context}; bounds={control.Bounds}, parent={control.Parent.ClientSize}");
                                     Assert.True(control.Bottom <= control.Parent.ClientSize.Height + 2,
                                         $"Bottom edge outside parent: {context}; bounds={control.Bounds}, parent={control.Parent.ClientSize}");
                                     if (control is not (Label or Button) || string.IsNullOrEmpty(control.Text))
@@ -76,12 +87,14 @@ public sealed class DpiLayoutTests
                                     Assert.True(textSize.Height <= control.ClientSize.Height + 2,
                                         $"Text clipped vertically: {context}; text={textSize.Height}, control={control.ClientSize.Height}");
                                 }
+
+                                host.Controls.Remove(canvas);
                                 form.Close();
-                                host.Controls.Remove(form);
                             }
                         }
                     }
                 }
+
                 host.Close();
             });
         }
@@ -91,6 +104,20 @@ public sealed class DpiLayoutTests
             CultureInfo.DefaultThreadCurrentUICulture = originalDefaultUiCulture;
         }
     }
+
+    private static Size GetDesignClientSize(Form form, bool minimumSize)
+    {
+        if (!minimumSize)
+            return form is MainForm ? new Size(1120, 720) : form.ClientSize;
+
+        return new Size(
+            form.MinimumSize.Width - (form.Width - form.ClientSize.Width),
+            form.MinimumSize.Height - (form.Height - form.ClientSize.Height));
+    }
+
+    private static Size Scale(Size size, float factor) => new(
+        (int)Math.Round(size.Width * factor),
+        (int)Math.Round(size.Height * factor));
 
     private static Form[] CreateWindows(string cultureName) =>
     [
