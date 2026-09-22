@@ -50,6 +50,7 @@ internal sealed class ChallengeForm : Form
             Padding = new Padding(26),
             RowCount = 9
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28));
@@ -148,6 +149,7 @@ internal sealed class ChallengeForm : Form
 
         _difficulty.SelectedIndex = 0;
         Shown += (_, _) => _answer.Focus();
+        UiStyles.EnableDpiScaling(this);
     }
 
     private void NewChallenge()

@@ -36,6 +36,7 @@ internal sealed class DetectionForm : Form
             Padding = new Padding(26),
             RowCount = 6
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 38));
@@ -118,6 +119,7 @@ internal sealed class DetectionForm : Form
             _results.SelectedIndex = 0;
         else
             useButton.Enabled = false;
+        UiStyles.EnableDpiScaling(this);
     }
 
     private void ShowSelection()

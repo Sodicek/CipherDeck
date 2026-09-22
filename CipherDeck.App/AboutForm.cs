@@ -25,9 +25,10 @@ internal sealed class AboutForm : Form
             RowCount = 3,
             BackColor = background
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 76));
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58));
 
         var heading = new Label
         {
@@ -84,6 +85,7 @@ internal sealed class AboutForm : Form
         Controls.Add(layout);
         AcceptButton = closeButton;
         CancelButton = closeButton;
+        UiStyles.EnableDpiScaling(this);
     }
 
     private void OpenGitHub()

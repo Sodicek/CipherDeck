@@ -35,6 +35,7 @@ internal sealed class ExportForm : Form
             Padding = new Padding(26),
             RowCount = 6
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 34));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52));
@@ -170,6 +171,7 @@ internal sealed class ExportForm : Form
         _styleSelector.SelectedIndexChanged += (_, _) => RefreshPreview();
         _styleSelector.SelectedIndex = 0;
         FormClosed += (_, _) => DisposePreview();
+        UiStyles.EnableDpiScaling(this);
     }
 
     public string? CompletionMessage { get; private set; }

@@ -33,10 +33,11 @@ internal sealed class HistoryForm : Form
             RowCount = 4,
             BackColor = background
         };
+        layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 45));
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 55));
-        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 52));
+        layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58));
 
         var heading = new Label
         {
@@ -111,6 +112,7 @@ internal sealed class HistoryForm : Form
         {
             _historyList.SelectedIndex = 0;
         }
+        UiStyles.EnableDpiScaling(this);
     }
 
     private void ShowPreview()

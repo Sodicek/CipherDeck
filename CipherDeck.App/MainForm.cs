@@ -8,15 +8,22 @@ public partial class MainForm : Form
 {
     private readonly System.Windows.Forms.Timer _previewTimer;
     private readonly AppPreferences _preferences;
+    private readonly bool _persistPreferences;
     private readonly TransformationSessionService _transformationSession = new();
-    private readonly HistoryService _history = new();
+    private readonly HistoryService _history;
     private readonly TextFileService _textFiles = new();
     private bool _darkTheme;
     private bool _changingLanguage;
 
-    public MainForm()
+    public MainForm() : this(AppPreferences.Load(), new HistoryService(), persistPreferences: true)
     {
-        _preferences = AppPreferences.Load();
+    }
+
+    internal MainForm(AppPreferences preferences, HistoryService history, bool persistPreferences = false)
+    {
+        _preferences = preferences ?? throw new ArgumentNullException(nameof(preferences));
+        _history = history ?? throw new ArgumentNullException(nameof(history));
+        _persistPreferences = persistPreferences;
         AppLanguage.Apply(_preferences.LanguageCode);
         _darkTheme = _preferences.DarkTheme;
         _previewTimer = new System.Windows.Forms.Timer { Interval = 280 };
@@ -73,7 +80,7 @@ public partial class MainForm : Form
         {
             _preferences.SelectedCipherId = cipher.Id;
             _preferences.SelectedCipherName = cipher.Name;
-            _preferences.Save();
+            SavePreferences();
         }
         if (!_changingLanguage)
             SchedulePreview();
@@ -447,7 +454,7 @@ public partial class MainForm : Form
     {
         _darkTheme = !_darkTheme;
         _preferences.DarkTheme = _darkTheme;
-        _preferences.Save();
+        SavePreferences();
         ApplyTheme();
         SetSuccess(AppText.Get(_darkTheme ? "StatusDarkTheme" : "StatusLightTheme"));
     }
@@ -464,7 +471,7 @@ public partial class MainForm : Form
             ? AppLanguage.English
             : AppLanguage.Czech;
         AppLanguage.Apply(_preferences.LanguageCode);
-        _preferences.Save();
+        SavePreferences();
 
         _changingLanguage = true;
         cipherSelector.BeginUpdate();
@@ -571,6 +578,12 @@ public partial class MainForm : Form
     }
 
     private void UpdateHistoryButton() => historyButton.Text = AppText.Format("MainHistory", _history.Entries.Count);
+
+    private void SavePreferences()
+    {
+        if (_persistPreferences)
+            _preferences.Save();
+    }
 
     private void ApplyLocalization()
     {
