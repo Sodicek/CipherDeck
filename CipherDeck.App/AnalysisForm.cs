@@ -50,11 +50,17 @@ internal sealed class AnalysisForm : Form
             Text = AppText.Format("AnalysisSummary", totalLetters, frequencies.Count)
         };
 
-        var chart = new FrequencyChartPanel { Dock = DockStyle.Fill, Margin = new Padding(0, 8, 0, 12) };
+        var chart = new FrequencyChartPanel
+        {
+            AccessibleName = AppText.Get("AnalysisChart"),
+            Dock = DockStyle.Fill,
+            Margin = new Padding(0, 8, 0, 12)
+        };
         chart.SetData(frequencies, darkTheme);
 
         var grid = new DataGridView
         {
+            AccessibleName = AppText.Get("AnalysisTable"),
             AllowUserToAddRows = false,
             AllowUserToDeleteRows = false,
             AllowUserToResizeRows = false,

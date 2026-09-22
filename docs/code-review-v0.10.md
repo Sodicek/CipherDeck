@@ -52,6 +52,10 @@ The release script now publishes the self-contained x64 application once and pro
 
 An isolated Windows CI job installs the baseline MSI, upgrades to the release-candidate MSI, verifies product registration, executable hashes, and the Start menu shortcut, then uninstalls and checks that the app and shortcut are removed. The script refuses to run outside an ephemeral GitHub Actions runner. The hosted runner already includes a .NET SDK, so a manual no-runtime launch check remains before stable release.
 
+### Audit keyboard access and control names
+
+The main editor now lets Tab leave the input and reach the read-only output, so keyboard users can select and copy results. Main-window Tab order follows the visible header, settings, editors, actions, and footer. Challenge difficulty can be changed with arrow keys without focus jumping to the answer. Every secondary window has names for text fields, lists, and previews; icon-only and language/theme controls have descriptive names in both languages. Windows tests construct all secondary forms in both themes and languages and verify interactive names, keyboard reachability of text fields, dialog buttons, and normal-text color contrast.
+
 ## Follow-up work for v1.0.0-rc.1
 
 ### Reuse secondary-form layout carefully
@@ -60,7 +64,7 @@ Several secondary forms repeat layout and dialog-button setup. Small shared help
 
 ### Expand UI verification
 
-Add a small automated UI smoke suite for startup, language switching, keyboard navigation, and minimum-size layouts. Continue manual DPI checks at 100%, 125%, 150%, and 200% until those scenarios are reliable in automation.
+Add an automated UI smoke suite for startup, language switching, and minimum-size layouts. The structural accessibility tests do not replace a manual screen-reader pass. Continue manual DPI checks at 100%, 125%, 150%, and 200% until those scenarios are reliable in automation.
 
 ### Release work
 
@@ -69,5 +73,5 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 
 ## Recommended order
 
-1. Run keyboard, minimum-size, and DPI review in both languages.
+1. Run minimum-size and DPI review in both languages, with a screen-reader spot check.
 2. Prepare the v1.0.0-rc.1 installer and release automation.

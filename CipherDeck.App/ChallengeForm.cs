@@ -69,6 +69,7 @@ internal sealed class ChallengeForm : Form
         };
         _difficulty = new ComboBox
         {
+            AccessibleName = AppText.Get("ChallengeDifficulty"),
             BackColor = input,
             DropDownStyle = ComboBoxStyle.DropDownList,
             FlatStyle = FlatStyle.Flat,
@@ -85,6 +86,7 @@ internal sealed class ChallengeForm : Form
         var cipherLabel = CreateLabel(AppText.Get("ChallengeCipherText"), text, bold: true);
         _cipherText = new RichTextBox
         {
+            AccessibleName = cipherLabel.Text,
             BackColor = input,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
@@ -103,6 +105,7 @@ internal sealed class ChallengeForm : Form
         var answerLabel = CreateLabel(AppText.Get("ChallengeAnswer"), text, bold: true);
         _answer = new RichTextBox
         {
+            AccessibleName = answerLabel.Text,
             BackColor = input,
             BorderStyle = BorderStyle.None,
             Dock = DockStyle.Fill,
@@ -122,7 +125,11 @@ internal sealed class ChallengeForm : Form
         checkButton.Click += (_, _) => CheckAnswer();
         hintButton.Click += (_, _) => ShowHint();
         revealButton.Click += (_, _) => RevealAnswer();
-        newButton.Click += (_, _) => NewChallenge();
+        newButton.Click += (_, _) =>
+        {
+            NewChallenge();
+            _answer.Focus();
+        };
         buttons.Controls.Add(newButton, 0, 0);
         buttons.Controls.Add(hintButton, 1, 0);
         buttons.Controls.Add(revealButton, 2, 0);
@@ -140,6 +147,7 @@ internal sealed class ChallengeForm : Form
         Controls.Add(layout);
 
         _difficulty.SelectedIndex = 0;
+        Shown += (_, _) => _answer.Focus();
     }
 
     private void NewChallenge()
@@ -153,7 +161,6 @@ internal sealed class ChallengeForm : Form
         _hint.Text = AppText.Get("ChallengeHintHidden");
         _status.ForeColor = UiTheme.GetPalette(_darkTheme).Muted;
         _status.Text = AppText.Get("ChallengeTry");
-        _answer.Focus();
     }
 
     private void CheckAnswer()

@@ -93,18 +93,24 @@
   <data name="StatusDetecting" xml:space="preserve"><value>Hledám pravděpodobnou šifru…</value></data>
   <data name="AnalysisTitle" xml:space="preserve"><value>CipherDeck · Analýza četnosti</value></data>
   <data name="AnalysisHeading" xml:space="preserve"><value>Četnost písmen</value></data>
+  <data name="AnalysisChart" xml:space="preserve"><value>Graf četnosti písmen</value></data>
+  <data name="AnalysisTable" xml:space="preserve"><value>Tabulka četnosti písmen</value></data>
   <data name="AnalysisSummary" xml:space="preserve"><value>{0:N0} písmen · {1:N0} různých znaků · graf zobrazuje 12 nejčastějších</value></data>
   <data name="AnalysisLetter" xml:space="preserve"><value>Písmeno</value></data>
   <data name="AnalysisCount" xml:space="preserve"><value>Počet</value></data>
   <data name="AnalysisShare" xml:space="preserve"><value>Podíl</value></data>
   <data name="DetectionTitle" xml:space="preserve"><value>CipherDeck · Odhad šifry</value></data>
   <data name="DetectionHeading" xml:space="preserve"><value>Pravděpodobný typ šifry</value></data>
+  <data name="DetectionResults" xml:space="preserve"><value>Návrhy šifer</value></data>
+  <data name="DetectionPreview" xml:space="preserve"><value>Náhled rozluštěného textu</value></data>
   <data name="DetectionDisclaimer" xml:space="preserve"><value>Heuristický odhad pro Pozpátku, Atbash a Caesarovu šifru — ne zaručený výsledek.</value></data>
   <data name="DetectionUse" xml:space="preserve"><value>Použít návrh</value></data>
   <data name="ExplanationTitle" xml:space="preserve"><value>CipherDeck · Jak funguje {0}</value></data>
   <data name="ExplanationStep" xml:space="preserve"><value>KROK {0}/{1}</value></data>
+  <data name="ExplanationSnapshot" xml:space="preserve"><value>Ukázka aktuálního kroku</value></data>
   <data name="HistoryTitle" xml:space="preserve"><value>CipherDeck · Historie</value></data>
   <data name="HistoryHeading" xml:space="preserve"><value>Historie operací</value></data>
+  <data name="HistoryPreview" xml:space="preserve"><value>Náhled vybrané operace</value></data>
   <data name="HistoryUse" xml:space="preserve"><value>Načíst operaci</value></data>
   <data name="HistoryClear" xml:space="preserve"><value>Vymazat historii</value></data>
   <data name="HistoryEmpty" xml:space="preserve"><value>Historie je zatím prázdná. Operace se přidá po stisknutí tlačítka PROVÉST.</value></data>
@@ -116,6 +122,7 @@
   <data name="HistoryDecryption" xml:space="preserve"><value>odšifrování</value></data>
   <data name="ChallengeTitle" xml:space="preserve"><value>CipherDeck · Výzvy</value></data>
   <data name="ChallengeHeading" xml:space="preserve"><value>Rozlušti zprávu</value></data>
+  <data name="ChallengeDifficulty" xml:space="preserve"><value>Obtížnost výzvy</value></data>
   <data name="ChallengeEasy" xml:space="preserve"><value>Lehká</value></data>
   <data name="ChallengeMedium" xml:space="preserve"><value>Střední</value></data>
   <data name="ChallengeHard" xml:space="preserve"><value>Těžká</value></data>
@@ -135,6 +142,7 @@
   <data name="ChallengeRevealStatus" xml:space="preserve"><value>Použitá šifra: {0} · klíč: {1}</value></data>
   <data name="ExportTitle" xml:space="preserve"><value>CipherDeck · Exportní centrum</value></data>
   <data name="ExportHeading" xml:space="preserve"><value>Exportovat výsledek</value></data>
+  <data name="ExportPreview" xml:space="preserve"><value>Náhled exportní kartičky</value></data>
   <data name="ExportSummary" xml:space="preserve"><value>Ulož text, vytvoř PNG kartičku nebo zkopíruj obrázek rovnou do schránky.</value></data>
   <data name="ExportName" xml:space="preserve"><value>NÁZEV</value></data>
   <data name="ExportStyle" xml:space="preserve"><value>VZHLED</value></data>
@@ -158,6 +166,7 @@
   <data name="ShareFooter" xml:space="preserve"><value>Vytvořeno v CipherDecku · klasické šifry jsou určené pro výuku a zábavu</value></data>
   <data name="ShareDefaultTitle" xml:space="preserve"><value>Šifrovaná zpráva</value></data>
   <data name="AboutTitle" xml:space="preserve"><value>O aplikaci CipherDeck</value></data>
+  <data name="AboutHelpLabel" xml:space="preserve"><value>Nápověda k aplikaci</value></data>
   <data name="AboutHeading" xml:space="preserve"><value>CipherDeck  {0}</value></data>
   <data name="AboutClose" xml:space="preserve"><value>Rozumím</value></data>
   <data name="AboutGitHub" xml:space="preserve"><value>Otevřít GitHub</value></data>
