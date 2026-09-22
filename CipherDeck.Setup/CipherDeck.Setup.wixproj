@@ -1,0 +1,19 @@
+<Project Sdk="WixToolset.Sdk/5.0.2">
+  <PropertyGroup>
+    <OutputType>Package</OutputType>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <Cultures>en-US</Cultures>
+    <DebugType>none</DebugType>
+    <DefaultCompressionLevel>high</DefaultCompressionLevel>
+    <ProductVersion Condition="'$(ProductVersion)' == ''">0.10.0</ProductVersion>
+    <PackageVersionLabel Condition="'$(PackageVersionLabel)' == ''">$(ProductVersion)</PackageVersionLabel>
+    <PublishDir Condition="'$(PublishDir)' == ''">$(MSBuildThisFileDirectory)..\artifacts\release\publish</PublishDir>
+    <OutputName>CipherDeck-v$(PackageVersionLabel)-win-x64-setup</OutputName>
+    <DefineConstants>$(DefineConstants);ProductVersion=$(ProductVersion);PublishDir=$(PublishDir)</DefineConstants>
+    <SuppressSpecificWarnings>$(SuppressSpecificWarnings);1076</SuppressSpecificWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
+    <BindVariable Include="WixUILicenseRtf=$(MSBuildThisFileDirectory)License.rtf" />
+  </ItemGroup>
+</Project>

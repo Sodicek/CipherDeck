@@ -45,3 +45,7 @@ jobs:
 
       - name: Run tests
         run: dotnet test CipherDeck.sln --configuration Release --no-build
+
+      - name: Build portable and installer packages
+        shell: pwsh
+        run: ./scripts/Build-ReleasePackages.ps1

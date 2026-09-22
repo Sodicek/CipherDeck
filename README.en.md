@@ -84,16 +84,19 @@ dotnet run --project CipherDeck.App/CipherDeck.App.csproj
 dotnet test CipherDeck.sln
 ```
 
-## Building a standalone Windows app
+## Building release packages
 
 ```powershell
-dotnet publish CipherDeck.App/CipherDeck.App.csproj -p:PublishProfile=win-x64
+./scripts/Build-ReleasePackages.ps1
 ```
+
+The script creates a self-contained portable ZIP, an x64 MSI installer, and one SHA-256 checksum file in `artifacts/release/v<version>`. Pass a version such as `-Version 1.0.0-rc.1`, or omit it to use the application version.
 
 ## Project structure
 
 - `CipherDeck.App` – CipherDeck's desktop UI and application services,
 - `CipherDeck.Core` – cipher algorithms, independent of the UI,
+- `CipherDeck.Setup` – WiX project for the Windows MSI installer,
 - `CipherDeck.Core.Tests` – platform-independent algorithm tests,
 - `CipherDeck.Tests` – Windows UI, renderer, and persistence tests,
 - `ToDo.md` – roadmap for future versions.

@@ -44,6 +44,10 @@ Transformation sessions, cancellation, history mutations, persistence coordinati
 
 Both test projects now use Microsoft.NET.Test.Sdk 18.10.1 and xunit.runner.visualstudio 4.0.0 while retaining the xUnit v2 framework. The full suite was verified with the same .NET 8 SDK used by CI, and the dependency audit reports no outdated or known vulnerable packages.
 
+### Add repeatable Windows packaging
+
+The release script now publishes the self-contained x64 application once and produces a portable ZIP, a WiX-based MSI, and SHA-256 checksums from that payload. The installer supports upgrades, repair and removal, installs a Start menu shortcut, and is rebuilt by CI on every change.
+
 ## Follow-up work for v1.0.0-rc.1
 
 ### Reuse secondary-form layout carefully
@@ -56,7 +60,7 @@ Add a small automated UI smoke suite for startup, language switching, keyboard n
 
 ### Release work
 
-- Add repeatable installer creation and installation/update/uninstallation checks for v1.0.0-rc.1.
+- Run repeatable installation, update, and uninstallation checks for v1.0.0-rc.1 in a clean environment.
 - Automate release packaging, checksums, and release-note publication for the v1 release-candidate flow.
 
 ## Recommended order

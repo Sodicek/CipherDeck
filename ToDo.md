@@ -26,7 +26,7 @@ Vydaná verze: **v0.10.0**. Následující verze jsou plán, nikoliv dokončené
 - [x] Oddělit platformně nezávislé Core testy od Windows UI a renderer testů.
 - [x] Rozdělit koordinaci transformací, historie a souborů z `MainForm` do aplikačních služeb.
 - [x] Aktualizovat testovací SDK a xUnit runner jako samostatnou tooling změnu.
-- [ ] Připravit Windows instalátor vedle portable ZIPu.
+- [x] Připravit Windows instalátor vedle portable ZIPu.
 - [ ] Ověřit instalaci, aktualizaci a odinstalaci v čistém prostředí.
 - [ ] Dokončit kontrolu klávesnice a přístupnosti všech oken.
 - [ ] Zkontrolovat obě jazykové varianty při 100 %, 125 %, 150 % a 200 % DPI, v minimální i běžné velikosti okna.
