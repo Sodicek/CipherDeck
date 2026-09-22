@@ -33,6 +33,8 @@ Keep release notes in `docs/releases/<version>.md`. Use real newlines and blank 
 
 Build the portable ZIP, Windows MSI, and checksums together with `./scripts/Build-ReleasePackages.ps1 -Version <version>`. Keep the WiX license text synchronized with `LICENSE` when the license changes.
 
+CI runs `Test-InstallerLifecycle.ps1` on a fresh Windows runner to verify clean installation, upgrade, and uninstallation. The script intentionally refuses to run on local development machines.
+
 Do not pass multiline prose as a shell argument containing literal `\n`. After publishing, read back the body and confirm its formatting, version, download asset, and checksum.
 
 Documentation-only changes do not require an application version bump or a new binary release.
